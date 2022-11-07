@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  API_ORIGIN: 'https://sleepy-waters-31777.herokuapp.com',
 };
 
 /*
