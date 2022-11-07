@@ -10,11 +10,15 @@ import { environment } from '../../../../environments/environment';
 export class LoggingService {
   constructor(private http: HttpClient) {}
 
-  getErrLogs(): Observable<string> {
-    return this.http.get<string>(`${environment.API_ORIGIN}/logs/error`);
+  getErrLogs(): Observable<unknown> {
+    return this.http.get(`${environment.API_ORIGIN}/logs/error`, {
+      responseType: 'text',
+    });
   }
 
-  getInfoLogs(): Observable<any> {
-    return this.http.get(`${environment.API_ORIGIN}/logs/info`);
+  getInfoLogs(): Observable<unknown> {
+    return this.http.get(`${environment.API_ORIGIN}/logs/info`, {
+      responseType: 'text',
+    });
   }
 }
