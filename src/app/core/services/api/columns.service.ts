@@ -3,8 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { ICreateBoardDto } from '../../models/board.model';
-import { IColumn, IUpdateColumnDto } from '../../models/column.model';
+import {
+  IColumn,
+  IColumnData,
+  ICreateColumnDto,
+  IUpdateColumnDto,
+} from '../../models/column.model';
 import { httpOptionsWithJson } from './utils';
 
 @Injectable({
@@ -18,28 +22,27 @@ export class ColumnsService {
     return this.http.get<IColumn[]>(url);
   }
 
-  createColumn(boardId: string, board: ICreateBoardDto): Observable<IColumn> {
+  createColumn(boardId: string, board: ICreateColumnDto): Observable<IColumn> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns`;
     return this.http.post<IColumn>(url, board, httpOptionsWithJson);
   }
 
-  // TODO: unknown type
-  getColumn(boardId: string, columnId: string): Observable<unknown> {
+  getColumn(boardId: string, columnId: string): Observable<IColumnData> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}`;
-    return this.http.get<unknown>(url);
+    return this.http.get<IColumnData>(url);
   }
 
-  deleteColumn(boardId: string, columnId: string): Observable<void> {
+  deleteColumn(boardId: string, columnId: string): Observable<null> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}`;
-    return this.http.delete<void>(url);
+    return this.http.delete<null>(url);
   }
 
   updateColumn(
     boardId: string,
     columnId: string,
     column: IUpdateColumnDto,
-  ): Observable<void> {
+  ): Observable<IColumn> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}`;
-    return this.http.put<void>(url, column, httpOptionsWithJson);
+    return this.http.put<IColumn>(url, column, httpOptionsWithJson);
   }
 }

@@ -1,9 +1,13 @@
-import { ITask } from './task.model';
+import { ITaskShort } from './task.model';
 
 export interface IColumn {
   id: string;
   title: string;
   order: number;
+}
+
+export interface IColumnData extends IColumn {
+  tasks: ITaskShort[];
 }
 
 export interface ICreateColumnDto {
@@ -13,9 +17,4 @@ export interface ICreateColumnDto {
 export interface IUpdateColumnDto {
   title: string;
   order: number;
-}
-
-// TODO: check type
-export interface IColumnData extends IColumn {
-  tasks: ITask[];
 }
