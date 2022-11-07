@@ -1,6 +1,6 @@
-import { IFileInfo } from './file-info.model';
+import { FileInfo } from './file-info.model';
 
-export interface ITask {
+export interface Task {
   id: string;
   title: string;
   order: number;
@@ -8,18 +8,18 @@ export interface ITask {
   userId: string;
   boardId: string;
   columnId: string;
-  files: IFileInfo[];
+  files: FileInfo[];
 }
 
-export interface ITaskShort extends Omit<ITask, 'boardId' | 'columnId'> {}
+export interface TaskShort extends Omit<Task, 'boardId' | 'columnId'> {}
 
-export interface ICreateTaskDto {
+export interface CreateTaskDto {
   title: string;
   description: string;
   userId: string;
 }
 
-export interface ICreatedTask {
+export interface CreatedTask {
   id: string;
   title: string;
   order: number;
@@ -29,7 +29,7 @@ export interface ICreatedTask {
   columnId: string;
 }
 
-export interface IUpdateTaskDto {
+export interface UpdateTaskDto {
   title: string;
   order: number;
   description: string;
@@ -38,6 +38,6 @@ export interface IUpdateTaskDto {
   columnId: string;
 }
 
-export interface IUpdatedTask extends IUpdateTaskDto {
+export interface UpdatedTask extends UpdateTaskDto {
   id: string;
 }

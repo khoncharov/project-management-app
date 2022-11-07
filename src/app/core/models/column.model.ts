@@ -1,20 +1,20 @@
-import { ITaskShort } from './task.model';
+import { TaskShort } from './task.model';
 
-export interface IColumn {
+export interface Column {
   id: string;
   title: string;
   order: number;
 }
 
-export interface IColumnWithTasks extends IColumn {
-  tasks: ITaskShort[];
+export interface ColumnWithTasks extends Column {
+  tasks: TaskShort[];
 }
 
-export interface ICreateColumnDto {
+export interface CreateColumnDto {
   title: string;
 }
 
-export interface IUpdateColumnDto {
+export interface UpdateColumnDto {
   title: string;
   order: number;
 }

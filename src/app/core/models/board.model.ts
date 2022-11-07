@@ -1,21 +1,21 @@
-import { IColumnWithTasks } from './column.model';
+import { ColumnWithTasks } from './column.model';
 
-export interface IBoard {
+export interface Board {
   id: string;
   title: string;
   description: string;
 }
 
-export interface IBoardWithColumns extends IBoard {
-  columns: IColumnWithTasks;
+export interface BoardWithColumns extends Board {
+  columns: ColumnWithTasks;
 }
 
-export interface ICreateBoardDto {
+export interface CreateBoardDto {
   title: string;
   description: string;
 }
 
-export interface IUpdateBoardDto {
+export interface UpdateBoardDto {
   title: string;
   description: string;
 }

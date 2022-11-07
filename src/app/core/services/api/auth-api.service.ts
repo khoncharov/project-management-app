@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { ICreateUserDto, ISignInUserDto, IUser } from '../../models/user.model';
+import { CreateUserDto, SignInUserDto, User } from '../../models/user.model';
 import { httpOptionsWithJson } from './utils';
 
 @Injectable({
@@ -12,13 +12,13 @@ import { httpOptionsWithJson } from './utils';
 export class AuthApiService {
   constructor(private http: HttpClient) {}
 
-  signIn(user: ISignInUserDto): Observable<{ token: string }> {
+  signIn(user: SignInUserDto): Observable<{ token: string }> {
     const url = `${environment.API_ORIGIN}/signin`;
     return this.http.post<{ token: string }>(url, user, httpOptionsWithJson);
   }
 
-  signUp(user: ICreateUserDto): Observable<IUser> {
+  signUp(user: CreateUserDto): Observable<User> {
     const url = `${environment.API_ORIGIN}/signup`;
-    return this.http.post<IUser>(url, user, httpOptionsWithJson);
+    return this.http.post<User>(url, user, httpOptionsWithJson);
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { IUpdateUserDto, IUser } from '../../models/user.model';
+import { UpdateUserDto, User } from '../../models/user.model';
 import { httpOptionsWithJson } from './utils';
 
 @Injectable({
@@ -12,14 +12,14 @@ import { httpOptionsWithJson } from './utils';
 export class AdminApiService {
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<IUser[]> {
+  getUsers(): Observable<User[]> {
     const url = `${environment.API_ORIGIN}/users`;
-    return this.http.get<IUser[]>(url);
+    return this.http.get<User[]>(url);
   }
 
-  getUser(id: string): Observable<IUser> {
+  getUser(id: string): Observable<User> {
     const url = `${environment.API_ORIGIN}/users/${id}`;
-    return this.http.get<IUser>(url);
+    return this.http.get<User>(url);
   }
 
   deleteUser(id: string): Observable<null> {
@@ -27,8 +27,8 @@ export class AdminApiService {
     return this.http.delete<null>(url);
   }
 
-  updateUser(userId: string, updatedUser: IUpdateUserDto): Observable<IUser> {
-    const url = `${environment.API_ORIGIN}/users/${userId}`;
-    return this.http.put<IUser>(url, updatedUser, httpOptionsWithJson);
+  updateUser(id: string, updatedUser: UpdateUserDto): Observable<User> {
+    const url = `${environment.API_ORIGIN}/users/${id}`;
+    return this.http.put<User>(url, updatedUser, httpOptionsWithJson);
   }
 }

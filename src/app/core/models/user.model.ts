@@ -1,21 +1,21 @@
-export interface IUser {
+export interface User {
   id: string;
   name: string;
   login: string;
 }
 
-export interface IUpdateUserDto {
+export interface UpdateUserDto {
   name: string;
   login: string;
   password: string;
 }
 
-export interface ISignInUserDto {
+export interface SignInUserDto {
   login: string;
   password: string;
 }
 
-export interface ICreateUserDto {
+export interface CreateUserDto {
   name: string;
   login: string;
   password: string;

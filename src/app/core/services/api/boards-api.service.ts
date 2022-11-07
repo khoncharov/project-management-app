@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import {
-  IBoard,
-  IBoardWithColumns,
-  ICreateBoardDto,
-  IUpdateBoardDto,
+  Board,
+  BoardWithColumns,
+  CreateBoardDto,
+  UpdateBoardDto,
 } from '../../models/board.model';
 import { httpOptionsWithJson } from './utils';
 
@@ -17,19 +17,19 @@ import { httpOptionsWithJson } from './utils';
 export class BoardsApiService {
   constructor(private http: HttpClient) {}
 
-  getBoards(): Observable<IBoard[]> {
+  getBoards(): Observable<Board[]> {
     const url = `${environment.API_ORIGIN}/boards`;
-    return this.http.get<IBoard[]>(url);
+    return this.http.get<Board[]>(url);
   }
 
-  createBoard(board: ICreateBoardDto): Observable<IBoard> {
+  createBoard(board: CreateBoardDto): Observable<Board> {
     const url = `${environment.API_ORIGIN}/boards`;
-    return this.http.post<IBoard>(url, board, httpOptionsWithJson);
+    return this.http.post<Board>(url, board, httpOptionsWithJson);
   }
 
-  getBoard(id: string): Observable<IBoardWithColumns> {
+  getBoard(id: string): Observable<BoardWithColumns> {
     const url = `${environment.API_ORIGIN}/boards/${id}`;
-    return this.http.get<IBoardWithColumns>(url);
+    return this.http.get<BoardWithColumns>(url);
   }
 
   deleteBoard(id: string): Observable<null> {
@@ -37,8 +37,8 @@ export class BoardsApiService {
     return this.http.delete<null>(url);
   }
 
-  updateBoard(id: string, board: IUpdateBoardDto): Observable<IBoard> {
+  updateBoard(id: string, board: UpdateBoardDto): Observable<Board> {
     const url = `${environment.API_ORIGIN}/boards/${id}`;
-    return this.http.put<IBoard>(url, board, httpOptionsWithJson);
+    return this.http.put<Board>(url, board, httpOptionsWithJson);
   }
 }

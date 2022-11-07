@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import {
-  ICreatedTask,
-  ICreateTaskDto,
-  ITask,
-  IUpdatedTask,
-  IUpdateTaskDto,
+  CreatedTask,
+  CreateTaskDto,
+  Task,
+  UpdatedTask,
+  UpdateTaskDto,
 } from '../../models/task.model';
 import { httpOptionsWithJson } from './utils';
 
@@ -18,27 +18,23 @@ import { httpOptionsWithJson } from './utils';
 export class TasksApiService {
   constructor(private http: HttpClient) {}
 
-  getTasks(boardId: string, columnId: string): Observable<ITask[]> {
+  getTasks(boardId: string, columnId: string): Observable<Task[]> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks`;
-    return this.http.get<ITask[]>(url);
+    return this.http.get<Task[]>(url);
   }
 
   createTask(
     boardId: string,
     columnId: string,
-    task: ICreateTaskDto,
-  ): Observable<ICreatedTask> {
+    task: CreateTaskDto,
+  ): Observable<CreatedTask> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks`;
-    return this.http.post<ICreatedTask>(url, task, httpOptionsWithJson);
+    return this.http.post<CreatedTask>(url, task, httpOptionsWithJson);
   }
 
-  getTask(
-    boardId: string,
-    columnId: string,
-    taskId: string,
-  ): Observable<ITask> {
+  getTask(boardId: string, columnId: string, taskId: string): Observable<Task> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
-    return this.http.get<ITask>(url);
+    return this.http.get<Task>(url);
   }
 
   deleteTask(
@@ -54,9 +50,9 @@ export class TasksApiService {
     boardId: string,
     columnId: string,
     taskId: string,
-    task: IUpdateTaskDto,
-  ): Observable<IUpdatedTask> {
+    task: UpdateTaskDto,
+  ): Observable<UpdatedTask> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
-    return this.http.put<IUpdatedTask>(url, task, httpOptionsWithJson);
+    return this.http.put<UpdatedTask>(url, task, httpOptionsWithJson);
   }
 }

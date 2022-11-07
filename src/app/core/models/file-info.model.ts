@@ -1,4 +1,4 @@
-export interface IFileInfo {
+export interface FileInfo {
   filename: string;
   fileSize: number;
 }

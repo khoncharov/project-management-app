@@ -4,10 +4,10 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import {
-  IColumn,
-  IColumnWithTasks,
-  ICreateColumnDto,
-  IUpdateColumnDto,
+  Column,
+  ColumnWithTasks,
+  CreateColumnDto,
+  UpdateColumnDto,
 } from '../../models/column.model';
 import { httpOptionsWithJson } from './utils';
 
@@ -17,19 +17,19 @@ import { httpOptionsWithJson } from './utils';
 export class ColumnsApiService {
   constructor(private http: HttpClient) {}
 
-  getColumns(boardId: string): Observable<IColumn[]> {
+  getColumns(boardId: string): Observable<Column[]> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns`;
-    return this.http.get<IColumn[]>(url);
+    return this.http.get<Column[]>(url);
   }
 
-  createColumn(boardId: string, board: ICreateColumnDto): Observable<IColumn> {
+  createColumn(boardId: string, board: CreateColumnDto): Observable<Column> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns`;
-    return this.http.post<IColumn>(url, board, httpOptionsWithJson);
+    return this.http.post<Column>(url, board, httpOptionsWithJson);
   }
 
-  getColumn(boardId: string, columnId: string): Observable<IColumnWithTasks> {
+  getColumn(boardId: string, columnId: string): Observable<ColumnWithTasks> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}`;
-    return this.http.get<IColumnWithTasks>(url);
+    return this.http.get<ColumnWithTasks>(url);
   }
 
   deleteColumn(boardId: string, columnId: string): Observable<null> {
@@ -40,9 +40,9 @@ export class ColumnsApiService {
   updateColumn(
     boardId: string,
     columnId: string,
-    column: IUpdateColumnDto,
-  ): Observable<IColumn> {
+    column: UpdateColumnDto,
+  ): Observable<Column> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}`;
-    return this.http.put<IColumn>(url, column, httpOptionsWithJson);
+    return this.http.put<Column>(url, column, httpOptionsWithJson);
   }
 }
