@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { environment } from '../../../../environments/environment';
 import {
   CreatedTask,
   CreateTaskDto,
@@ -10,7 +9,7 @@ import {
   UpdatedTask,
   UpdateTaskDto,
 } from '../../models/task.model';
-import { httpOptionsWithJson } from './utils';
+import { getTasksUrl, httpOptionsWithJson } from './utils';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +18,7 @@ export class TasksApiService {
   constructor(private http: HttpClient) {}
 
   getTasks(boardId: string, columnId: string): Observable<Task[]> {
-    const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks`;
+    const url = getTasksUrl(boardId, columnId);
     return this.http.get<Task[]>(url);
   }
 
@@ -28,12 +27,12 @@ export class TasksApiService {
     columnId: string,
     task: CreateTaskDto,
   ): Observable<CreatedTask> {
-    const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks`;
+    const url = getTasksUrl(boardId, columnId);
     return this.http.post<CreatedTask>(url, task, httpOptionsWithJson);
   }
 
   getTask(boardId: string, columnId: string, taskId: string): Observable<Task> {
-    const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
+    const url = getTasksUrl(boardId, columnId, taskId);
     return this.http.get<Task>(url);
   }
 
@@ -42,7 +41,7 @@ export class TasksApiService {
     columnId: string,
     taskId: string,
   ): Observable<null> {
-    const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
+    const url = getTasksUrl(boardId, columnId, taskId);
     return this.http.delete<null>(url);
   }
 
@@ -52,7 +51,7 @@ export class TasksApiService {
     taskId: string,
     task: UpdateTaskDto,
   ): Observable<UpdatedTask> {
-    const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
+    const url = getTasksUrl(boardId, columnId, taskId);
     return this.http.put<UpdatedTask>(url, task, httpOptionsWithJson);
   }
 }
