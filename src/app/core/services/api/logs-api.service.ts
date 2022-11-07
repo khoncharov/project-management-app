@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class LoggingService {
+export class LogApiService {
   constructor(private http: HttpClient) {}
 
   getErrLogs(): Observable<unknown> {

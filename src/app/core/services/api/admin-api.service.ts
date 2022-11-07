@@ -9,7 +9,7 @@ import { httpOptionsWithJson } from './utils';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminService {
+export class AdminApiService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<IUser[]> {

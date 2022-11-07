@@ -15,7 +15,7 @@ import { httpOptionsWithJson } from './utils';
 @Injectable({
   providedIn: 'root',
 })
-export class TasksService {
+export class TasksApiService {
   constructor(private http: HttpClient) {}
 
   getTasks(boardId: string, columnId: string): Observable<ITask[]> {

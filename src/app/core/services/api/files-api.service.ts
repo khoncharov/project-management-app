@@ -13,7 +13,7 @@ export const httpOptionsLoad = {
 @Injectable({
   providedIn: 'root',
 })
-export class FilesService {
+export class FilesApiService {
   constructor(private http: HttpClient) {}
 
   getFile(taskId: string, filename: string) {

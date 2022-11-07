@@ -9,7 +9,7 @@ import { httpOptionsWithJson } from './utils';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthApiService {
   constructor(private http: HttpClient) {}
 
   signIn(user: ISignInUserDto): Observable<{ token: string }> {

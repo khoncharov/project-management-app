@@ -14,7 +14,7 @@ import { httpOptionsWithJson } from './utils';
 @Injectable({
   providedIn: 'root',
 })
-export class BoardsService {
+export class BoardsApiService {
   constructor(private http: HttpClient) {}
 
   getBoards(): Observable<IBoard[]> {

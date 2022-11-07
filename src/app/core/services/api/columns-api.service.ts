@@ -14,7 +14,7 @@ import { httpOptionsWithJson } from './utils';
 @Injectable({
   providedIn: 'root',
 })
-export class ColumnsService {
+export class ColumnsApiService {
   constructor(private http: HttpClient) {}
 
   getColumns(boardId: string): Observable<IColumn[]> {
