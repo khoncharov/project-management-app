@@ -22,9 +22,9 @@ export class AdminService {
     return this.http.get<IUser>(url);
   }
 
-  deleteUser(id: string): Observable<void> {
+  deleteUser(id: string): Observable<null> {
     const url = `${environment.API_ORIGIN}/users/${id}`;
-    return this.http.delete<void>(url);
+    return this.http.delete<null>(url);
   }
 
   updateUser(userId: string, updatedUser: IUpdateUserDto): Observable<IUser> {

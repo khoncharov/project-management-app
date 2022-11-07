@@ -32,9 +32,9 @@ export class BoardsService {
     return this.http.get<IBoardData>(url);
   }
 
-  deleteBoard(id: string): Observable<void> {
+  deleteBoard(id: string): Observable<null> {
     const url = `${environment.API_ORIGIN}/boards/${id}`;
-    return this.http.delete<void>(url);
+    return this.http.delete<null>(url);
   }
 
   updateBoard(id: string, board: IUpdateBoardDto): Observable<IBoard> {
