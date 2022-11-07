@@ -6,7 +6,7 @@ export interface IColumn {
   order: number;
 }
 
-export interface IColumnData extends IColumn {
+export interface IColumnWithTasks extends IColumn {
   tasks: ITaskShort[];
 }
 

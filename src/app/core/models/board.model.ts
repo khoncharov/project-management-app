@@ -1,4 +1,4 @@
-import { IColumnData } from './column.model';
+import { IColumnWithTasks } from './column.model';
 
 export interface IBoard {
   id: string;
@@ -6,8 +6,8 @@ export interface IBoard {
   description: string;
 }
 
-export interface IBoardData extends IBoard {
-  columns: IColumnData;
+export interface IBoardWithColumns extends IBoard {
+  columns: IColumnWithTasks;
 }
 
 export interface ICreateBoardDto {

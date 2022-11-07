@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import {
   IColumn,
-  IColumnData,
+  IColumnWithTasks,
   ICreateColumnDto,
   IUpdateColumnDto,
 } from '../../models/column.model';
@@ -27,9 +27,9 @@ export class ColumnsService {
     return this.http.post<IColumn>(url, board, httpOptionsWithJson);
   }
 
-  getColumn(boardId: string, columnId: string): Observable<IColumnData> {
+  getColumn(boardId: string, columnId: string): Observable<IColumnWithTasks> {
     const url = `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}`;
-    return this.http.get<IColumnData>(url);
+    return this.http.get<IColumnWithTasks>(url);
   }
 
   deleteColumn(boardId: string, columnId: string): Observable<null> {

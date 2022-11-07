@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import {
   IBoard,
-  IBoardData,
+  IBoardWithColumns,
   ICreateBoardDto,
   IUpdateBoardDto,
 } from '../../models/board.model';
@@ -27,9 +27,9 @@ export class BoardsService {
     return this.http.post<IBoard>(url, board, httpOptionsWithJson);
   }
 
-  getBoard(id: string): Observable<IBoardData> {
+  getBoard(id: string): Observable<IBoardWithColumns> {
     const url = `${environment.API_ORIGIN}/boards/${id}`;
-    return this.http.get<IBoardData>(url);
+    return this.http.get<IBoardWithColumns>(url);
   }
 
   deleteBoard(id: string): Observable<null> {
