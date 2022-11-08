@@ -19,12 +19,9 @@ export interface CreateTaskDto {
   userId: string;
 }
 
-export interface CreatedTask {
+export interface CreatedTask extends CreateTaskDto {
   id: string;
-  title: string;
   order: number;
-  description: string;
-  userId: string;
   boardId: string;
   columnId: string;
 }
