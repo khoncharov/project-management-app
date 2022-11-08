@@ -30,9 +30,9 @@ export const getBoardsUrl = (boardId?: string): string => {
 
 export const getColumnsUrl = (boardId: string, columnId?: string): string => {
   if (columnId) {
-    return `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}`;
+    return `${getBoardsUrl(boardId)}/columns/${columnId}`;
   }
-  return `${environment.API_ORIGIN}/boards/${boardId}/columns`;
+  return `${getBoardsUrl(boardId)}/columns`;
 };
 
 export const getTasksUrl = (
@@ -41,7 +41,7 @@ export const getTasksUrl = (
   taskId?: string,
 ): string => {
   if (taskId) {
-    return `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks/${taskId}`;
+    return `${getColumnsUrl(boardId, columnId)}/tasks/${taskId}`;
   }
-  return `${environment.API_ORIGIN}/boards/${boardId}/columns/${columnId}/tasks`;
+  return `${getColumnsUrl(boardId, columnId)}/tasks`;
 };
