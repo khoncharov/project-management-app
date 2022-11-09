@@ -1,8 +1,26 @@
-<!-- TEMP MARKUP -->
-<a routerLink="/">Logo</a>
-<a routerLink="/home">Home</a>
-<a routerLink="/admin">Admin</a>
-<a routerLink="/projects">Projects</a>
-<a routerLink="/board">Board</a>
-<a routerLink="/login">Login</a>
-<a routerLink="/any-other-path">404</a>
+<header class="header">
+  <div class="header-container">
+    <div class="header-container_link">
+      <a routerLink="/">
+        <img class="header-logo" src="../../../../assets/logo.svg" alt="logo"/>
+      </a>
+      <a class="header-container_btn" routerLink="/home" routerLinkActive="active">Home</a>
+      <a class="header-container_btn" routerLink="/projects" routerLinkActive="active">Projects</a>
+      <a class="header-container_btn" routerLink="/admin" routerLinkActive="active">Admin</a>
+      <a class="header-container_btn" routerLink="/board" routerLinkActive="active">Board</a>
+    </div>
+    <div class="header-switcher">
+      <span>en</span>
+      <mat-slide-toggle></mat-slide-toggle>
+      <span>ru</span>
+    </div>
+    <div class="header-login">
+      <p class="header-login_title">username</p>
+      <mat-icon 
+        class="header-login_icon header_icon"
+        routerLink="/login"
+        fontIcon="account_circle">
+      </mat-icon>
+    </div>
+  </div>
+</header>
