@@ -1,7 +1,8 @@
 /* eslint-disable arrow-body-style */
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs';
+import { of } from 'rxjs';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import { AuthApiService } from '../../core/services/api/auth-api.service';
 import * as AuthActions from '../actions/auth.actions';
@@ -15,9 +16,10 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.loginUser),
       mergeMap((payload) => {
-        return this.authApi
-          .signIn(payload.user)
-          .pipe(map(({ token }) => AuthApiActions.loginUserSuccess({ token })));
+        return this.authApi.signIn(payload.user).pipe(
+          map(({ token }) => AuthApiActions.loginUserSuccess({ token })),
+          catchError((error) => of(AuthApiActions.loginUserFailure({ error }))),
+        );
       }),
     );
   });

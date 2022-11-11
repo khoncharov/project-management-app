@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthEffects } from './store/effects/auth.effects';
 import { UpdateUserEffects } from './store/effects/user.effects';
+import { authReducer } from './store/reducers/auth.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { UpdateUserEffects } from './store/effects/user.effects';
     CoreModule,
     SharedModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ currentUser: authReducer }),
     EffectsModule.forRoot([AuthEffects, UpdateUserEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
