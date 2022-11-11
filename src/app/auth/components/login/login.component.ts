@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { AuthApiService } from 'src/app/core/services/api/auth-api.service';
+import { passwordValidator } from 'src/app/core/validators';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,18 @@ import { AuthApiService } from 'src/app/core/services/api/auth-api.service';
 })
 export class LoginComponent {
   loginForm = this.fb.group({
-    login: ['', Validators.required],
-    password: ['', Validators.required],
+    login: ['', [Validators.required]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(8),
+        passwordValidator(),
+      ],
+    ],
   });
 
-  hide = true;
+  isHidden = true;
 
   constructor(
     private fb: FormBuilder,
