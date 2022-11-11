@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { AuthApiService } from 'src/app/core/services/api/auth-api.service';
@@ -15,11 +15,7 @@ export class LoginComponent {
     login: ['', [Validators.required]],
     password: [
       '',
-      [
-        Validators.required,
-        Validators.minLength(8),
-        passwordValidator(),
-      ],
+      [Validators.required, Validators.minLength(8), passwordValidator()],
     ],
   });
 
@@ -30,6 +26,15 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthApiService,
   ) {}
+
+  getErrorMessage(error: ValidationErrors) {
+    if (error['required']) return 'Please fill in this field';
+    if (error['minlength']) return 'Should be at least 8 characters';
+    if (error['inValidPassword']) {
+      return 'Should contain at least 1 capital letter, 1 small letter and 1 number';
+    }
+    return '';
+  }
 
   onSubmit() {
     const { login, password } = this.loginForm.value;

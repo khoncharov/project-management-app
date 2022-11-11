@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { AuthApiService } from 'src/app/core/services/api/auth-api.service';
@@ -34,6 +34,16 @@ export class SignUpComponent {
     private router: Router,
     private authService: AuthApiService,
   ) {}
+
+  getErrorMessage(error: ValidationErrors) {
+    if (error['required']) return 'Please fill in this field';
+    if (error['minlength']) return 'Should be at least 8 characters';
+    if (error['inValidPassword']) {
+      return 'Should contain at least 1 capital letter, 1 small letter and 1 number';
+    }
+    if (error['mustMatch']) return 'Passwords do not match';
+    return '';
+  }
 
   onSubmit() {
     const { name, login, password } = this.signUpForm.value;
