@@ -15,3 +15,13 @@ export const selectLoginError = createSelector(
   selectCurrUserState,
   (state) => state.page.error,
 );
+
+export const selectToken = createSelector(
+  selectCurrUserState,
+  (state) => state.token.token,
+);
+
+export const selectUser = createSelector(
+  selectCurrUserState,
+  (state) => state.user,
+);

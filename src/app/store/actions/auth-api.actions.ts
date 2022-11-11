@@ -11,6 +11,11 @@ export const loginUserSuccess = createAction(
   props<{ token: string }>(),
 );
 
+export const registerUserFailure = createAction(
+  '[Auth API] User sign-up error',
+  props<{ error: Error }>(),
+);
+
 export const registerUserSuccess = createAction(
   '[Auth API] User signed-up',
   props<{ user: User }>(),

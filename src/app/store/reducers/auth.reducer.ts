@@ -90,12 +90,71 @@ export const authReducer = createReducer(
     return state;
   }),
 
+  on(AuthActions.logoutUser, (state): CurrentUserState => {
+    localData.userToken = '';
+    return {
+      ...state,
+      ...initState,
+    };
+  }),
+
+  on(
+    AuthActions.registerUser,
+    (state): CurrentUserState => ({
+      ...state,
+      page: {
+        error: null,
+        isLoading: true,
+      },
+    }),
+  ),
+
+  on(
+    AuthApiActions.registerUserFailure,
+    (state, action): CurrentUserState => ({
+      ...state,
+      page: {
+        error: action.error.message,
+        isLoading: false,
+      },
+    }),
+  ),
+
   on(AuthApiActions.registerUserSuccess, (state, action): CurrentUserState => {
     const { id, name, login } = action.user;
-    // TODO: get token
     return {
       ...state,
       user: { id, name, login },
+      page: {
+        error: null,
+        isLoading: false,
+      },
     };
+  }),
+
+  on(AuthActions.checkToken, (state) => {
+    const token = localData.userToken;
+    if (token) {
+      const tokenData = parseJWT(token);
+      if (tokenData) {
+        return {
+          ...state,
+          user: {
+            id: tokenData.userId,
+            login: tokenData.login,
+            name: '',
+          },
+          token: {
+            token,
+            issuedAt: tokenData.iat,
+          },
+          page: {
+            error: null,
+            isLoading: false,
+          },
+        };
+      }
+    }
+    return state;
   }),
 );

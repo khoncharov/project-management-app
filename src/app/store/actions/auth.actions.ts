@@ -11,10 +11,6 @@ export const registerUser = createAction(
   props<{ user: CreateUserDto }>(),
 );
 
-// TODO: do we need this?
 export const logoutUser = createAction('[Header] Sign-out user');
 
-// TODO: Token
-export const checkTokenExist = createAction('[Token] Check token exist');
-
-export const checkTokenExpired = createAction('[Token] Check token expired');
+export const checkToken = createAction('[Token] Check token');
