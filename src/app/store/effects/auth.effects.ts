@@ -1,3 +1,5 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable arrow-body-style */
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
@@ -28,9 +30,12 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.registerUser),
       mergeMap((payload) => {
-        return this.authApi
-          .signUp(payload.user)
-          .pipe(map((user) => AuthApiActions.registerUserSuccess({ user })));
+        return this.authApi.signUp(payload.user).pipe(
+          map((user) => AuthApiActions.registerUserSuccess({ user })),
+          catchError((error) =>
+            of(AuthApiActions.registerUserFailure({ error })),
+          ),
+        );
       }),
     );
   });
