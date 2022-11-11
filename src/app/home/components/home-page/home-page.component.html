@@ -1,1 +1,18 @@
-<p>home-page works!</p>
+<h2>Login</h2>
+
+<input type="text" placeholder="Name (reg)" [formControl]="userName" /><br />
+<input type="text" placeholder="Login" [formControl]="userLogin" /><br />
+<input type="text" placeholder="Password" [formControl]="userPassword" /><br />
+
+<button type="button" (click)="onSignUp()">REG</button><br />
+<button type="button" (click)="onSignIn()">LOGIN</button><br />
+<button type="button" (click)="onSignOut()">LOGOUT</button><br />
+
+<hr />
+
+<mat-progress-bar *ngIf="isLoading$ | async" mode="query"></mat-progress-bar>
+
+<div>
+  Err:
+  {{ error$ | async }}
+</div>
