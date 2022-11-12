@@ -1,7 +1,10 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable object-curly-newline */
 /* eslint-disable arrow-body-style */
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs';
+import { catchError, map, mergeMap, of } from 'rxjs';
 
 import { AdminApiService } from '../../core/services/api/admin-api.service';
 import * as UserActions from '../actions/user.actions';
@@ -15,9 +18,10 @@ export class UpdateUserEffects {
     return this.actions$.pipe(
       ofType(UserActions.getUser),
       mergeMap((payload) => {
-        return this.adminApi
-          .getUser(payload.id)
-          .pipe(map((user) => UserApiActions.userDataLoaded({ user })));
+        return this.adminApi.getUser(payload.id).pipe(
+          map((user) => UserApiActions.getUserSuccess({ user })),
+          catchError((error) => of(UserApiActions.getUserFailure({ error }))),
+        );
       }),
     );
   });
@@ -26,9 +30,12 @@ export class UpdateUserEffects {
     return this.actions$.pipe(
       ofType(UserActions.updateUser),
       mergeMap((payload) => {
-        return this.adminApi
-          .updateUser(payload.id, payload.user)
-          .pipe(map((user) => UserApiActions.updateUserSuccess({ user })));
+        return this.adminApi.updateUser(payload.id, payload.user).pipe(
+          map((user) => UserApiActions.updateUserSuccess({ user })),
+          catchError((error) =>
+            of(UserApiActions.updateUserFailure({ error })),
+          ),
+        );
       }),
     );
   });
@@ -37,9 +44,12 @@ export class UpdateUserEffects {
     return this.actions$.pipe(
       ofType(UserActions.deleteUser),
       mergeMap((payload) => {
-        return this.adminApi
-          .deleteUser(payload.id)
-          .pipe(map(() => UserApiActions.deleteUserSuccess()));
+        return this.adminApi.deleteUser(payload.id).pipe(
+          map(() => UserApiActions.deleteUserSuccess()),
+          catchError((error) =>
+            of(UserApiActions.deleteUserFailure({ error })),
+          ),
+        );
       }),
     );
   });

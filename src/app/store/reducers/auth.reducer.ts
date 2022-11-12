@@ -5,6 +5,8 @@ import { LocalDataService } from '../../core/services/localStorage/local-data.se
 import { parseJWT } from '../../core/utils/utils';
 import * as AuthActions from '../actions/auth.actions';
 import * as AuthApiActions from '../actions/auth-api.actions';
+import * as UserActions from '../actions/user.actions';
+import * as UserApiActions from '../actions/user-api.actions';
 
 export interface TokenData {
   token: string;
@@ -38,21 +40,20 @@ const initState: CurrentUserState = {
   },
 };
 
+const onDataRequest = (state: CurrentUserState): CurrentUserState => ({
+  ...state,
+  page: {
+    error: null,
+    isLoading: true,
+  },
+});
+
 const localData = new LocalDataService();
 
 export const authReducer = createReducer(
   initState,
 
-  on(
-    AuthActions.loginUser,
-    (state): CurrentUserState => ({
-      ...state,
-      page: {
-        error: null,
-        isLoading: true,
-      },
-    }),
-  ),
+  on(AuthActions.loginUser, onDataRequest),
 
   on(
     AuthApiActions.loginUserFailure,
@@ -98,16 +99,7 @@ export const authReducer = createReducer(
     };
   }),
 
-  on(
-    AuthActions.registerUser,
-    (state): CurrentUserState => ({
-      ...state,
-      page: {
-        error: null,
-        isLoading: true,
-      },
-    }),
-  ),
+  on(AuthActions.registerUser, onDataRequest),
 
   on(
     AuthApiActions.registerUserFailure,
@@ -157,4 +149,75 @@ export const authReducer = createReducer(
     }
     return state;
   }),
+
+  on(UserActions.getUser, onDataRequest),
+
+  on(
+    UserApiActions.getUserFailure,
+    (state, action): CurrentUserState => ({
+      ...state,
+      page: {
+        error: action.error.message,
+        isLoading: false,
+      },
+    }),
+  ),
+
+  on(
+    UserApiActions.getUserSuccess,
+    (state, action): CurrentUserState => ({
+      ...state,
+      user: action.user,
+      page: {
+        error: null,
+        isLoading: false,
+      },
+    }),
+  ),
+
+  on(UserActions.updateUser, onDataRequest),
+
+  on(
+    UserApiActions.updateUserFailure,
+    (state, action): CurrentUserState => ({
+      ...state,
+      page: {
+        error: action.error.message,
+        isLoading: false,
+      },
+    }),
+  ),
+
+  on(
+    UserApiActions.updateUserSuccess,
+    (state, action): CurrentUserState => ({
+      ...state,
+      user: action.user,
+      page: {
+        error: null,
+        isLoading: false,
+      },
+    }),
+  ),
+
+  on(UserActions.deleteUser, onDataRequest),
+
+  on(
+    UserApiActions.deleteUserFailure,
+    (state, action): CurrentUserState => ({
+      ...state,
+      page: {
+        error: action.error.message,
+        isLoading: false,
+      },
+    }),
+  ),
+
+  on(
+    UserApiActions.updateUserSuccess,
+    (state): CurrentUserState => ({
+      ...state,
+      ...initState,
+    }),
+  ),
 );
