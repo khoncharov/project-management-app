@@ -1,1 +1,17 @@
-<p>projects-page works!</p>
+<button type="button">New Board</button>
+
+<ul>
+  <li>Num - Title - Description</li>
+  <li *ngFor="let board of boards$ | async; index as i">
+    {{ i }} | {{ board.title }} | {{ board.description }} |
+    <button type="button">open</button>
+    <button type="button">del</button>
+  </li>
+</ul>
+
+<mat-progress-bar *ngIf="isLoading$ | async" mode="query"></mat-progress-bar>
+
+<div>
+  Err:
+  {{ error$ | async }}
+</div>
