@@ -15,6 +15,11 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path: 'edit-user',
+    loadChildren: () =>
+      import('./modules/modules.module').then((m) => m.ModulesModule),
+  },
+  {
     path: 'board',
     loadChildren: () =>
       import('./board/board.module').then((m) => m.BoardModule),

@@ -1,0 +1,41 @@
+.edit-user {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-user-container {
+  width: 19rem;
+  height: 27rem;
+  padding: 1.5rem;
+  background-color: #F2F2F2;
+  border-radius: 5px;
+
+  mat-form-field {
+    width: 19rem;
+    line-height: 1.2;
+  }
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.edit-user-container_btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  width: 8rem;
+  height: 2rem;
+  margin-top: 3.5rem;
+  background-color: #D7D7D7;
+  color: #FFFFFF;
+}
+
+button:hover {
+  filter: drop-shadow(2px 0px 4px #D7D7D7);
+}
