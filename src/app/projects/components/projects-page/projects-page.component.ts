@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { Board } from '../../../core/models/board.model';
+import * as BoardActions from '../../../store/actions/board.actions';
+import * as fromProjects from '../../../store/selectors/projects.selectors';
 
 @Component({
   selector: 'app-projects-page',
@@ -15,22 +18,15 @@ export class ProjectsPageComponent implements OnInit {
 
   protected isLoading$!: Observable<boolean>;
 
-  ngOnInit(): void {
-    const mock: Board[] = [
-      {
-        id: '1',
-        title: 't1',
-        description: 'd1',
-      },
-      {
-        id: '2',
-        title: 't2',
-        description: 'd2',
-      },
-    ];
+  constructor(private store: Store) {}
 
-    this.boards$ = of(mock);
-    this.error$ = of(null);
-    this.isLoading$ = of(true);
+  ngOnInit(): void {
+    this.boards$ = this.store.select(fromProjects.selectBoards);
+
+    this.error$ = this.store.select(fromProjects.selectError);
+
+    this.isLoading$ = this.store.select(fromProjects.selectProgress);
+
+    this.store.dispatch(BoardActions.getBoards());
   }
 }
