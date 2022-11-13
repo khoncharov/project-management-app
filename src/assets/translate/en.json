@@ -1,0 +1,11 @@
+{
+  "editUser": {
+    "user": "Edit profile",
+    "name": "Name",
+    "login": "Login",
+    "newPassword": "New password",
+    "repeatPassword": "Repeat password",
+    "deleteUser": "Delete User",
+    "submit": "Save"
+  }
+}
