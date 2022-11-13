@@ -5,6 +5,7 @@
   <li *ngFor="let board of boards$ | async; index as i">
     {{ i + 1 }} / {{ board.title }} / {{ board.description }} /
     <button type="button" (click)="onOpenBoard(board.id)">open</button>
+    <button type="button">edit</button>
     <button type="button" (click)="onDeleteBoard(board.id)">del</button>
   </li>
 </ul>
