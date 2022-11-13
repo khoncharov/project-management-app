@@ -58,8 +58,8 @@ export class BoardEffects {
     return this.actions$.pipe(
       ofType(BoardActions.deleteBoard),
       mergeMap((payload) => {
-        return this.boardApi.deleteBoard(payload.id).pipe(
-          map(() => BoardApiActions.deleteBoardSuccess()),
+        return this.boardApi.deleteBoardAndGetList(payload.id).pipe(
+          map((boards) => BoardApiActions.deleteBoardSuccess({ boards })),
           catchError((error) =>
             of(BoardApiActions.deleteBoardFailure({ error })),
           ),

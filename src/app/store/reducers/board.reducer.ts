@@ -105,7 +105,7 @@ export const projectsReducer = createReducer(
     BoardApiActions.deleteBoardSuccess,
     (state, action): ProjectsState => ({
       ...state,
-      // boards: action.boards, delete B => get Bs
+      boards: action.boards,
       error: null,
       isLoading: false,
     }),
