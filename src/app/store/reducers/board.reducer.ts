@@ -27,6 +27,14 @@ const onDataRequest = (state: ProjectsState): ProjectsState => ({
 export const projectsReducer = createReducer(
   initState,
 
+  on(
+    BoardActions.removeError,
+    (state): ProjectsState => ({
+      ...state,
+      error: null,
+    }),
+  ),
+
   on(BoardActions.getBoards, onDataRequest),
   on(BoardActions.createBoard, onDataRequest),
   on(BoardActions.getBoard, onDataRequest),
@@ -111,11 +119,11 @@ export const projectsReducer = createReducer(
     }),
   ),
   on(BoardApiActions.updateBoardSuccess, (state, action): ProjectsState => {
-    const boards = state.boards.map((b) => {
-      if (b.id === action.board.id) {
+    const boards = state.boards.map((board) => {
+      if (board.id === action.board.id) {
         return action.board;
       }
-      return b;
+      return board;
     });
     return {
       ...state,

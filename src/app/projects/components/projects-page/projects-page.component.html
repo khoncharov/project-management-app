@@ -1,11 +1,11 @@
-<button type="button">New Board</button>
+<button type="button" (click)="onCreateNewBoard()">New Board</button>
 
 <ul>
   <li>Num - Title - Description</li>
   <li *ngFor="let board of boards$ | async; index as i">
-    {{ i }} | {{ board.title }} | {{ board.description }} |
-    <button type="button">open</button>
-    <button type="button">del</button>
+    {{ i + 1 }} / {{ board.title }} / {{ board.description }} /
+    <button type="button" (click)="onOpenBoard(board.id)">open</button>
+    <button type="button" (click)="onDeleteBoard(board.id)">del</button>
   </li>
 </ul>
 
@@ -15,3 +15,4 @@
   Err:
   {{ error$ | async }}
 </div>
+<button type="button" (click)="onError()">ok</button>

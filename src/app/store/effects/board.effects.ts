@@ -28,6 +28,20 @@ export class BoardEffects {
     );
   });
 
+  createBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.createBoard),
+      mergeMap((payload) => {
+        return this.boardApi.createBoard(payload.board).pipe(
+          map((board) => BoardApiActions.createBoardSuccess({ board })),
+          catchError((error) =>
+            of(BoardApiActions.createBoardFailure({ error })),
+          ),
+        );
+      }),
+    );
+  });
+
   getBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.getBoard),

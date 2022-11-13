@@ -4,7 +4,7 @@ import { CreateBoardDto, UpdateBoardDto } from '../../core/models/board.model';
 export const getBoards = createAction('[Board] Get boards list');
 
 export const createBoard = createAction(
-  '[Board] Update board',
+  '[Board] Create board',
   props<{ board: CreateBoardDto }>(),
 );
 
@@ -22,3 +22,5 @@ export const updateBoard = createAction(
   '[Board] Update board',
   props<{ id: string; board: UpdateBoardDto }>(),
 );
+
+export const removeError = createAction('[Board] Remove request error');
