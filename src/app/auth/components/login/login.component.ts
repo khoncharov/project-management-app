@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
-import { AuthApiService } from 'src/app/core/services/api/auth-api.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { SignInUserDto, User } from 'src/app/core/models';
 import { passwordValidator } from 'src/app/core/validators';
+
+import * as AuthActions from 'src/app/store/actions/auth.actions';
+import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm = this.fb.group({
     login: ['', [Validators.required]],
     password: [
@@ -21,11 +25,26 @@ export class LoginComponent {
 
   isHidden = true;
 
+  user$!: Observable<User>;
+
+  error$!: Observable<string | null>;
+
+  isLoading$!: Observable<boolean>;
+
+  token$!: Observable<string>;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthApiService,
+    private store: Store,
   ) {}
+
+  ngOnInit(): void {
+    this.error$ = this.store.select(fromCurrentUser.selectLoginError);
+    this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
+    this.token$ = this.store.select(fromCurrentUser.selectToken);
+    this.user$ = this.store.select(fromCurrentUser.selectUser);
+  }
 
   getErrorMessage(error: ValidationErrors) {
     if (error['required']) return 'Please fill in this field';
@@ -39,12 +58,11 @@ export class LoginComponent {
   onSubmit() {
     const { login, password } = this.loginForm.value;
     if (login && password) {
-      this.authService
-        .signIn({ login, password })
-        .pipe(take(1))
-        .subscribe(() => {
-          this.router.navigateByUrl('projects');
-        });
+      const user: SignInUserDto = {
+        login,
+        password,
+      };
+      this.store.dispatch(AuthActions.loginUser({ user }));
     }
   }
 }
