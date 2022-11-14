@@ -49,4 +49,8 @@ export class ProjectsPageComponent implements OnInit {
   onDeleteBoard(id: string) {
     this.store.dispatch(BoardActions.deleteBoard({ id }));
   }
+
+  getIconColor(id: string): string {
+    return `color: #${id.slice(0, 6)}`;
+  }
 }
