@@ -13,6 +13,11 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { AuthEffects } from './store/effects/auth.effects';
+import { UserEffects } from './store/effects/user.effects';
+import { authReducer } from './store/reducers/auth.reducer';
+import { projectsReducer } from './store/reducers/board.reducer';
+import { BoardEffects } from './store/effects/board.effects';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/translate/', '.json');
@@ -25,8 +30,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
     CoreModule,
     SharedModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot({
+      currentUser: authReducer,
+      projects: projectsReducer,
+    }),
+    EffectsModule.forRoot([AuthEffects, UserEffects, BoardEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

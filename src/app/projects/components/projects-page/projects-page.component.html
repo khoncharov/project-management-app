@@ -1,1 +1,21 @@
-<p>projects-page works!</p>
+<button type="button" (click)="onCreateNewBoard()">New Board</button>
+
+<ul>
+  <li>Num - Title - Description</li>
+  <li *ngFor="let board of boards$ | async; index as i">
+    {{ i + 1 }} /
+    <mat-icon [style]="getIconColor(board.id)">assignment</mat-icon>
+    {{ board.title }} / {{ board.description }} /
+    <button type="button" (click)="onOpenBoard(board.id)">open</button>
+    <button type="button">edit</button>
+    <button type="button" (click)="onDeleteBoard(board.id)">del</button>
+  </li>
+</ul>
+
+<mat-progress-bar *ngIf="isLoading$ | async" mode="query"></mat-progress-bar>
+
+<div>
+  Err:
+  {{ error$ | async }}
+</div>
+<button type="button" (click)="onError()">ok</button>

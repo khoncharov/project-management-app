@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
 
 import {
   Board,
@@ -39,5 +39,9 @@ export class BoardsApiService {
   updateBoard(id: string, board: UpdateBoardDto): Observable<Board> {
     const url = getBoardsUrl(id);
     return this.http.put<Board>(url, board, httpOptionsWithJson);
+  }
+
+  deleteBoardAndGetList(id: string): Observable<Board[]> {
+    return this.deleteBoard(id).pipe(mergeMap(() => this.getBoards()));
   }
 }
