@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -37,11 +38,11 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private store: Store,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
     this.error$ = this.store.select(fromCurrentUser.selectLoginError);
-    this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
     this.token$ = this.store.select(fromCurrentUser.selectToken);
     this.user$ = this.store.select(fromCurrentUser.selectUser);
   }
@@ -63,6 +64,21 @@ export class LoginComponent implements OnInit {
         password,
       };
       this.store.dispatch(AuthActions.loginUser({ user }));
+
+      this.error$.subscribe((error) => {
+        if (error) {
+          this.snackBar.open(error, 'close', {
+            verticalPosition: 'top',
+            panelClass: 'snack-bar-light',
+          });
+        }
+      });
+
+      this.token$.subscribe((token) => {
+        if (token) {
+          this.router.navigate(['/projects']);
+        }
+      });
     }
   }
 }
