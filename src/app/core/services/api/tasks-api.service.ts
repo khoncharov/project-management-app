@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
 
 import {
   CreatedTask,
@@ -53,5 +53,15 @@ export class TasksApiService {
   ): Observable<UpdatedTask> {
     const url = getTasksUrl(boardId, columnId, taskId);
     return this.http.put<UpdatedTask>(url, task, httpOptionsWithJson);
+  }
+
+  deleteTaskAndGetList(
+    boardId: string,
+    columnId: string,
+    taskId: string,
+  ): Observable<Task[]> {
+    return this.deleteTask(boardId, columnId, taskId).pipe(
+      mergeMap(() => this.getTasks(boardId, columnId)),
+    );
   }
 }
