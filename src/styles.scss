@@ -7,4 +7,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #f1eaea;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
