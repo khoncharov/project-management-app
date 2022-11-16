@@ -14,13 +14,15 @@
 
 .header-container {
   height: 5rem;
+  max-width: 1200px;
   display: flex;
-  margin: 0 10rem;
+  margin: 0 auto;
   gap: 1.5rem;
   justify-content: flex-start;
   align-items: center;
   background-color: #ffffff;
 }
+
 .header-container_link {
   display: flex;
   align-items: center;
