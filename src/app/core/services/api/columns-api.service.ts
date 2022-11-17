@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { mergeMap, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import {
   Column,
@@ -45,7 +45,12 @@ export class ColumnsApiService {
     return this.http.delete<null>(url);
   }
 
-  deleteColumnAndGetId(boardId: string, columnId: string): Observable<string> {
-    return this.deleteColumn(boardId, columnId).pipe(mergeMap(() => columnId));
+  deleteColumnAndGetId(
+    boardId: string,
+    columnId: string,
+  ): Observable<{ id: string }> {
+    return this.deleteColumn(boardId, columnId).pipe(
+      map(() => ({ id: columnId })),
+    );
   }
 }
