@@ -13,8 +13,10 @@ import { SharedModule } from './shared/shared.module';
 import { AuthEffects } from './store/effects/auth.effects';
 import { UserEffects } from './store/effects/user.effects';
 import { authReducer } from './store/reducers/auth.reducer';
-import { projectsReducer } from './store/reducers/board.reducer';
+import { projectsReducer } from './store/reducers/projects.reducer';
 import { BoardEffects } from './store/effects/board.effects';
+import { ColumnEffects } from './store/effects/column.effects';
+import { selectedBoardReducer } from './store/reducers/selectedBoard.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,8 +28,14 @@ import { BoardEffects } from './store/effects/board.effects';
     StoreModule.forRoot({
       currentUser: authReducer,
       projects: projectsReducer,
+      selectedBoard: selectedBoardReducer,
     }),
-    EffectsModule.forRoot([AuthEffects, UserEffects, BoardEffects]),
+    EffectsModule.forRoot([
+      AuthEffects,
+      UserEffects,
+      BoardEffects,
+      ColumnEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

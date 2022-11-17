@@ -38,7 +38,7 @@ export const deleteColumnFailure = createAction(
 
 export const deleteColumnSuccess = createAction(
   '[Column API] Column deleted',
-  props<{ columns: Column[] }>(),
+  props<{ id: string }>(),
 );
 
 export const updateColumnFailure = createAction(
