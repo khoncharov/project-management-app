@@ -1,1 +1,26 @@
-<p>board-page works!</p>
+<div class="spinner-container" *ngIf="isLoading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-card class="board-container" *ngIf="board$ | async as b">
+  <h2>{{ b.title }} / {{ b.description }}</h2>
+
+  <div class="columns-container">
+    <div class="columns">
+      <mat-card class="column" *ngFor="let column of b.columns">
+        <mat-card-content>
+          <h3>{{ column.title }}</h3>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="column-controls">
+      <button mat-icon-button color="primary" (click)="onColumnAdd(b.id)">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onColumnDelete(b)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>
