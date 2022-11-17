@@ -21,19 +21,14 @@ export class ColumnsApiService {
     return this.http.get<Column[]>(url);
   }
 
-  createColumn(boardId: string, board: CreateColumnDto): Observable<Column> {
+  createColumn(boardId: string, column: CreateColumnDto): Observable<Column> {
     const url = getColumnsUrl(boardId);
-    return this.http.post<Column>(url, board, httpOptionsWithJson);
+    return this.http.post<Column>(url, column, httpOptionsWithJson);
   }
 
   getColumn(boardId: string, columnId: string): Observable<ColumnWithTasks> {
     const url = getColumnsUrl(boardId, columnId);
     return this.http.get<ColumnWithTasks>(url);
-  }
-
-  deleteColumn(boardId: string, columnId: string): Observable<null> {
-    const url = getColumnsUrl(boardId, columnId);
-    return this.http.delete<null>(url);
   }
 
   updateColumn(
@@ -45,12 +40,12 @@ export class ColumnsApiService {
     return this.http.put<Column>(url, column, httpOptionsWithJson);
   }
 
-  deleteColumnAndGetList(
-    boardId: string,
-    columnId: string,
-  ): Observable<Column[]> {
-    return this.deleteColumn(boardId, columnId).pipe(
-      mergeMap(() => this.getColumns(boardId)),
-    );
+  deleteColumn(boardId: string, columnId: string): Observable<null> {
+    const url = getColumnsUrl(boardId, columnId);
+    return this.http.delete<null>(url);
+  }
+
+  deleteColumnAndGetId(boardId: string, columnId: string): Observable<string> {
+    return this.deleteColumn(boardId, columnId).pipe(mergeMap(() => columnId));
   }
 }

@@ -1,19 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { Board, BoardWithColumns } from '../../core/models/board.model';
+import { Board } from '../../core/models/board.model';
 import * as BoardActions from '../actions/board.actions';
 import * as BoardApiActions from '../actions/board-api.actions';
 
 export interface ProjectsState {
   boards: Board[];
-  selected: BoardWithColumns | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initState: ProjectsState = {
   boards: [],
-  selected: null,
   isLoading: false,
   error: null,
 };
@@ -37,7 +35,6 @@ export const projectsReducer = createReducer(
 
   on(BoardActions.getBoards, onDataRequest),
   on(BoardActions.createBoard, onDataRequest),
-  on(BoardActions.getBoard, onDataRequest),
   on(BoardActions.deleteBoard, onDataRequest),
   on(BoardActions.updateBoard, onDataRequest),
 
@@ -51,14 +48,6 @@ export const projectsReducer = createReducer(
   ),
   on(
     BoardApiActions.createBoardFailure,
-    (state, action): ProjectsState => ({
-      ...state,
-      error: action.error.message,
-      isLoading: false,
-    }),
-  ),
-  on(
-    BoardApiActions.getBoardFailure,
     (state, action): ProjectsState => ({
       ...state,
       error: action.error.message,
@@ -96,15 +85,6 @@ export const projectsReducer = createReducer(
     (state, action): ProjectsState => ({
       ...state,
       boards: [...state.boards, action.board],
-      error: null,
-      isLoading: false,
-    }),
-  ),
-  on(
-    BoardApiActions.getBoardSuccess,
-    (state, action): ProjectsState => ({
-      ...state,
-      selected: action.board,
       error: null,
       isLoading: false,
     }),

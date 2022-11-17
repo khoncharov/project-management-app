@@ -82,9 +82,9 @@ export class ColumnEffects {
       ofType(ColumnActions.deleteColumn),
       mergeMap((payload) => {
         return this.columnApi
-          .deleteColumnAndGetList(payload.boardId, payload.columnId)
+          .deleteColumnAndGetId(payload.boardId, payload.columnId)
           .pipe(
-            map((columns) => ColumnApiActions.deleteColumnSuccess({ columns })),
+            map((id) => ColumnApiActions.deleteColumnSuccess({ id })),
             catchError((error) =>
               of(ColumnApiActions.deleteColumnFailure({ error })),
             ),

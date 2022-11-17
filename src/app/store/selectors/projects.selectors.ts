@@ -1,7 +1,7 @@
 /* eslint-disable operator-linebreak */
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { ProjectsState } from '../reducers/board.reducer';
+import { ProjectsState } from '../reducers/projects.reducer';
 
 export const selectProjectsState =
   createFeatureSelector<ProjectsState>('projects');
@@ -19,9 +19,4 @@ export const selectError = createSelector(
 export const selectBoards = createSelector(
   selectProjectsState,
   (state) => state.boards,
-);
-
-export const selectBoard = createSelector(
-  selectProjectsState,
-  (state) => state.selected,
 );
