@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Board, CreateBoardDto } from '../../../core/models/board.model';
 import * as BoardActions from '../../../store/actions/board.actions';
@@ -11,31 +13,44 @@ import * as fromProjects from '../../../store/selectors/projects.selectors';
   templateUrl: './projects-page.component.html',
   styleUrls: ['./projects-page.component.scss'],
 })
-export class ProjectsPageComponent implements OnInit {
+export class ProjectsPageComponent implements OnInit, OnDestroy {
   protected boards$!: Observable<Board[]>;
 
   protected error$!: Observable<string | null>;
 
+  private errorSub!: Subscription;
+
   protected isLoading$!: Observable<boolean>;
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private errorBar: MatSnackBar,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.boards$ = this.store.select(fromProjects.selectBoards);
-
     this.error$ = this.store.select(fromProjects.selectError);
-
     this.isLoading$ = this.store.select(fromProjects.selectProgress);
 
     this.store.dispatch(BoardActions.getBoards());
+
+    this.errorSub = this.error$.subscribe((err) => {
+      if (err) {
+        this.errorBar.open(err, 'Ok', {
+          verticalPosition: 'top',
+        });
+      }
+    });
   }
 
-  onError() {
-    this.store.dispatch(BoardActions.removeError());
+  ngOnDestroy(): void {
+    this.errorSub.unsubscribe();
   }
 
   onOpenBoard(id: string) {
     this.store.dispatch(BoardActions.getBoard({ id }));
+    this.router.navigate(['/board']);
   }
 
   onCreateNewBoard() {
