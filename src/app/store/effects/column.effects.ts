@@ -84,7 +84,7 @@ export class ColumnEffects {
         return this.columnApi
           .deleteColumnAndGetId(payload.boardId, payload.columnId)
           .pipe(
-            map((id) => ColumnApiActions.deleteColumnSuccess({ id })),
+            map(({ id }) => ColumnApiActions.deleteColumnSuccess({ id })),
             catchError((error) =>
               of(ColumnApiActions.deleteColumnFailure({ error })),
             ),

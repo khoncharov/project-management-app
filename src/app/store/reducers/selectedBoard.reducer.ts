@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { BoardWithColumns } from '../../core/models';
+import { BoardWithColumns, ColumnWithTasks } from '../../core/models';
 import * as BoardActions from '../actions/board.actions';
 import * as BoardApiActions from '../actions/board-api.actions';
 import * as ColumnActions from '../actions/column.actions';
@@ -63,10 +63,14 @@ export const selectedBoardReducer = createReducer(
     ColumnApiActions.createColumnSuccess,
     (state, action): SelectedBoardState => {
       if (state.board) {
+        const newColumn: ColumnWithTasks = {
+          ...action.column,
+          tasks: [],
+        };
         return {
           board: {
             ...state.board,
-            ...action.column,
+            columns: [...state.board.columns, newColumn],
           },
           error: null,
           isLoading: false,
@@ -91,14 +95,22 @@ export const selectedBoardReducer = createReducer(
     ColumnApiActions.updateColumnSuccess,
     (state, action): SelectedBoardState => {
       if (state.board) {
-        return {
-          board: {
-            ...state.board,
-            ...action.column,
-          },
-          error: null,
-          isLoading: false,
-        };
+        const column = state.board.columns.find(
+          (c) => c.id === action.column.id,
+        );
+        if (column) {
+          column.title = action.column.title;
+          column.order = action.column.order;
+
+          return {
+            board: {
+              ...state.board,
+            },
+            error: null,
+            isLoading: false,
+          };
+        }
+        return state;
       }
       return state;
     },
@@ -119,10 +131,11 @@ export const selectedBoardReducer = createReducer(
     ColumnApiActions.deleteColumnSuccess,
     (state, action): SelectedBoardState => {
       if (state.board) {
+        const columns = state.board.columns.filter((c) => c.id !== action.id);
         return {
           board: {
             ...state.board,
-            columns: state.board.columns.filter((c) => c.id !== action.id),
+            columns: [...columns],
           },
           error: null,
           isLoading: false,
