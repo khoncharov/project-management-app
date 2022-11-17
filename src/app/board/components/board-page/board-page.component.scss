@@ -20,6 +20,18 @@
   grid-template-rows: min-content 1fr;
 }
 
+.board-header {
+  display: flex;
+
+  &-text {
+    margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80vw;
+  }
+}
+
 .columns-container {
   padding: 10px;
   display: grid;
