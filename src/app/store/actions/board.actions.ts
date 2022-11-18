@@ -23,4 +23,10 @@ export const updateBoard = createAction(
   props<{ id: string; board: UpdateBoardDto }>(),
 );
 
-export const removeError = createAction('[Board] Remove request error');
+export const removeProjectsError = createAction(
+  '[Board] Remove request error in projects',
+);
+
+export const removeSelectedBoardError = createAction(
+  '[Board] Remove request error in selected board',
+);
