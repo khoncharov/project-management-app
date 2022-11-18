@@ -1,10 +1,12 @@
 <div class="edit-user">
   <div class="edit-user-container">
-    <form [formGroup]="editForm">
+    <form [formGroup]="editForm" (ngSubmit)="editProfile()">
       <h1>{{ "editUser.user" | translate }}</h1>
       <mat-form-field appearance="fill">
-        <mat-label>{{ "editUser.name" | translate }}</mat-label>
-        <input matInput type="name" formControlName="name" />
+        <mat-label autocomplete for="name">{{
+          "editUser.name" | translate
+        }}</mat-label>
+        <input matInput type="text" formControlName="name" value="name" />
         <mat-error
           *ngIf="
             editForm.get('name')?.invalid &&
@@ -12,27 +14,36 @@
           "
         >
           <span *ngIf="editForm.get('name')?.hasError('required')">
-            Please enter a name
+            {{ "editUser.nameError" | translate }}
           </span>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>{{ "editUser.login" | translate }}</mat-label>
-        <input matInput type="email" formControlName="email" />
+        <mat-label autocomplete for="login">{{
+          "editUser.login" | translate
+        }}</mat-label>
+        <input matInput type="text" formControlName="login" value="login" />
         <mat-error
           *ngIf="
-            editForm.get('email')?.invalid &&
-            (editForm.get('email')?.touched || editForm.get('email')?.dirty)
+            editForm.get('login')?.invalid &&
+            (editForm.get('login')?.touched || editForm.get('login')?.dirty)
           "
         >
-          <span *ngIf="editForm.get('email')?.hasError('required')">
-            Please enter a login email
+          <span *ngIf="editForm.get('login')?.hasError('required')">
+            {{ "editUser.loginError" | translate }}
           </span>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>{{ "editUser.newPassword" | translate }}</mat-label>
-        <input type="password" matInput formControlName="password" />
+        <mat-label autocomplete for="password">{{
+          "editUser.newPassword" | translate
+        }}</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          value="password"
+        />
         <mat-error
           *ngIf="
             editForm.get('password')?.invalid &&
@@ -40,28 +51,19 @@
               editForm.get('password')?.dirty)
           "
         >
-          <div *ngIf="editForm.get('password')?.hasError('required')">
-            Please enter a password
-          </div>
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>{{ "editUser.repeatPassword" | translate }}</mat-label>
-        <input type="password" matInput formControlName="password" />
-        <mat-error
-          *ngIf="
-            editForm.get('password')?.invalid &&
-            (editForm.get('password')?.touched ||
-              editForm.get('password')?.dirty)
-          "
-        >
-          <div *ngIf="editForm.get('password')?.hasError('required')">
-            Please enter password again
-          </div>
+          <span *ngIf="editForm.get('password')?.hasError('required')">
+            {{ "editUser.passwordError" | translate }}
+          </span>
+          <span *ngIf="editForm.get('password')?.hasError('minLength')">
+            {{ "editUser.passwordLengthError" | translate }}
+          </span>
+          <span *ngIf="editForm.get('password')?.hasError('pattern')">
+            {{ "editUser.passwordValidError" | translate }}
+          </span>
         </mat-error>
       </mat-form-field>
       <div class="edit-user-container_btn">
-        <button mat-button>
+        <button mat-button (click)="deleteProfile()">
           {{ "editUser.deleteUser" | translate }}
         </button>
         <button mat-button type="submit" [disabled]="editForm.invalid">
@@ -69,5 +71,9 @@
         </button>
       </div>
     </form>
+    <mat-progress-bar
+      *ngIf="isLoading$ | async"
+      mode="query"
+    ></mat-progress-bar>
   </div>
 </div>

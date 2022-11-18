@@ -192,7 +192,7 @@ export const authReducer = createReducer(
     UserApiActions.updateUserSuccess,
     (state, action): CurrentUserState => ({
       ...state,
-      user: action.user,
+      user: { ...action.user },
       page: {
         error: null,
         isLoading: false,
@@ -210,14 +210,6 @@ export const authReducer = createReducer(
         error: action.error.message,
         isLoading: false,
       },
-    }),
-  ),
-
-  on(
-    UserApiActions.updateUserSuccess,
-    (state): CurrentUserState => ({
-      ...state,
-      ...initState,
     }),
   ),
 );
