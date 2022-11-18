@@ -17,6 +17,7 @@ import { projectsReducer } from './store/reducers/projects.reducer';
 import { BoardEffects } from './store/effects/board.effects';
 import { ColumnEffects } from './store/effects/column.effects';
 import { selectedBoardReducer } from './store/reducers/selectedBoard.reducer';
+import { TaskEffects } from './store/effects/task.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +36,7 @@ import { selectedBoardReducer } from './store/reducers/selectedBoard.reducer';
       UserEffects,
       BoardEffects,
       ColumnEffects,
+      TaskEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

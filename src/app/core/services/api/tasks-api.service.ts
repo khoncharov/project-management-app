@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { mergeMap, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import {
   CreatedTask,
@@ -9,13 +9,14 @@ import {
   UpdatedTask,
   UpdateTaskDto,
 } from '../../models/task.model';
+import { BoardsApiService } from './boards-api.service';
 import { getTasksUrl, httpOptionsWithJson } from './utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TasksApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private boardApi: BoardsApiService) {}
 
   getTasks(boardId: string, columnId: string): Observable<Task[]> {
     const url = getTasksUrl(boardId, columnId);
@@ -36,15 +37,6 @@ export class TasksApiService {
     return this.http.get<Task>(url);
   }
 
-  deleteTask(
-    boardId: string,
-    columnId: string,
-    taskId: string,
-  ): Observable<null> {
-    const url = getTasksUrl(boardId, columnId, taskId);
-    return this.http.delete<null>(url);
-  }
-
   updateTask(
     boardId: string,
     columnId: string,
@@ -55,13 +47,22 @@ export class TasksApiService {
     return this.http.put<UpdatedTask>(url, task, httpOptionsWithJson);
   }
 
-  deleteTaskAndGetList(
+  deleteTask(
     boardId: string,
     columnId: string,
     taskId: string,
-  ): Observable<Task[]> {
+  ): Observable<null> {
+    const url = getTasksUrl(boardId, columnId, taskId);
+    return this.http.delete<null>(url);
+  }
+
+  deleteTaskAndGetId(
+    boardId: string,
+    columnId: string,
+    taskId: string,
+  ): Observable<{ id: string }> {
     return this.deleteTask(boardId, columnId, taskId).pipe(
-      mergeMap(() => this.getTasks(boardId, columnId)),
+      map(() => ({ id: taskId })),
     );
   }
 }
