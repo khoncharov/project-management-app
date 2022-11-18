@@ -1,10 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import {
-  BoardWithColumns,
-  ColumnWithTasks,
-  TaskShort,
-} from '../../core/models';
+import { BoardWithColumns, ColumnWithTasks } from '../../core/models';
 import * as BoardActions from '../actions/board.actions';
 import * as BoardApiActions from '../actions/board-api.actions';
 import * as ColumnActions from '../actions/column.actions';
@@ -172,53 +168,16 @@ export const selectedBoardReducer = createReducer(
       isLoading: false,
     }),
   ),
-  on(TaskApiActions.createTaskSuccess, (state, action): SelectedBoardState => {
-    const newTask = action.task;
-    const newTaskMapped: TaskShort = {
-      id: newTask.id,
-      title: newTask.title,
-      description: newTask.description,
-      order: newTask.order,
-      userId: newTask.userId,
-      files: [],
-    };
-    const updatedColumns = [];
-
-    if (state.board) {
-      const column = state.board.columns.find((c) => c.id === newTask.columnId);
-      console.log(column);
-
-      if (column) {
-        column.tasks.push(newTaskMapped);
-        console.log(state);
-
-        return {
-          board: {
-            ...state.board,
-            columns: [...updatedColumns],
-          },
-          error: null,
-          isLoading: false,
-        };
-      }
-      return state;
-    }
-    // if (state.board) {
-    //   const newTask: TaskShort = {
-    //     ...action.task,
-    //     tasks: [],
-    //   };
-    //   return {
-    //     board: {
-    //       ...state.board,
-    //       columns: [...state.board.columns, newColumn],
-    //     },
-    //     error: null,
-    //     isLoading: false,
-    //   };
-    // }
-    return state;
-  }),
+  on(
+    TaskApiActions.createTaskSuccess,
+    (state, action): SelectedBoardState => ({
+      board: {
+        ...action.board,
+      },
+      error: null,
+      isLoading: false,
+    }),
+  ),
 
   // Update task
 
@@ -231,25 +190,16 @@ export const selectedBoardReducer = createReducer(
       isLoading: false,
     }),
   ),
-  on(TaskApiActions.updateTaskSuccess, (state, action): SelectedBoardState => {
-    // if (state.board) {
-    //   const column = state.board.columns.find((c) => c.id === action.column.id);
-    //   if (column) {
-    //     column.title = action.column.title;
-    //     column.order = action.column.order;
-
-    //     return {
-    //       board: {
-    //         ...state.board,
-    //       },
-    //       error: null,
-    //       isLoading: false,
-    //     };
-    //   }
-    //   return state;
-    // }
-    return state;
-  }),
+  on(
+    TaskApiActions.updateTaskSuccess,
+    (state, action): SelectedBoardState => ({
+      board: {
+        ...action.board,
+      },
+      error: null,
+      isLoading: false,
+    }),
+  ),
 
   // Delete task
 
@@ -262,18 +212,14 @@ export const selectedBoardReducer = createReducer(
       isLoading: false,
     }),
   ),
-  on(TaskApiActions.deleteTaskSuccess, (state, action): SelectedBoardState => {
-    // if (state.board) {
-    //   const colIndex = state.board.columns.findIndex((c) => c.id === action.id);
-    //   return {
-    //     board: {
-    //       ...state.board,
-    //       columns: [...columns],
-    //     },
-    //     error: null,
-    //     isLoading: false,
-    //   };
-    // }
-    return state;
-  }),
+  on(
+    TaskApiActions.deleteTaskSuccess,
+    (state, action): SelectedBoardState => ({
+      board: {
+        ...action.board,
+      },
+      error: null,
+      isLoading: false,
+    }),
+  ),
 );

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreatedTask, Task, UpdatedTask } from '../../core/models';
+import { BoardWithColumns, Task } from '../../core/models';
 
 export const getTasksFailure = createAction(
   '[Task API] Get tasks failed',
@@ -28,7 +28,7 @@ export const createTaskFailure = createAction(
 
 export const createTaskSuccess = createAction(
   '[Task API] Task created',
-  props<{ task: CreatedTask }>(),
+  props<{ board: BoardWithColumns }>(),
 );
 
 export const deleteTaskFailure = createAction(
@@ -38,7 +38,7 @@ export const deleteTaskFailure = createAction(
 
 export const deleteTaskSuccess = createAction(
   '[Task API] Task deleted',
-  props<{ id: string }>(),
+  props<{ board: BoardWithColumns }>(),
 );
 
 export const updateTaskFailure = createAction(
@@ -48,5 +48,5 @@ export const updateTaskFailure = createAction(
 
 export const updateTaskSuccess = createAction(
   '[Task API] Task updated',
-  props<{ task: UpdatedTask }>(),
+  props<{ board: BoardWithColumns }>(),
 );
