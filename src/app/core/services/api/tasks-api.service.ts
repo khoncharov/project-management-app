@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
+import { BoardWithColumns } from '../../models';
 
 import {
   CreatedTask,
@@ -56,13 +57,34 @@ export class TasksApiService {
     return this.http.delete<null>(url);
   }
 
-  deleteTaskAndGetId(
+  createTaskAndGetColumns(
+    boardId: string,
+    columnId: string,
+    task: CreateTaskDto,
+  ): Observable<BoardWithColumns> {
+    return this.createTask(boardId, columnId, task).pipe(
+      mergeMap(() => this.boardApi.getBoard(boardId)),
+    );
+  }
+
+  updateTaskAndGetColumns(
     boardId: string,
     columnId: string,
     taskId: string,
-  ): Observable<{ id: string }> {
+    task: UpdateTaskDto,
+  ): Observable<BoardWithColumns> {
+    return this.updateTask(boardId, columnId, taskId, task).pipe(
+      mergeMap(() => this.boardApi.getBoard(boardId)),
+    );
+  }
+
+  deleteTaskAndGetColumns(
+    boardId: string,
+    columnId: string,
+    taskId: string,
+  ): Observable<BoardWithColumns> {
     return this.deleteTask(boardId, columnId, taskId).pipe(
-      map(() => ({ id: taskId })),
+      mergeMap(() => this.boardApi.getBoard(boardId)),
     );
   }
 }

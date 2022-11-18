@@ -31,9 +31,13 @@ export class TaskEffects {
       ofType(TaskActions.createTask),
       mergeMap((payload) => {
         return this.taskApi
-          .createTask(payload.boardId, payload.columnId, payload.task)
+          .createTaskAndGetColumns(
+            payload.boardId,
+            payload.columnId,
+            payload.task,
+          )
           .pipe(
-            map((task) => TaskApiActions.createTaskSuccess({ task })),
+            map((board) => TaskApiActions.createTaskSuccess({ board })),
             catchError((error) =>
               of(TaskApiActions.createTaskFailure({ error })),
             ),
@@ -61,14 +65,14 @@ export class TaskEffects {
       ofType(TaskActions.updateTask),
       mergeMap((payload) => {
         return this.taskApi
-          .updateTask(
+          .updateTaskAndGetColumns(
             payload.boardId,
             payload.columnId,
             payload.taskId,
             payload.task,
           )
           .pipe(
-            map((task) => TaskApiActions.updateTaskSuccess({ task })),
+            map((board) => TaskApiActions.updateTaskSuccess({ board })),
             catchError((error) =>
               of(TaskApiActions.updateTaskFailure({ error })),
             ),
@@ -82,9 +86,13 @@ export class TaskEffects {
       ofType(TaskActions.deleteTask),
       mergeMap((payload) => {
         return this.taskApi
-          .deleteTaskAndGetId(payload.boardId, payload.columnId, payload.taskId)
+          .deleteTaskAndGetColumns(
+            payload.boardId,
+            payload.columnId,
+            payload.taskId,
+          )
           .pipe(
-            map(({ id }) => TaskApiActions.deleteTaskSuccess({ id })),
+            map((board) => TaskApiActions.deleteTaskSuccess({ board })),
             catchError((error) =>
               of(TaskApiActions.deleteTaskFailure({ error })),
             ),
