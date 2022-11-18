@@ -1,28 +1,28 @@
 <mat-card class="sign-up">
   <mat-card-header>
-    <mat-card-title>Sign Up</mat-card-title>
+    <mat-card-title>{{ "signUp" | translate }}</mat-card-title>
   </mat-card-header>
 
   <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
     <mat-card-content>
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Name</mat-label>
+        <mat-label>{{ "name" | translate }}</mat-label>
         <input matInput formControlName="name" />
         <mat-error *ngIf="signUpForm.controls['name'].errors">
-          {{ getErrorMessage(signUpForm.controls['name'].errors) }}
+          {{ getErrorMessage(signUpForm.controls["name"].errors) }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Login</mat-label>
+        <mat-label>{{ "login" | translate }}</mat-label>
         <input matInput formControlName="login" />
         <mat-error *ngIf="signUpForm.controls['login'].errors">
-          {{ getErrorMessage(signUpForm.controls['login'].errors) }}
+          {{ getErrorMessage(signUpForm.controls["login"].errors) }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Password</mat-label>
+        <mat-label>{{ "password" | translate }}</mat-label>
         <input
           matInput
           formControlName="password"
@@ -38,12 +38,12 @@
           <mat-icon>{{ isHidden ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
         <mat-error *ngIf="signUpForm.controls['password'].errors">
-          {{ getErrorMessage(signUpForm.controls['password'].errors) }}
+          {{ getErrorMessage(signUpForm.controls["password"].errors) }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Confirm password</mat-label>
+        <mat-label>{{ "confirmPassword" | translate }}</mat-label>
         <input
           matInput
           formControlName="confirmPassword"
@@ -59,15 +59,15 @@
           <mat-icon>{{ isHidden ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
         <mat-error *ngIf="signUpForm.controls['confirmPassword'].errors">
-          {{ getErrorMessage(signUpForm.controls['confirmPassword'].errors) }}
+          {{ getErrorMessage(signUpForm.controls["confirmPassword"].errors) }}
         </mat-error>
       </mat-form-field>
     </mat-card-content>
 
     <mat-card-actions>
       <div>
-        <span>Have an account?</span>
-        <a routerLink="/auth/login" mat-button color="primary">Login</a>
+        <span>{{ "haveAccount" | translate }}</span>
+        <a routerLink="/auth/login" mat-button color="primary">{{ "login" | translate }}</a>
       </div>
 
       <button
@@ -76,7 +76,7 @@
         [disabled]="signUpForm.invalid"
         type="submit"
       >
-        Sign Up
+        {{ "signUp" | translate }}
       </button>
     </mat-card-actions>
   </form>
