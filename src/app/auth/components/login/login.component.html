@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-card-content>
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Login</mat-label>
+        <input matInput formControlName="login">
+        <mat-error *ngIf="loginForm.controls.login.errors">
+          {{ getErrorMessage(loginForm.controls.login.errors) }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          [type]="isHidden ? 'password' : 'text'">
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="isHidden = !isHidden"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="isHidden">
+          <mat-icon>{{ isHidden ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.controls.password.errors">
+          {{ getErrorMessage(loginForm.controls.password.errors) }}
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div>
+        <span>New user?</span>
+        <a routerLink="/auth/sign-up" mat-button color="primary">Sign Up</a>
+      </div>
+
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="loginForm.invalid"
+        type="submit">
+        Login
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
