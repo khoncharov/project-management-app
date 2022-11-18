@@ -1,20 +1,18 @@
 .footer {
+  margin-top: 20px;
   height: 5rem;
-  width: 100vw;
   background-color: #fff;
   box-shadow: 1px 1px 4px #b7bfcf;
-  position: absolute;
-  left: 0;
-  bottom: 0;
 }
 
 .footer-container {
+  margin: 0 auto;
   height: 5rem;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1rem;
-  margin: 0 10rem;
 }
 
 .footer__link {
@@ -41,9 +39,9 @@
 }
 
 .footer-year {
-    margin: 0;
-    color: #000000;
-    filter: opacity(0.5);
+  margin: 0;
+  color: #000000;
+  filter: opacity(0.5);
 }
 
 a {
@@ -51,5 +49,5 @@ a {
 }
 
 .footer__list-item::before {
-  content: url('../../../../assets/images/github-icon.svg');
+  content: url("../../../../assets/images/github-icon.svg");
 }

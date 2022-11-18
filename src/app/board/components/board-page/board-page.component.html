@@ -1,1 +1,73 @@
-<p>board-page works!</p>
+<div class="spinner-container" *ngIf="isLoading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-card class="board-container" *ngIf="board$ | async as b">
+  <div class="board-header">
+    <mat-icon [style]="'color: #' + b.id.slice(0, 6)"> assignment </mat-icon>
+    <h2 class="board-header-text">{{ b.title }} / {{ b.description }}</h2>
+  </div>
+
+  <div class="columns-container">
+    <div class="columns">
+      <mat-card
+        class="column"
+        *ngFor="let column of b.columns | columnsInOrder"
+      >
+        <mat-card-content>
+          <div class="column-header">
+            <h3 class="column-header-text">{{ column.title }}</h3>
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="onColumnEdit(column)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+
+          <div class="tasks-container">
+            <div class="tasks">
+              <mat-card
+                class="task"
+                *ngFor="let task of column.tasks | tasksInOrder"
+              >
+                <mat-card-content>
+                  <h3>{{ task.title }}</h3>
+                </mat-card-content>
+                <mat-card-actions align="end">
+                  <button
+                    mat-icon-button
+                    color="warn"
+                    (click)="onTaskDelete(b.id, column.id, task.id)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+
+            <div class="task-controls">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="onTaskAdd(b.id, column.id)"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="column-controls">
+      <button mat-icon-button color="primary" (click)="onColumnAdd(b.id)">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onColumnDelete(b)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>

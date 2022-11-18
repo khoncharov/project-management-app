@@ -7,7 +7,7 @@ export interface Board {
 }
 
 export interface BoardWithColumns extends Board {
-  columns: ColumnWithTasks;
+  columns: ColumnWithTasks[];
 }
 
 export interface CreateBoardDto {

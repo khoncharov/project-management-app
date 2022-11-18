@@ -1,16 +1,17 @@
 .edit-user {
-  height: 70vh;
+  min-height: calc(100vh - 10rem - 40px);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .edit-user-container {
-  width: 19rem;
-  height: 22rem;
+  width: 352px;
+  height: 24rem;
   padding: 1.5rem;
-  background-color: #f2f2f2;
-  border-radius: 5px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px rgb(168, 166, 177);
 
   mat-form-field {
     width: 19rem;
@@ -32,14 +33,11 @@ h1 {
   justify-content: space-between;
 }
 
-button {
+.form-button {
   width: 9rem;
   height: 2rem;
-  margin-top: 3.5rem;
+  margin-top: 25px;
   background-color: #d7d7d7;
   color: #ffffff;
-}
-
-button:hover {
-  filter: drop-shadow(2px 0px 4px #d7d7d7);
+  cursor: pointer;
 }

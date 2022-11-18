@@ -5,66 +5,64 @@
 
 .header {
   height: 5rem;
-  width: 100vw;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
+  background-color: #ffffff;
 }
 
 .header-container {
   height: 5rem;
+  max-width: 1200px;
   display: flex;
-  margin: 0 10rem;
+  margin: 0 auto;
   gap: 1.5rem;
   justify-content: flex-start;
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
+
 .header-container_link {
   display: flex;
   align-items: center;
-  
+
   a {
     margin: 0 10px;
     text-decoration: none;
     user-select: none;
   }
-  
+
   a:hover {
-    color: #2B3B92;
+    color: #2b3b92;
   }
 
   .active {
-    color: #2B3B92;
-    text-decoration: underline solid #2B3B92 3px;
+    color: #2b3b92;
+    text-decoration: underline solid #2b3b92 3px;
     text-underline-offset: 2rem;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;
   }
 }
 
-.header-logo {
-  padding-right: 3rem;
-}
-
 .header-container_btn {
-  color: #B15F5F;
+  color: #b15f5f;
 }
 
 .header_icon {
   padding: 0;
   border: none;
   border-radius: 50%;
-  background-color: #EF476F; 
-  color: #D9D9D9;
+  background-color: #ef476f;
+  color: #d9d9d9;
   cursor: pointer;
 }
 
 .header-switcher {
   display: flex;
-  color: #2B3B92;
+  color: #2b3b92;
   margin-left: auto;
   align-items: center;
 
@@ -78,7 +76,7 @@
   height: 1.5rem;
   margin-left: 3rem;
   display: flex;
-  gap: 1rem; 
+  gap: 1rem;
 
   .header-login_title {
     font-weight: 500;
