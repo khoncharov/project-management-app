@@ -2,16 +2,49 @@
   <div class="header-container">
     <div class="header-container_link">
       <a routerLink="/">
-        <img class="header-logo" src="../../../../assets/images/logo.svg" alt="logo"/>
+        <img
+          class="header-logo"
+          src="../../../../assets/images/logo.svg"
+          alt="logo"
+        />
       </a>
-      <a class="header-container_btn" routerLink="/home" routerLinkActive="active">Home</a>
-      <a class="header-container_btn" routerLink="/projects" routerLinkActive="active">Projects</a>
-      <a class="header-container_btn" routerLink="/admin" routerLinkActive="active">Admin</a>
-      <a class="header-container_btn" routerLink="/board" routerLinkActive="active">Board</a>
+      <a
+        class="header-container_btn"
+        routerLink="/home"
+        routerLinkActive="active"
+        >Home</a
+      >
+      <a
+        class="header-container_btn"
+        routerLink="/projects"
+        routerLinkActive="active"
+        >Projects</a
+      >
+      <a
+        class="header-container_btn"
+        routerLink="/admin"
+        routerLinkActive="active"
+        >Admin</a
+      >
+      <a
+        class="header-container_btn"
+        routerLink="/board"
+        routerLinkActive="active"
+        >Board</a
+      >
+      <a
+        class="header-container_btn"
+        routerLink="/edit-profile"
+        routerLinkActive="active"
+        >edit
+      </a>
     </div>
     <div class="header-switcher">
       <span>en</span>
-      <mat-slide-toggle></mat-slide-toggle>
+      <mat-slide-toggle
+        [checked]="isLangChecked"
+        (change)="checkLang()"
+      ></mat-slide-toggle>
       <span>ru</span>
     </div>
     <div class="header-login">

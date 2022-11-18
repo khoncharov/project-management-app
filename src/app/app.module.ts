@@ -5,6 +5,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -15,6 +18,10 @@ import { UserEffects } from './store/effects/user.effects';
 import { authReducer } from './store/reducers/auth.reducer';
 import { projectsReducer } from './store/reducers/board.reducer';
 import { BoardEffects } from './store/effects/board.effects';
+
+export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
+  return new TranslateHttpLoader(http, './assets/translate/', '.json');
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +40,13 @@ import { BoardEffects } from './store/effects/board.effects';
       logOnly: environment.production,
     }),
     BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
