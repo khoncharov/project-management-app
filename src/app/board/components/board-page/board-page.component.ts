@@ -3,9 +3,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 
-import { BoardWithColumns, CreateColumnDto } from '../../../core/models';
+import {
+  BoardWithColumns,
+  ColumnWithTasks,
+  CreateColumnDto,
+  CreateTaskDto,
+} from '../../../core/models';
 import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selectors';
 import * as ColumnActions from '../../../store/actions/column.actions';
+import * as TaskActions from '../../../store/actions/task.actions';
 
 @Component({
   selector: 'app-board-page',
@@ -51,13 +57,40 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   onColumnDelete(board: BoardWithColumns): void {
     if (board.columns.length) {
-      const lastColumn = board.columns.at(-1);
+      const columns = board.columns.map((c) => ({
+        order: c.order,
+        id: c.id,
+      }));
+      columns.sort((a, b) => a.order - b.order);
+      const lastColumnId = columns.at(-1)!.id;
+
       this.store.dispatch(
         ColumnActions.deleteColumn({
           boardId: board.id,
-          columnId: lastColumn!.id,
+          columnId: lastColumnId,
         }),
       );
     }
+  }
+
+  onColumnEdit(column: ColumnWithTasks): void {
+    // eslint-disable-next-line no-console
+    console.log(column.order, column.id);
+  }
+
+  onTaskAdd(boardId: string, columnId: string): void {
+    const currUserId = '5a7c63bb-5b75-48c3-a57b-dad8074b37ee';
+
+    const task: CreateTaskDto = {
+      title: 'New task',
+      description: 'Describe you task',
+      userId: currUserId,
+    };
+
+    this.store.dispatch(TaskActions.createTask({ boardId, columnId, task }));
+  }
+
+  onTaskDelete(boardId: string, columnId: string, taskId: string): void {
+    this.store.dispatch(TaskActions.deleteTask({ boardId, columnId, taskId }));
   }
 }
