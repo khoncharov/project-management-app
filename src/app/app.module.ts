@@ -20,6 +20,7 @@ import { projectsReducer } from './store/reducers/projects.reducer';
 import { BoardEffects } from './store/effects/board.effects';
 import { ColumnEffects } from './store/effects/column.effects';
 import { selectedBoardReducer } from './store/reducers/selectedBoard.reducer';
+import { TaskEffects } from './store/effects/task.effects';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/translate/', '.json');
@@ -42,6 +43,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
       UserEffects,
       BoardEffects,
       ColumnEffects,
+      TaskEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
