@@ -26,7 +26,7 @@ export const projectsReducer = createReducer(
   initState,
 
   on(
-    BoardActions.removeError,
+    BoardActions.removeProjectsError,
     (state): ProjectsState => ({
       ...state,
       error: null,
