@@ -79,7 +79,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   onTaskAdd(boardId: string, columnId: string): void {
-    const currUserId = '5a7c63bb-5b75-48c3-a57b-dad8074b37ee';
+    const currUserId = '53a5b637-ceb2-4d5b-8eee-5033bb4c42b8';
 
     const task: CreateTaskDto = {
       title: 'New task',
