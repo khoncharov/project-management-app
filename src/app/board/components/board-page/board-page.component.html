@@ -29,6 +29,8 @@
           <div class="tasks-container">
             <div class="tasks">
               <app-task
+                [boardId]="b.id"
+                [columnId]="column.id"
                 *ngFor="let task of column.tasks | tasksInOrder"
                 [task]="task"
               ></app-task>

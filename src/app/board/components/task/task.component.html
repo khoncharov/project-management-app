@@ -1,18 +1,25 @@
 <mat-card class="task">
   <mat-card-content>
-    <h3>{{ task.title }}</h3>
-    <p>{{ task.description }}</p>
-    <p>Responsible</p>
+    <h3 class="task-header">{{ task.title }}</h3>
+    <p class="task-text">{{ task.description }}</p>
   </mat-card-content>
 
   <mat-card-actions align="end">
-    <button mat-icon-button color="primary" (click)="onTaskEdit()">
+    <div class="task-assignee">
+      <mat-icon class="task-assignee-icon">account_circle</mat-icon>
+      <span class="task-assignee-text">John Smith</span>
+    </div>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="onTaskEdit(boardId, columnId, task.id)"
+    >
       <mat-icon>edit</mat-icon>
     </button>
     <button
       mat-icon-button
       color="warn"
-      (click)="onTaskDelete('b.id', 'column.id', 'task.id')"
+      (click)="onTaskDelete(boardId, columnId, task.id)"
     >
       <mat-icon>delete</mat-icon>
     </button>

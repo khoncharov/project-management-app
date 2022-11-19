@@ -1,4 +1,35 @@
 .task {
   width: 100%;
   border-radius: 5px;
+
+  &-header {
+    margin: 0 0 5px 0;
+    max-width: 225px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-text {
+    color: #b15f5f;
+  }
+
+  &-assignee {
+    width: 144px;
+    margin-right: 8px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+
+    &-icon {
+      margin: 0 5px 2px 0;
+    }
+
+    &-text {
+      max-width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }
