@@ -4,7 +4,7 @@
 
 <mat-card class="board-container" *ngIf="board$ | async as b">
   <div class="board-header">
-    <mat-icon [style]="'color: #' + b.id.slice(0, 6)"> assignment </mat-icon>
+    <mat-icon [style]="'color: #' + b.id.slice(0, 6)">assignment</mat-icon>
     <h2 class="board-header-text">{{ b.title }} / {{ b.description }}</h2>
   </div>
 
@@ -28,23 +28,10 @@
 
           <div class="tasks-container">
             <div class="tasks">
-              <mat-card
-                class="task"
+              <app-task
                 *ngFor="let task of column.tasks | tasksInOrder"
-              >
-                <mat-card-content>
-                  <h3>{{ task.title }}</h3>
-                </mat-card-content>
-                <mat-card-actions align="end">
-                  <button
-                    mat-icon-button
-                    color="warn"
-                    (click)="onTaskDelete(b.id, column.id, task.id)"
-                  >
-                    <mat-icon>delete</mat-icon>
-                  </button>
-                </mat-card-actions>
-              </mat-card>
+                [task]="task"
+              ></app-task>
             </div>
 
             <div class="task-controls">
