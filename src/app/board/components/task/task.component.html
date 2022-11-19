@@ -9,9 +9,9 @@
       <mat-icon class="task-assignee-icon" [style]="getIconColor(task.userId)"
         >account_circle</mat-icon
       >
-      <span class="task-assignee-text">{{
-        task.userId | userNameById: users
-      }}</span>
+      <span class="task-assignee-text">
+        {{ task.userId | userNameById: users }}
+      </span>
     </div>
     <button
       mat-icon-button
