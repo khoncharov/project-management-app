@@ -1,0 +1,42 @@
+.column {
+  width: 300px;
+  height: 100%;
+  background-color: #f5f0f0;
+  box-shadow: 1px 1px 2px #9fa1a8;
+}
+
+.column-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  &-text {
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.tasks-container {
+  display: grid;
+  grid-template-rows: max-content min-content;
+  overflow: auto;
+}
+
+.tasks {
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-controls {
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,6 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { BoardWithColumns, ColumnWithTasks } from '../../core/models';
+import { BoardWithColumns, ColumnWithTasks, User } from '../../core/models';
+import * as UserActions from '../actions/user.actions';
+import * as UserApiActions from '../actions/user-api.actions';
 import * as BoardActions from '../actions/board.actions';
 import * as BoardApiActions from '../actions/board-api.actions';
 import * as ColumnActions from '../actions/column.actions';
@@ -10,12 +12,14 @@ import * as TaskApiActions from '../actions/task-api.actions';
 
 export interface SelectedBoardState {
   board: BoardWithColumns | null;
+  users: User[];
   isLoading: boolean;
   error: string | null;
 }
 
 const initState: SelectedBoardState = {
   board: null,
+  users: [],
   isLoading: false,
   error: null,
 };
@@ -60,6 +64,27 @@ export const selectedBoardReducer = createReducer(
     }),
   ),
 
+  // Get users
+
+  on(UserActions.getUsers, onDataRequest),
+  on(
+    UserApiActions.getUsersFailure,
+    (state, action): SelectedBoardState => ({
+      ...state,
+      error: action.error.message,
+      isLoading: false,
+    }),
+  ),
+  on(
+    UserApiActions.getUsersSuccess,
+    (state, action): SelectedBoardState => ({
+      ...state,
+      users: action.users,
+      error: null,
+      isLoading: false,
+    }),
+  ),
+
   // Create column
 
   on(ColumnActions.createColumn, onDataRequest),
@@ -80,6 +105,7 @@ export const selectedBoardReducer = createReducer(
           tasks: [],
         };
         return {
+          ...state,
           board: {
             ...state.board,
             columns: [...state.board.columns, newColumn],
@@ -115,6 +141,7 @@ export const selectedBoardReducer = createReducer(
           column.order = action.column.order;
 
           return {
+            ...state,
             board: {
               ...state.board,
             },
@@ -145,6 +172,7 @@ export const selectedBoardReducer = createReducer(
       if (state.board) {
         const columns = state.board.columns.filter((c) => c.id !== action.id);
         return {
+          ...state,
           board: {
             ...state.board,
             columns: [...columns],
@@ -171,6 +199,7 @@ export const selectedBoardReducer = createReducer(
   on(
     TaskApiActions.createTaskSuccess,
     (state, action): SelectedBoardState => ({
+      ...state,
       board: {
         ...action.board,
       },
@@ -193,6 +222,7 @@ export const selectedBoardReducer = createReducer(
   on(
     TaskApiActions.updateTaskSuccess,
     (state, action): SelectedBoardState => ({
+      ...state,
       board: {
         ...action.board,
       },
@@ -215,6 +245,7 @@ export const selectedBoardReducer = createReducer(
   on(
     TaskApiActions.deleteTaskSuccess,
     (state, action): SelectedBoardState => ({
+      ...state,
       board: {
         ...action.board,
       },

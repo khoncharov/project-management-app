@@ -20,3 +20,8 @@ export const selectBoard = createSelector(
   selectCurrentBoardState,
   (state) => state.board,
 );
+
+export const selectUsers = createSelector(
+  selectCurrentBoardState,
+  (state) => state.users,
+);
