@@ -8,6 +8,7 @@ import { ColumnsInOrderPipe } from './pipes/columns-in-order.pipe';
 import { TasksInOrderPipe } from './pipes/tasks-in-order.pipe';
 import { TaskComponent } from './components/task/task.component';
 import { ColumnComponent } from './components/column/column.component';
+import { UserNameByIdPipe } from './pipes/user-name-by-id.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ColumnComponent } from './components/column/column.component';
     TasksInOrderPipe,
     TaskComponent,
     ColumnComponent,
+    UserNameByIdPipe,
   ],
   imports: [CommonModule, BoardRoutingModule, MaterialModule],
 })

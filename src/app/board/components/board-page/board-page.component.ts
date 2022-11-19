@@ -12,6 +12,7 @@ import {
 import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selectors';
 import * as ColumnActions from '../../../store/actions/column.actions';
 import * as TaskActions from '../../../store/actions/task.actions';
+import * as UserActions from '../../../store/actions/user.actions';
 
 @Component({
   selector: 'app-board-page',
@@ -41,6 +42,8 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    this.store.dispatch(UserActions.getUsers());
   }
 
   ngOnDestroy(): void {
@@ -79,7 +82,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   onTaskAdd(boardId: string, columnId: string): void {
-    const currUserId = '53a5b637-ceb2-4d5b-8eee-5033bb4c42b8';
+    const currUserId = 'ae02b5f0-1419-456e-b76c-fe95a3b606b8';
 
     const task: CreateTaskDto = {
       title: 'New task',

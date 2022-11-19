@@ -5,9 +5,13 @@
   </mat-card-content>
 
   <mat-card-actions align="end">
-    <div class="task-assignee">
-      <mat-icon class="task-assignee-icon">account_circle</mat-icon>
-      <span class="task-assignee-text">John Smith</span>
+    <div class="task-assignee" *ngIf="users$ | async as users">
+      <mat-icon class="task-assignee-icon" [style]="getIconColor(task.userId)"
+        >account_circle</mat-icon
+      >
+      <span class="task-assignee-text">{{
+        task.userId | userNameById: users
+      }}</span>
     </div>
     <button
       mat-icon-button

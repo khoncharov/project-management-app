@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { TaskShort, UpdateTaskDto } from '../../../core/models';
+import { TaskShort, UpdateTaskDto, User } from '../../../core/models';
 import * as TaskActions from '../../../store/actions/task.actions';
+import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selectors';
 
 @Component({
   selector: 'app-task',
@@ -16,7 +18,11 @@ export class TaskComponent {
 
   @Input() task!: TaskShort;
 
-  constructor(private store: Store) {}
+  protected users$!: Observable<User[]>;
+
+  constructor(private store: Store) {
+    this.users$ = this.store.select(fromSelectedBoard.selectUsers);
+  }
 
   onTaskEdit(boardId: string, columnId: string, taskId: string): void {
     const task: UpdateTaskDto = {
@@ -40,5 +46,9 @@ export class TaskComponent {
 
   onTaskDelete(boardId: string, columnId: string, taskId: string): void {
     this.store.dispatch(TaskActions.deleteTask({ boardId, columnId, taskId }));
+  }
+
+  getIconColor(id: string): string {
+    return `color: #${id.slice(0, 6)}`;
   }
 }
