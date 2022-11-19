@@ -40,6 +40,7 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
         this.errorBar.open(err, 'Ok', {
           verticalPosition: 'top',
         });
+        this.store.dispatch(BoardActions.removeProjectsError());
       }
     });
   }
