@@ -10,44 +10,11 @@
 
   <div class="columns-container">
     <div class="columns">
-      <mat-card
-        class="column"
+      <app-column
+        [boardId]="b.id"
         *ngFor="let column of b.columns | columnsInOrder"
-      >
-        <mat-card-content>
-          <div class="column-header">
-            <h3 class="column-header-text">{{ column.title }}</h3>
-            <button
-              mat-icon-button
-              color="primary"
-              (click)="onColumnEdit(column)"
-            >
-              <mat-icon>edit</mat-icon>
-            </button>
-          </div>
-
-          <div class="tasks-container">
-            <div class="tasks">
-              <app-task
-                [boardId]="b.id"
-                [columnId]="column.id"
-                *ngFor="let task of column.tasks | tasksInOrder"
-                [task]="task"
-              ></app-task>
-            </div>
-
-            <div class="task-controls">
-              <button
-                mat-icon-button
-                color="primary"
-                (click)="onTaskAdd(b.id, column.id)"
-              >
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
+        [column]="column"
+      ></app-column>
     </div>
 
     <div class="column-controls">
