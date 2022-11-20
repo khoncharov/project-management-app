@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import MaterialModule from '../shared/material/material.module';
 import { BoardRoutingModule } from './board-routing.module';
@@ -19,6 +20,6 @@ import { UserNameByIdPipe } from './pipes/user-name-by-id.pipe';
     ColumnComponent,
     UserNameByIdPipe,
   ],
-  imports: [CommonModule, BoardRoutingModule, MaterialModule],
+  imports: [CommonModule, BoardRoutingModule, MaterialModule, DragDropModule],
 })
 export class BoardModule {}
