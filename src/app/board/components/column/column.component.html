@@ -8,12 +8,19 @@
     </div>
 
     <div class="tasks-container">
-      <div class="tasks">
+      <div
+        class="tasks"
+        cdkDropList
+        (cdkDropListDropped)="onTaskDrop($event)"
+        [cdkDropListData]="column.id"
+      >
         <app-task
-          [boardId]="boardId"
+          [boardId]="board.id"
           [columnId]="column.id"
           *ngFor="let task of column.tasks | tasksInOrder"
           [task]="task"
+          cdkDrag
+          [id]="task.id"
         ></app-task>
       </div>
 
@@ -21,7 +28,7 @@
         <button
           mat-icon-button
           color="primary"
-          (click)="onTaskAdd(boardId, column.id)"
+          (click)="onTaskAdd(board.id, column.id)"
         >
           <mat-icon>add</mat-icon>
         </button>

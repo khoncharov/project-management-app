@@ -1,7 +1,14 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { ColumnWithTasks, CreateTaskDto } from '../../../core/models';
+import {
+  BoardWithColumns,
+  ColumnWithTasks,
+  CreateTaskDto,
+  TaskShort,
+  UpdateTaskDto,
+} from '../../../core/models';
 import * as TaskActions from '../../../store/actions/task.actions';
 
 @Component({
@@ -10,7 +17,7 @@ import * as TaskActions from '../../../store/actions/task.actions';
   styleUrls: ['./column.component.scss'],
 })
 export class ColumnComponent {
-  @Input() boardId!: string;
+  @Input() board!: BoardWithColumns;
 
   @Input() column!: ColumnWithTasks;
 
@@ -30,5 +37,53 @@ export class ColumnComponent {
     };
 
     this.store.dispatch(TaskActions.createTask({ boardId, columnId, task }));
+  }
+
+  onTaskDrop(e: CdkDragDrop<string>): void {
+    const isIndexChanged = e.currentIndex !== e.previousIndex;
+
+    const currColumnId = e.container.data;
+    const prevColumnId = e.previousContainer.data;
+    const isContainerChanged = currColumnId !== prevColumnId;
+
+    const isMoved = isIndexChanged || isContainerChanged;
+
+    if (isMoved) {
+      const boardId = this.board.id;
+
+      const taskElement = e.item.element.nativeElement;
+      const taskId = taskElement.id;
+
+      const currTask = this.getTaskById(prevColumnId, taskId);
+
+      if (currTask) {
+        const task: UpdateTaskDto = {
+          boardId,
+          columnId: currColumnId,
+          title: currTask.title,
+          description: currTask.description,
+          order: e.currentIndex + 1,
+          userId: currTask.userId,
+        };
+
+        this.store.dispatch(
+          TaskActions.updateTask({
+            boardId,
+            columnId: prevColumnId,
+            taskId,
+            task,
+          }),
+        );
+      }
+    }
+  }
+
+  getTaskById(columnId: string, id: string): TaskShort | undefined {
+    let result: TaskShort | undefined;
+    const column = this.board.columns.find((c) => c.id === columnId);
+    if (column) {
+      result = column.tasks.find((t) => t.id === id);
+    }
+    return result;
   }
 }
