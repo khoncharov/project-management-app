@@ -1,20 +1,22 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, mergeMap, Observable } from 'rxjs';
 
 import {
+  BoardWithColumns,
   Column,
   ColumnWithTasks,
   CreateColumnDto,
   UpdateColumnDto,
-} from '../../models/column.model';
+} from '../../models';
+import { BoardsApiService } from './boards-api.service';
 import { getColumnsUrl, httpOptionsWithJson } from './utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ColumnsApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private boardApi: BoardsApiService) {}
 
   getColumns(boardId: string): Observable<Column[]> {
     const url = getColumnsUrl(boardId);
@@ -38,6 +40,16 @@ export class ColumnsApiService {
   ): Observable<Column> {
     const url = getColumnsUrl(boardId, columnId);
     return this.http.put<Column>(url, column, httpOptionsWithJson);
+  }
+
+  updateColumnAndGetBoard(
+    boardId: string,
+    columnId: string,
+    column: UpdateColumnDto,
+  ): Observable<BoardWithColumns> {
+    return this.updateColumn(boardId, columnId, column).pipe(
+      mergeMap(() => this.boardApi.getBoard(boardId)),
+    );
   }
 
   deleteColumn(boardId: string, columnId: string): Observable<null> {
