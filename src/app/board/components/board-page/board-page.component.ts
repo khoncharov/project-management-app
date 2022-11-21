@@ -5,12 +5,13 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
+import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 import {
   BoardWithColumns,
   ColumnWithTasks,
   CreateColumnDto,
   UpdateColumnDto,
-} from '../../../core/models';
+} from 'src/app/core/models';
 import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selectors';
 import * as BoardActions from '../../../store/actions/board.actions';
 import * as ColumnActions from '../../../store/actions/column.actions';
@@ -34,7 +35,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private errorBar: MatSnackBar,
-    protected dialog: MatDialog,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -74,21 +75,31 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   onColumnDelete(board: BoardWithColumns): void {
-    if (board.columns.length) {
-      const columns = board.columns.map((c) => ({
-        order: c.order,
-        id: c.id,
-      }));
-      columns.sort((a, b) => a.order - b.order);
-      const lastColumnId = columns.at(-1)!.id;
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Do you really want to delete this column?',
+        message: 'This column will be permanently deleted.',
+      },
+    });
 
-      this.store.dispatch(
-        ColumnActions.deleteColumn({
-          boardId: board.id,
-          columnId: lastColumnId,
-        }),
-      );
-    }
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (!confirm) return;
+      if (board.columns.length) {
+        const columns = board.columns.map((c) => ({
+          order: c.order,
+          id: c.id,
+        }));
+        columns.sort((a, b) => a.order - b.order);
+        const lastColumnId = columns.at(-1)!.id;
+
+        this.store.dispatch(
+          ColumnActions.deleteColumn({
+            boardId: board.id,
+            columnId: lastColumnId,
+          }),
+        );
+      }
+    });
   }
 
   onColumnDrop(e: CdkDragDrop<string[]>, board: BoardWithColumns): void {

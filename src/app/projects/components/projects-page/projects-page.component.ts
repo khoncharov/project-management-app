@@ -1,8 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 
 import { Board, CreateBoardDto } from '../../../core/models/board.model';
 import * as BoardActions from '../../../store/actions/board.actions';
@@ -26,6 +28,7 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
     private store: Store,
     private errorBar: MatSnackBar,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +66,17 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
   }
 
   onDeleteBoard(id: string) {
-    this.store.dispatch(BoardActions.deleteBoard({ id }));
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Do you want to delete this board?',
+        message: 'This board will be permanently deleted.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (!confirm) return;
+      this.store.dispatch(BoardActions.deleteBoard({ id }));
+    });
   }
 
   getIconColor(id: string): string {

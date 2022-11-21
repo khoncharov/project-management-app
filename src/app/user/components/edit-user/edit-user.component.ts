@@ -5,13 +5,16 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Observable, Subscription } from 'rxjs';
-import { User } from 'src/app/core/models/user.model';
-import * as fromCurrentUser from '../../../store/selectors/current-user.selectors';
-import * as AuthActions from '../../../store/actions/user.actions';
+import { User } from 'src/app/core/models';
+import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
+import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors';
+import * as AuthActions from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-edit-user',
@@ -22,6 +25,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   public editForm!: FormGroup;
 
   private currentUserSubscription!: Subscription;
+
+  private errorSubscription!: Subscription;
 
   protected user$!: Observable<User>;
 
@@ -35,6 +40,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private store: Store,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +60,15 @@ export class EditUserComponent implements OnInit, OnDestroy {
           name: user.name,
           login: user.login,
           password: '',
+        });
+      }
+    });
+
+    this.errorSubscription = this.error$.subscribe((error) => {
+      if (error) {
+        this.snackBar.open(error, 'close', {
+          verticalPosition: 'top',
+          panelClass: 'snack-bar-light',
         });
       }
     });
@@ -88,15 +104,26 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   deleteProfile() {
-    this.store.dispatch(
-      AuthActions.deleteUser({
-        id: this.currentUser.id,
-      }),
-    );
-    this.router.navigateByUrl('/home');
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Do you want to delete your account?',
+        message: 'Your account will be permanently deleted.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (!confirm) return;
+      this.store.dispatch(
+        AuthActions.deleteUser({
+          id: this.currentUser.id,
+        }),
+      );
+      this.router.navigateByUrl('/home');
+    });
   }
 
   ngOnDestroy(): void {
     this.currentUserSubscription.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 }
