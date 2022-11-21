@@ -10,6 +10,8 @@ import { TasksInOrderPipe } from './pipes/tasks-in-order.pipe';
 import { TaskComponent } from './components/task/task.component';
 import { ColumnComponent } from './components/column/column.component';
 import { UserNameByIdPipe } from './pipes/user-name-by-id.pipe';
+import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
+import { ColumnDialogComponent } from './components/column-dialog/column-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { UserNameByIdPipe } from './pipes/user-name-by-id.pipe';
     TaskComponent,
     ColumnComponent,
     UserNameByIdPipe,
+    TaskDialogComponent,
+    ColumnDialogComponent,
   ],
   imports: [CommonModule, BoardRoutingModule, MaterialModule, DragDropModule],
 })
