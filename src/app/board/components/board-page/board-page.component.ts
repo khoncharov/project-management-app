@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -14,6 +15,7 @@ import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selec
 import * as BoardActions from '../../../store/actions/board.actions';
 import * as ColumnActions from '../../../store/actions/column.actions';
 import * as UserActions from '../../../store/actions/user.actions';
+import { ColumnDialogComponent } from '../column-dialog/column-dialog.component';
 
 @Component({
   selector: 'app-board-page',
@@ -29,7 +31,11 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   protected isLoading$!: Observable<boolean>;
 
-  constructor(private store: Store, private errorBar: MatSnackBar) {}
+  constructor(
+    private store: Store,
+    private errorBar: MatSnackBar,
+    protected dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(UserActions.getUsers());
@@ -53,11 +59,18 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   onColumnAdd(boardId: string): void {
-    const column: CreateColumnDto = {
-      title: 'New column',
-    };
+    const dialogRef = this.dialog.open(ColumnDialogComponent);
 
-    this.store.dispatch(ColumnActions.createColumn({ boardId, column }));
+    dialogRef.afterClosed().subscribe((result) => {
+      const columnTitle: string = result;
+      if (columnTitle) {
+        const column: CreateColumnDto = {
+          title: columnTitle,
+        };
+
+        this.store.dispatch(ColumnActions.createColumn({ boardId, column }));
+      }
+    });
   }
 
   onColumnDelete(board: BoardWithColumns): void {

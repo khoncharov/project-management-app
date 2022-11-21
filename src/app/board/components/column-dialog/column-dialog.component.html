@@ -1,1 +1,23 @@
-<p>column-dialog works!</p>
+<div class="dialog-container">
+  <h2 mat-dialog-title>New column</h2>
+
+  <mat-form-field appearance="outline" floatLabel="never" class="input-field">
+    <mat-label>Column title</mat-label>
+    <input matInput required autocomplete="off" [(ngModel)]="columnTitle" />
+    <mat-hint align="start">Min 1 character</mat-hint>
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary">Cancel</button>
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      color="primary"
+      [disabled]="columnTitle.length < 1"
+      [mat-dialog-close]="columnTitle"
+    >
+      Create
+    </button>
+  </div>
+</div>

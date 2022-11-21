@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import MaterialModule from '../shared/material/material.module';
 import { BoardRoutingModule } from './board-routing.module';
@@ -24,6 +25,13 @@ import { ColumnDialogComponent } from './components/column-dialog/column-dialog.
     TaskDialogComponent,
     ColumnDialogComponent,
   ],
-  imports: [CommonModule, BoardRoutingModule, MaterialModule, DragDropModule],
+  imports: [
+    CommonModule,
+    BoardRoutingModule,
+    MaterialModule,
+    DragDropModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class BoardModule {}
