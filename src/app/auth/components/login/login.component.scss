@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 70vh;
 }
 
 mat-card {
@@ -40,4 +41,10 @@ mat-card {
     align-items: center;
     justify-content: space-between;
   }
+}
+
+::ng-deep snack-bar-container.snack-bar-light {
+  background-color: #ffffff;
+  color: #000000;
+  white-space: pre-wrap;
 }
