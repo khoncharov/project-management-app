@@ -25,3 +25,8 @@ export const selectUser = createSelector(
   selectCurrUserState,
   (state) => state.user,
 );
+
+export const selectUserId = createSelector(
+  selectCurrUserState,
+  (state) => state.user.id,
+);

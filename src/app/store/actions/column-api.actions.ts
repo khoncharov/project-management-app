@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { BoardWithColumns } from '../../core/models';
 import { Column, ColumnWithTasks } from '../../core/models/column.model';
 
 export const getColumnsFailure = createAction(
@@ -48,5 +49,5 @@ export const updateColumnFailure = createAction(
 
 export const updateColumnSuccess = createAction(
   '[Column API] Column updated',
-  props<{ column: Column }>(),
+  props<{ board: BoardWithColumns }>(),
 );

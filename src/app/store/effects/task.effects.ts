@@ -31,7 +31,7 @@ export class TaskEffects {
       ofType(TaskActions.createTask),
       mergeMap((payload) => {
         return this.taskApi
-          .createTaskAndGetColumns(
+          .createTaskAndGetBoard(
             payload.boardId,
             payload.columnId,
             payload.task,
@@ -65,7 +65,7 @@ export class TaskEffects {
       ofType(TaskActions.updateTask),
       mergeMap((payload) => {
         return this.taskApi
-          .updateTaskAndGetColumns(
+          .updateTaskAndGetBoard(
             payload.boardId,
             payload.columnId,
             payload.taskId,
@@ -86,7 +86,7 @@ export class TaskEffects {
       ofType(TaskActions.deleteTask),
       mergeMap((payload) => {
         return this.taskApi
-          .deleteTaskAndGetColumns(
+          .deleteTaskAndGetBoard(
             payload.boardId,
             payload.columnId,
             payload.taskId,

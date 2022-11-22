@@ -1,0 +1,28 @@
+.dialog-container {
+  width: calc(320px - 24px * 2);
+}
+
+.input-field {
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.textarea-input {
+  min-height: 65px;
+}
+
+.selected-item {
+  &-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &-icon {
+    margin-right: 16px;
+  }
+}

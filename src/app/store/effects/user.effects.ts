@@ -14,6 +14,18 @@ import * as UserApiActions from '../actions/user-api.actions';
 export class UserEffects {
   constructor(private actions$: Actions, private adminApi: AdminApiService) {}
 
+  getUsers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.getUsers),
+      mergeMap(() => {
+        return this.adminApi.getUsers().pipe(
+          map((users) => UserApiActions.getUsersSuccess({ users })),
+          catchError((error) => of(UserApiActions.getUserFailure({ error }))),
+        );
+      }),
+    );
+  });
+
   getUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.getUser),
