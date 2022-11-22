@@ -2,7 +2,7 @@
   <div class="edit-user-container">
     <form [formGroup]="editForm" (ngSubmit)="editProfile()">
       <h1>{{ "editUser.user" | translate }}</h1>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label autocomplete for="name">{{
           "editUser.name" | translate
         }}</mat-label>
@@ -18,7 +18,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label autocomplete for="login">{{
           "editUser.login" | translate
         }}</mat-label>
@@ -34,7 +34,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label autocomplete for="password">{{
           "editUser.newPassword" | translate
         }}</mat-label>

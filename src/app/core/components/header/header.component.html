@@ -2,36 +2,28 @@
   <div class="header-container">
     <div class="header-container_link">
       <a routerLink="/">
-        <img
-          class="header-logo"
-          src="../../../../assets/images/logo.svg"
-          alt="logo"
-        />
+        <img class="header-logo" src="../assets/images/logo.svg" alt="logo" />
       </a>
       <a
         class="header-container_btn"
         routerLink="/home"
         routerLinkActive="active"
-        >Home</a
+        >{{ "header.home" | translate }}</a
       >
       <a
         class="header-container_btn"
         routerLink="/projects"
         routerLinkActive="active"
-        >Projects</a
+        *ngIf="isAuthorized"
+        >{{ "header.projects" | translate }}</a
       >
       <a
         class="header-container_btn"
         routerLink="/board"
         routerLinkActive="active"
-        >Board</a
+        *ngIf="isAuthorized"
+        >{{ "header.board" | translate }}</a
       >
-      <a
-        class="header-container_btn"
-        routerLink="/edit-profile"
-        routerLinkActive="active"
-        >Profile
-      </a>
     </div>
     <div class="header-switcher">
       <span>en</span>
@@ -41,14 +33,29 @@
       ></mat-slide-toggle>
       <span>ru</span>
     </div>
-    <div class="header-login">
-      <p class="header-login_title">username</p>
-      <mat-icon
-        class="header-login_icon header_icon"
-        routerLink="/auth/login"
-        fontIcon="account_circle"
+    <div class="header-login header-login__sign-up" *ngIf="!isAuthorized">
+      <button mat-button class="header-login__button" routerLink="/auth/login">
+        {{ "header.login" | translate }}
+      </button>
+      <button
+        mat-button
+        class="header-login__button"
+        routerLink="/auth/sign-up"
       >
-      </mat-icon>
+        {{ "header.signup" | translate }}
+      </button>
+    </div>
+    <div class="header-login" *ngIf="isAuthorized">
+      <button
+        mat-button
+        class="header-login__button"
+        routerLink="/edit-profile"
+      >
+        {{ "header.profile" | translate }}
+      </button>
+      <button mat-button class="header-login__button" (click)="logout()">
+        {{ "header.logout" | translate }}
+      </button>
     </div>
   </div>
 </header>
