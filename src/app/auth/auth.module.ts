@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import MaterialModule from '../shared/material/material.module';
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -14,6 +15,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     AuthRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class AuthModule {}

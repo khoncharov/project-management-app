@@ -1,28 +1,28 @@
 <mat-card class="sign-up">
   <mat-card-header>
-    <mat-card-title>Sign Up</mat-card-title>
+    <mat-card-title>{{ "signUpPage.signUp" | translate }}</mat-card-title>
   </mat-card-header>
 
-  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
     <mat-card-content>
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Name</mat-label>
+        <mat-label>{{ "signUpPage.name" | translate }}</mat-label>
         <input matInput formControlName="name" />
-        <mat-error *ngIf="signUpForm.controls['name'].errors">
-          {{ getErrorMessage(signUpForm.controls['name'].errors) }}
+        <mat-error *ngIf="signUpForm.controls['name'].hasError('required')">
+          {{ "validationMessage.nameRequired" }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Login</mat-label>
+        <mat-label>{{ "signUpPage.login" | translate }}</mat-label>
         <input matInput formControlName="login" />
-        <mat-error *ngIf="signUpForm.controls['login'].errors">
-          {{ getErrorMessage(signUpForm.controls['login'].errors) }}
+        <mat-error *ngIf="signUpForm.controls['login'].hasError('required')">
+          {{ "validationMessage.loginRequired" }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Password</mat-label>
+        <mat-label>{{ "signUpPage.password" | translate }}</mat-label>
         <input
           matInput
           formControlName="password"
@@ -37,13 +37,29 @@
         >
           <mat-icon>{{ isHidden ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
-        <mat-error *ngIf="signUpForm.controls['password'].errors">
-          {{ getErrorMessage(signUpForm.controls['password'].errors) }}
+        <mat-error
+          *ngIf="signUpForm.controls['password'].hasError('required');
+          else minLengthValidation">
+          {{ "validationMessage.passwordRequired" | translate }}
         </mat-error>
+
+        <ng-template #minLengthValidation>
+          <mat-error
+            *ngIf="signUpForm.controls['password'].hasError('minlength');
+            else passwordValidation">
+            {{ "validationMessage.minLength" | translate }}
+          </mat-error>
+        </ng-template>
+
+        <ng-template #passwordValidation>
+          <mat-error *ngIf="signUpForm.controls['password'].hasError('inValidPassword')">
+            {{ "validationMessage.invalidPassword" | translate }}
+          </mat-error>
+        </ng-template>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Confirm password</mat-label>
+        <mat-label>{{ "signUpPage.confirmPassword" | translate }}</mat-label>
         <input
           matInput
           formControlName="confirmPassword"
@@ -58,16 +74,19 @@
         >
           <mat-icon>{{ isHidden ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
-        <mat-error *ngIf="signUpForm.controls['confirmPassword'].errors">
-          {{ getErrorMessage(signUpForm.controls['confirmPassword'].errors) }}
-        </mat-error>
+        <mat-error
+        *ngIf="signUpForm.controls['confirmPassword'].hasError('mustMatch')">
+        {{ "validationMessage.mustMatch" | translate }}
+      </mat-error>
       </mat-form-field>
     </mat-card-content>
 
     <mat-card-actions>
       <div>
-        <span>Have an account?</span>
-        <a routerLink="/auth/login" mat-button color="primary">Login</a>
+        <span>{{ "signUpPage.haveAccount" | translate }}</span>
+        <a routerLink="/auth/login" mat-button color="primary">{{
+          "signUpPage.loginLink" | translate
+        }}</a>
       </div>
 
       <button
@@ -76,8 +95,13 @@
         [disabled]="signUpForm.invalid"
         type="submit"
       >
-        Sign Up
+        {{ "signUpPage.submit" | translate }}
       </button>
     </mat-card-actions>
   </form>
+
+  <mat-progress-bar
+    *ngIf="isLoading$ | async"
+    mode="query">
+  </mat-progress-bar>
 </mat-card>

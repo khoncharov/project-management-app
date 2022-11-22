@@ -21,5 +21,34 @@
     "profile": "Profile",
     "projects": "Projects",
     "board": "Board"
+  },
+  "loginPage": {
+    "title": "Login",
+    "login": "Login",
+    "password": "Password",
+    "signUp": "Sign Up",
+    "newUser": "New User?",
+    "submit": "Login"
+  },
+  "signUpPage": {
+    "signUp": "Sign Up",
+    "name": "Name",
+    "login": "Login",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "haveAccount": "Have an account?",
+    "loginLink": "Login",
+    "submit": "Sign Up"
+  },
+  "validationMessage": {
+    "loginRequired": "Please enter a login",
+    "passwordRequired": "Please enter a password",
+    "minLength": "Should be at least 8 characters",
+    "invalidPassword": "Should contain at least 1 capital letter, 1 small letter and 1 number",
+    "mustMatch": "Passwords do not match"
+  },
+  "confirm": {
+    "cancel": "Cancel",
+    "delete": "Delete"
   }
 }

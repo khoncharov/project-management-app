@@ -25,7 +25,6 @@ import { TaskEffects } from './store/effects/task.effects';
 export function HttpLoaderFactory(http: HttpClient): TranslateLoader {
   return new TranslateHttpLoader(http, './assets/translate/', '.json');
 }
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

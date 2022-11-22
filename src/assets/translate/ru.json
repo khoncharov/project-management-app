@@ -21,5 +21,33 @@
     "profile": "Профиль",
     "projects": "Проекты",
     "board": "Доска"
+  },
+  "loginPage": {
+    "title": "Вход",
+    "login": "Логин",
+    "password": "Пароль",
+    "signUp": "Регистрация",
+    "newUser": "Новый пользователь?",
+    "submit": "Войти"
+  },
+  "signUpPage": {
+    "signUp": "Регистрация",
+    "name": "Имя",
+    "login": "Логин",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "haveAccount": "Уже есть аккаунт?",
+    "loginLink": "Войти",
+    "submit": "Зарегистрироваться"
+  },
+  "validationMessage": {
+    "required": "Пожалуйста, введите",
+    "minLength": "Должен быть не менее 8 символов",
+    "invalidPassword": "Должен содержать как минимум 1 заглавную букву, 1 строчную букву и 1 цифру",
+    "mustMatch": "Пароли не совпадают"
+  },
+  "confirm": {
+    "cancel": "Отмена",
+    "delete": "Удалить"
   }
 }
