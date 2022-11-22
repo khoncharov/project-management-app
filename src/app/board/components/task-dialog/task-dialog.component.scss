@@ -14,3 +14,15 @@
 .textarea-input {
   min-height: 65px;
 }
+
+.selected-item {
+  &-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &-icon {
+    margin-right: 16px;
+  }
+}

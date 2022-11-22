@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import {
   BoardWithColumns,
   ColumnWithTasks,
+  CreateTaskDto,
   TaskShort,
   UpdateColumnDto,
   UpdateTaskDto,
@@ -51,16 +52,16 @@ export class ColumnComponent {
   }
 
   onTaskAdd(boardId: string, columnId: string): void {
-    // const currUserId = 'ae02b5f0-1419-456e-b76c-fe95a3b606b8';
+    const dialogRef = this.dialog.open(TaskDialogComponent);
 
-    // const task: CreateTaskDto = {
-    //   title: 'New task',
-    //   description: 'Describe you task',
-    //   userId: currUserId,
-    // };
-
-    // this.store.dispatch(TaskActions.createTask({ boardId, columnId, task }));
-    this.dialog.open(TaskDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const task = result as CreateTaskDto;
+        this.store.dispatch(
+          TaskActions.createTask({ boardId, columnId, task }),
+        );
+      }
+    });
   }
 
   onTaskDrop(e: CdkDragDrop<string>): void {
