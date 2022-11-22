@@ -13,6 +13,7 @@ import { ColumnComponent } from './components/column/column.component';
 import { UserNameByIdPipe } from './pipes/user-name-by-id.pipe';
 import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
 import { ColumnDialogComponent } from './components/column-dialog/column-dialog.component';
+import { ColumnTitleInputComponent } from './components/column-title-input/column-title-input.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ColumnDialogComponent } from './components/column-dialog/column-dialog.
     UserNameByIdPipe,
     TaskDialogComponent,
     ColumnDialogComponent,
+    ColumnTitleInputComponent,
   ],
   imports: [
     CommonModule,

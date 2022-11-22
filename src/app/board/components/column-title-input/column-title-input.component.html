@@ -1,0 +1,11 @@
+<mat-form-field appearance="outline" class="input-field">
+  <mat-label>Column title</mat-label>
+  <input matInput autocomplete="off" [(ngModel)]="columnTitle" />
+  <button matSuffix mat-icon-button color="primary" (click)="onSubmit()">
+    <mat-icon>check</mat-icon>
+  </button>
+  <button matSuffix mat-icon-button color="primary" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+  <mat-hint align="start">Min 1 character</mat-hint>
+</mat-form-field>
