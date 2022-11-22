@@ -12,5 +12,14 @@
     "passwordError": "Please enter a password",
     "passwordLengthError": "Should be at least 8 characters",
     "passwordValidError": "Should contain at least 1 capital letter, 1 small letter and 1 number"
+  },
+  "header": {
+    "home": "Home",
+    "login": "Login",
+    "signup": "SignUp",
+    "logout": "Logout",
+    "profile": "Profile",
+    "projects": "Projects",
+    "board": "Board"
   }
 }

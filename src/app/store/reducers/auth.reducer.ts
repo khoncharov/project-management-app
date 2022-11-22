@@ -74,9 +74,9 @@ export const authReducer = createReducer(
       return {
         ...state,
         user: {
+          ...state.user,
           id: tokenData.userId,
           login: tokenData.login,
-          name: '',
         },
         token: {
           token: action.token,
