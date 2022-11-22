@@ -1,10 +1,21 @@
+/* eslint-disable operator-linebreak */
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { TaskShort, UpdateTaskDto, User } from '../../../core/models';
+import {
+  CreateTaskDto,
+  TaskShort,
+  UpdateTaskDto,
+  User,
+} from '../../../core/models';
 import * as TaskActions from '../../../store/actions/task.actions';
 import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selectors';
+import {
+  TaskDialogComponent,
+  TaskTransferData,
+} from '../task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-task',
@@ -20,28 +31,52 @@ export class TaskComponent {
 
   protected users$!: Observable<User[]>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, protected dialog: MatDialog) {
     this.users$ = this.store.select(fromSelectedBoard.selectUsers);
   }
 
-  onTaskEdit(boardId: string, columnId: string, taskId: string): void {
-    const task: UpdateTaskDto = {
-      boardId,
-      columnId,
-      order: 1,
-      title: 'new title 1',
-      description: 'desc n-a',
-      userId: 'f894dd8d-3b5d-4769-8eaa-f10eb60cd734',
+  onTaskEdit(boardId: string, columnId: string, currTask: TaskShort): void {
+    const data: TaskTransferData = {
+      isNewTask: false,
+      task: {
+        title: currTask.title,
+        description: currTask.description,
+        userId: currTask.userId,
+      },
     };
 
-    this.store.dispatch(
-      TaskActions.updateTask({
-        boardId,
-        columnId,
-        taskId,
-        task,
-      }),
-    );
+    const dialogRef = this.dialog.open(TaskDialogComponent, { data });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const task = result as CreateTaskDto;
+
+        const isUpdated =
+          currTask.title !== task.title ||
+          currTask.description !== task.description ||
+          currTask.userId !== task.userId;
+
+        if (isUpdated) {
+          const updatedTask: UpdateTaskDto = {
+            boardId,
+            columnId,
+            order: currTask.order,
+            title: task.title,
+            description: task.description,
+            userId: task.userId,
+          };
+
+          this.store.dispatch(
+            TaskActions.updateTask({
+              boardId,
+              columnId,
+              taskId: currTask.id,
+              task: updatedTask,
+            }),
+          );
+        }
+      }
+    });
   }
 
   onTaskDelete(boardId: string, columnId: string, taskId: string): void {

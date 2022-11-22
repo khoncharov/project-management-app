@@ -13,7 +13,10 @@ import {
 } from '../../../core/models';
 import * as TaskActions from '../../../store/actions/task.actions';
 import * as ColumnActions from '../../../store/actions/column.actions';
-import { TaskDialogComponent } from '../task-dialog/task-dialog.component';
+import {
+  TaskDialogComponent,
+  TaskTransferData,
+} from '../task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-column',
@@ -52,7 +55,16 @@ export class ColumnComponent {
   }
 
   onTaskAdd(boardId: string, columnId: string): void {
-    const dialogRef = this.dialog.open(TaskDialogComponent);
+    const data: TaskTransferData = {
+      isNewTask: true,
+      task: {
+        title: '',
+        description: '',
+        userId: '',
+      },
+    };
+
+    const dialogRef = this.dialog.open(TaskDialogComponent, { data });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

@@ -10,6 +10,11 @@ import { CreateTaskDto, User } from '../../../core/models';
 import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selectors';
 import * as fromCurrentUser from '../../../store/selectors/current-user.selectors';
 
+export interface TaskTransferData {
+  isNewTask: boolean;
+  task: CreateTaskDto;
+}
+
 @Component({
   selector: 'app-task-dialog',
   templateUrl: './task-dialog.component.html',
@@ -33,10 +38,12 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    @Inject(MAT_DIALOG_DATA) public data: CreateTaskDto,
+    @Inject(MAT_DIALOG_DATA) public data: TaskTransferData,
   ) {}
 
   ngOnInit(): void {
+    this.isNewTask = this.data.isNewTask;
+
     this.users$ = this.store.select(fromSelectedBoard.selectUsers);
     this.currentUser$ = this.store.select(fromCurrentUser.selectUser);
 
@@ -55,7 +62,23 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
       description: ['', [Validators.required]],
       userId: '',
     });
-    this.taskForm.patchValue({ userId: this.selectedUser.id });
+
+    if (this.isNewTask) {
+      this.taskForm.patchValue({ userId: this.selectedUser.id });
+    } else {
+      this.taskForm.patchValue({
+        title: this.data.task.title,
+        description: this.data.task.description,
+      });
+      // In case user is deleted and task is returned with userId === ''
+      if (this.data.task.userId) {
+        this.taskForm.patchValue({ userId: this.data.task.userId });
+        this.changeSelectedUser(this.data.task.userId);
+      } else {
+        this.taskForm.patchValue({ userId: this.selectedUser.id });
+        this.changeSelectedUser(this.selectedUser.id);
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -66,7 +89,11 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
 
   onUserSelect(e: MatSelectChange): void {
     const selectedUserId = e.value as string;
-    const selected = this.users.find((u) => u.id === selectedUserId);
+    this.changeSelectedUser(selectedUserId);
+  }
+
+  changeSelectedUser(id: string): void {
+    const selected = this.users.find((u) => u.id === id);
     if (selected) {
       this.selectedUser = selected;
     }
