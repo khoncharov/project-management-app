@@ -53,6 +53,8 @@ const localData = new LocalDataService();
 export const authReducer = createReducer(
   initState,
 
+  // Login user
+
   on(AuthActions.loginUser, onDataRequest),
 
   on(
@@ -74,9 +76,9 @@ export const authReducer = createReducer(
       return {
         ...state,
         user: {
+          ...state.user,
           id: tokenData.userId,
           login: tokenData.login,
-          name: '',
         },
         token: {
           token: action.token,
@@ -91,6 +93,8 @@ export const authReducer = createReducer(
     return state;
   }),
 
+  // Logout user
+
   on(AuthActions.logoutUser, (state): CurrentUserState => {
     localData.userToken = '';
     return {
@@ -98,6 +102,8 @@ export const authReducer = createReducer(
       ...initState,
     };
   }),
+
+  // Register new user
 
   on(AuthActions.registerUser, onDataRequest),
 
@@ -123,6 +129,8 @@ export const authReducer = createReducer(
       },
     };
   }),
+
+  // Check token
 
   on(AuthActions.checkToken, (state) => {
     const token = localData.userToken;
@@ -150,6 +158,8 @@ export const authReducer = createReducer(
     return state;
   }),
 
+  // Get user
+
   on(UserActions.getUser, onDataRequest),
 
   on(
@@ -175,6 +185,8 @@ export const authReducer = createReducer(
     }),
   ),
 
+  // Update user
+
   on(UserActions.updateUser, onDataRequest),
 
   on(
@@ -199,6 +211,8 @@ export const authReducer = createReducer(
       },
     }),
   ),
+
+  // Delete user
 
   on(UserActions.deleteUser, onDataRequest),
 

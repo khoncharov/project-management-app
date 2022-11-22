@@ -1,19 +1,34 @@
 <mat-card class="column">
   <mat-card-content>
-    <div class="column-header">
+    <div class="column-header" *ngIf="isColumnTitleShown">
       <h3 class="column-header-text">{{ column.title }}</h3>
-      <button mat-icon-button color="primary" (click)="onColumnEdit(column)">
+      <button mat-icon-button color="primary" (click)="onColumnEdit()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
 
+    <div class="column-header" *ngIf="!isColumnTitleShown">
+      <app-column-title-input
+        [columnTitle]="column.title"
+        (cancelEvent)="isColumnTitleShown = true"
+        (submitEvent)="onColumnUpdate($event)"
+      ></app-column-title-input>
+    </div>
+
     <div class="tasks-container">
-      <div class="tasks">
+      <div
+        class="tasks"
+        cdkDropList
+        (cdkDropListDropped)="onTaskDrop($event)"
+        [cdkDropListData]="column.id"
+      >
         <app-task
-          [boardId]="boardId"
+          [boardId]="board.id"
           [columnId]="column.id"
           *ngFor="let task of column.tasks | tasksInOrder"
           [task]="task"
+          cdkDrag
+          [id]="task.id"
         ></app-task>
       </div>
 
@@ -21,7 +36,7 @@
         <button
           mat-icon-button
           color="primary"
-          (click)="onTaskAdd(boardId, column.id)"
+          (click)="onTaskAdd(board.id, column.id)"
         >
           <mat-icon>add</mat-icon>
         </button>

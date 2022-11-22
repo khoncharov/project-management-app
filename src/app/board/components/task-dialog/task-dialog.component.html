@@ -1,0 +1,60 @@
+<form class="dialog-container" [formGroup]="taskForm">
+  <h2 mat-dialog-title>{{ isNewTask ? "New task" : "Edit task" }}</h2>
+
+  <mat-form-field appearance="outline" class="input-field">
+    <mat-label>Title</mat-label>
+    <input matInput autocomplete="off" formControlName="title" />
+    <mat-hint align="start">Min 1 character</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="textarea">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      class="textarea-input"
+    ></textarea>
+    <mat-hint align="start">Min 1 character</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="input-field">
+    <mat-label>Assignee</mat-label>
+    <mat-select
+      formControlName="userId"
+      (selectionChange)="onUserSelect($event)"
+    >
+      <mat-select-trigger>
+        <div class="selected-item-container">
+          <mat-icon
+            [style]="'color: #' + selectedUser.id.slice(0, 6)"
+            class="selected-item-icon"
+          >
+            account_circle
+          </mat-icon>
+          <span>
+            {{ selectedUser.name }}
+          </span>
+        </div>
+      </mat-select-trigger>
+      <mat-option *ngFor="let user of users$ | async" [value]="user.id">
+        <mat-icon [style]="'color: #' + user.id.slice(0, 6)">
+          account_circle
+        </mat-icon>
+        {{ user.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="null" color="primary">Cancel</button>
+    <button
+      mat-button
+      cdkFocusInitial
+      color="primary"
+      [disabled]="taskForm.invalid"
+      [mat-dialog-close]="taskForm.value"
+    >
+      {{ isNewTask ? "Create" : "Update" }}
+    </button>
+  </div>
+</form>

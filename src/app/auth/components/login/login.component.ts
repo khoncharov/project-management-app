@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ValidationErrors, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { SignInUserDto, User } from 'src/app/core/models';
+import { Observable, Subscription } from 'rxjs';
+import { SignInUserDto } from 'src/app/core/models';
 import { passwordValidator } from 'src/app/core/validators';
 
 import * as AuthActions from 'src/app/store/actions/auth.actions';
@@ -15,24 +15,20 @@ import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  loginForm = this.fb.group({
-    login: ['', [Validators.required]],
-    password: [
-      '',
-      [Validators.required, Validators.minLength(8), passwordValidator()],
-    ],
-  });
+export class LoginComponent implements OnInit, OnDestroy {
+  private subscription1$ = new Subscription();
+
+  private subscription2$ = new Subscription();
+
+  loginForm!: FormGroup;
 
   isHidden = true;
 
-  user$!: Observable<User>;
+  token$!: Observable<string>;
 
   error$!: Observable<string | null>;
 
   isLoading$!: Observable<boolean>;
-
-  token$!: Observable<string>;
 
   constructor(
     private fb: FormBuilder,
@@ -42,21 +38,13 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.createForm();
     this.error$ = this.store.select(fromCurrentUser.selectLoginError);
+    this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
     this.token$ = this.store.select(fromCurrentUser.selectToken);
-    this.user$ = this.store.select(fromCurrentUser.selectUser);
   }
 
-  getErrorMessage(error: ValidationErrors) {
-    if (error['required']) return 'Please fill in this field';
-    if (error['minlength']) return 'Should be at least 8 characters';
-    if (error['inValidPassword']) {
-      return 'Should contain at least 1 capital letter, 1 small letter and 1 number';
-    }
-    return '';
-  }
-
-  onSubmit() {
+  login() {
     const { login, password } = this.loginForm.value;
     if (login && password) {
       const user: SignInUserDto = {
@@ -65,7 +53,7 @@ export class LoginComponent implements OnInit {
       };
       this.store.dispatch(AuthActions.loginUser({ user }));
 
-      this.error$.subscribe((error) => {
+      this.subscription1$ = this.error$.subscribe((error) => {
         if (error) {
           this.snackBar.open(error, 'close', {
             verticalPosition: 'top',
@@ -74,11 +62,26 @@ export class LoginComponent implements OnInit {
         }
       });
 
-      this.token$.subscribe((token) => {
+      this.subscription2$ = this.token$.subscribe((token) => {
         if (token) {
           this.router.navigate(['/projects']);
         }
       });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription1$.unsubscribe();
+    this.subscription2$.unsubscribe();
+  }
+
+  private createForm(): void {
+    this.loginForm = this.fb.group({
+      login: ['', [Validators.required]],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(8), passwordValidator()],
+      ],
+    });
   }
 }

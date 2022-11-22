@@ -12,11 +12,19 @@
   </div>
 
   <div class="columns-container">
-    <div class="columns">
+    <div
+      class="columns"
+      cdkDropListGroup
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      (cdkDropListDropped)="onColumnDrop($event, b)"
+    >
       <app-column
-        [boardId]="b.id"
+        [board]="b"
         *ngFor="let column of b.columns | columnsInOrder"
         [column]="column"
+        [id]="column.id"
+        cdkDrag
       ></app-column>
     </div>
 

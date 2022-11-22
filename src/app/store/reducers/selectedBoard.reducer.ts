@@ -133,23 +133,15 @@ export const selectedBoardReducer = createReducer(
     ColumnApiActions.updateColumnSuccess,
     (state, action): SelectedBoardState => {
       if (state.board) {
-        const column = state.board.columns.find(
-          (c) => c.id === action.column.id,
-        );
-        if (column) {
-          column.title = action.column.title;
-          column.order = action.column.order;
-
-          return {
-            ...state,
-            board: {
-              ...state.board,
-            },
-            error: null,
-            isLoading: false,
-          };
-        }
-        return state;
+        return {
+          ...state,
+          board: {
+            ...state.board,
+            columns: [...action.board.columns],
+          },
+          error: null,
+          isLoading: false,
+        };
       }
       return state;
     },

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { HeaderComponent } from './components/header/header.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -11,7 +12,13 @@ import { AddTokenInterceptor } from './interceptors/add-token';
 
 @NgModule({
   declarations: [HeaderComponent, PageNotFoundComponent, FooterComponent],
-  imports: [CommonModule, RouterModule, HttpClientModule, SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    HttpClientModule,
+    SharedModule,
+    TranslateModule,
+  ],
   exports: [HeaderComponent, FooterComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AddTokenInterceptor, multi: true },
