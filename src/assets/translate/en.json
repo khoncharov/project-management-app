@@ -45,5 +45,30 @@
   "confirm": {
     "cancel": "Cancel",
     "delete": "Delete"
+  },
+  "boardPage": {
+    "noBoard": "To load a board, please select it on the Projects page"
+  },
+  "columnDialog": {
+    "newColumn": "New column",
+    "title": "Title",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "columnTitle": {
+    "title": "Column title",
+    "hint": "Min 1 character"
+  },
+  "taskDialog": {
+    "newTask": "New task",
+    "editTask": "Edit task",
+    "title": "Title",
+    "description": "Description",
+    "assignee": "Assignee",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update"
   }
 }

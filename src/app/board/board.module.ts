@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 import MaterialModule from '../shared/material/material.module';
 import { BoardRoutingModule } from './board-routing.module';
@@ -34,6 +35,7 @@ import { ColumnTitleInputComponent } from './components/column-title-input/colum
     DragDropModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class BoardModule {}

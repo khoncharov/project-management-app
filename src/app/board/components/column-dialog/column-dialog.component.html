@@ -1,19 +1,21 @@
 <div class="dialog-container">
-  <h2 mat-dialog-title>New column</h2>
+  <h2 mat-dialog-title>{{ "columnDialog.newColumn" | translate }}</h2>
 
   <mat-form-field appearance="outline" floatLabel="never" class="input-field">
-    <mat-label>Title</mat-label>
+    <mat-label>{{ "columnDialog.title" | translate }}</mat-label>
     <input
       matInput
       cdkFocusInitial
       autocomplete="off"
       [(ngModel)]="columnTitle"
     />
-    <mat-hint align="start">Min 1 character</mat-hint>
+    <mat-hint align="start">{{ "columnDialog.hint" | translate }}</mat-hint>
   </mat-form-field>
 
   <div mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close color="primary">Cancel</button>
+    <button mat-button mat-dialog-close color="primary">
+      {{ "columnDialog.cancel" | translate }}
+    </button>
     <button
       mat-button
       mat-dialog-close
@@ -21,7 +23,7 @@
       [disabled]="columnTitle.length < 1"
       [mat-dialog-close]="columnTitle"
     >
-      Create
+      {{ "columnDialog.create" | translate }}
     </button>
   </div>
 </div>
