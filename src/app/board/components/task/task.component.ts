@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 import {
   CreateTaskDto,
   TaskShort,
@@ -80,7 +81,19 @@ export class TaskComponent {
   }
 
   onTaskDelete(boardId: string, columnId: string, taskId: string): void {
-    this.store.dispatch(TaskActions.deleteTask({ boardId, columnId, taskId }));
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Do you really want to delete this task?',
+        message: 'This task will be permanently deleted.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (!confirm) return;
+      this.store.dispatch(
+        TaskActions.deleteTask({ boardId, columnId, taskId }),
+      );
+    });
   }
 
   getIconColor(id: string): string {
