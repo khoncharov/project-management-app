@@ -1,0 +1,36 @@
+<form class="dialog-container" [formGroup]="boardForm">
+  <h2 mat-dialog-title>{{ isNewBoard ? "New board" : "Edit board" }}</h2>
+
+  <mat-form-field appearance="outline" class="input-field">
+    <mat-label>Title</mat-label>
+    <input
+      matInput
+      cdkFocusInitial
+      autocomplete="off"
+      formControlName="title"
+    />
+    <mat-hint align="start">Min 1 character</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="textarea">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      class="textarea-input"
+    ></textarea>
+    <mat-hint align="start">Min 1 character</mat-hint>
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="null" color="primary">Cancel</button>
+    <button
+      mat-button
+      color="primary"
+      [disabled]="boardForm.invalid"
+      [mat-dialog-close]="boardForm.value"
+    >
+      {{ isNewBoard ? "Create" : "Update" }}
+    </button>
+  </div>
+</form>

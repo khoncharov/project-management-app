@@ -21,7 +21,7 @@ export interface TaskTransferData {
   styleUrls: ['./task-dialog.component.scss'],
 })
 export class TaskDialogComponent implements OnInit, OnDestroy {
-  protected isNewTask = true;
+  protected isNewTask!: boolean;
 
   protected users$!: Observable<User[]>;
 

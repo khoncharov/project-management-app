@@ -3,7 +3,12 @@
 
   <mat-form-field appearance="outline" class="input-field">
     <mat-label>Title</mat-label>
-    <input matInput autocomplete="off" formControlName="title" />
+    <input
+      matInput
+      cdkFocusInitial
+      autocomplete="off"
+      formControlName="title"
+    />
     <mat-hint align="start">Min 1 character</mat-hint>
   </mat-form-field>
 
@@ -49,7 +54,6 @@
     <button mat-button [mat-dialog-close]="null" color="primary">Cancel</button>
     <button
       mat-button
-      cdkFocusInitial
       color="primary"
       [disabled]="taskForm.invalid"
       [mat-dialog-close]="taskForm.value"
