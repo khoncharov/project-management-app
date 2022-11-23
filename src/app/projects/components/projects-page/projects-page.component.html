@@ -19,7 +19,7 @@
 
       <!-- List items -->
       <mat-list-item
-        *ngFor="let board of boards$ | async; last as last"
+        *ngFor="let board of boards$ | async | sortBoardsByTitle; last as last"
         class="list-line"
       >
         <mat-icon matListIcon [style]="getIconColor(board.id)">
