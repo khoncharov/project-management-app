@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -98,9 +99,16 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         const updatedBoard = res as UpdateBoardDto;
-        this.store.dispatch(
-          BoardActions.updateBoard({ id: board.id, board: updatedBoard }),
-        );
+
+        const isChangedBoard =
+          board.title !== updatedBoard.title ||
+          board.description !== updatedBoard.description;
+
+        if (isChangedBoard) {
+          this.store.dispatch(
+            BoardActions.updateBoard({ id: board.id, board: updatedBoard }),
+          );
+        }
       }
     });
   }
