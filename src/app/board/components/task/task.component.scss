@@ -15,11 +15,13 @@
   }
 
   &-assignee {
-    width: 147px;
+    width: 100%;
     margin-right: 8px;
+    margin-left: 8px;
     height: 40px;
     display: flex;
     align-items: center;
+    overflow: hidden;
 
     &-icon {
       margin: 0 5px 2px 0;
@@ -31,6 +33,10 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      @media screen and (max-width: 600px) {
+        max-width: 70px;
+      }
     }
   }
 }

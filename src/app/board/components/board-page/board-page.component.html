@@ -8,7 +8,9 @@
 >
   <div class="board-header">
     <mat-icon [style]="'color: #' + b.id.slice(0, 6)">assignment</mat-icon>
-    <h2 class="board-header-text">{{ b.title }} / {{ b.description }}</h2>
+    <h2 class="board-header-text">
+      {{ b.title }} / <span>{{ b.description }}</span>
+    </h2>
   </div>
 
   <div class="columns-container">
