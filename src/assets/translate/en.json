@@ -70,5 +70,19 @@
     "cancel": "Cancel",
     "create": "Create",
     "update": "Update"
+  },
+  "boardDialog": {
+    "newBoard": "New board",
+    "editBoard": "Edit board",
+    "title": "Title",
+    "description": "Description",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update"
+  },
+  "projectPage": {
+    "title": "Name / Description",
+    "newBoard": "New board"
   }
 }

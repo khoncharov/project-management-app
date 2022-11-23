@@ -70,5 +70,19 @@
     "cancel": "Отмена",
     "create": "Создать",
     "update": "Сохранить"
+  },
+  "boardDialog": {
+    "newBoard": "Новая доска",
+    "editBoard": "Редактировать доску",
+    "title": "Заголовок",
+    "description": "Описание",
+    "hint": "Минимум 1 символ",
+    "cancel": "Отмена",
+    "create": "Создать",
+    "update": "Сохранить"
+  },
+  "projectPage": {
+    "title": "Имя / Описание",
+    "newBoard": "Новая доска"
   }
 }
