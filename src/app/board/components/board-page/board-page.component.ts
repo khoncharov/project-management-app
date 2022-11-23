@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
-import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 import {
   BoardWithColumns,
   ColumnWithTasks,
@@ -70,34 +69,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         };
 
         this.store.dispatch(ColumnActions.createColumn({ boardId, column }));
-      }
-    });
-  }
-
-  onColumnDelete(board: BoardWithColumns): void {
-    const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: {
-        title: 'Do you really want to delete this column?',
-        message: 'This column will be permanently deleted.',
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((confirm) => {
-      if (!confirm) return;
-      if (board.columns.length) {
-        const columns = board.columns.map((c) => ({
-          order: c.order,
-          id: c.id,
-        }));
-        columns.sort((a, b) => a.order - b.order);
-        const lastColumnId = columns.at(-1)!.id;
-
-        this.store.dispatch(
-          ColumnActions.deleteColumn({
-            boardId: board.id,
-            columnId: lastColumnId,
-          }),
-        );
       }
     });
   }

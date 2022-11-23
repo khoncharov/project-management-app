@@ -17,6 +17,7 @@ import {
   TaskDialogComponent,
   TaskTransferData,
 } from '../task-dialog/task-dialog.component';
+import { ConfirmComponent } from '../../../shared/components/confirm/confirm.component';
 
 @Component({
   selector: 'app-column',
@@ -122,5 +123,25 @@ export class ColumnComponent {
       result = column.tasks.find((t) => t.id === id);
     }
     return result;
+  }
+
+  onColumnDelete(): void {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Do you really want to delete this column?',
+        message: 'This column will be permanently deleted.',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (confirm) {
+        this.store.dispatch(
+          ColumnActions.deleteColumn({
+            boardId: this.board.id,
+            columnId: this.column.id,
+          }),
+        );
+      }
+    });
   }
 }

@@ -21,6 +21,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  &-controls {
+    display: flex;
+  }
 }
 
 .tasks-container {
