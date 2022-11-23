@@ -6,9 +6,17 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 
-import { Board, CreateBoardDto } from '../../../core/models/board.model';
+import {
+  Board,
+  CreateBoardDto,
+  UpdateBoardDto,
+} from '../../../core/models/board.model';
 import * as BoardActions from '../../../store/actions/board.actions';
 import * as fromProjects from '../../../store/selectors/projects.selectors';
+import {
+  BoardDialogComponent,
+  BoardTransferData,
+} from '../board-dialog/board-dialog.component';
 
 @Component({
   selector: 'app-projects-page',
@@ -58,11 +66,43 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
   }
 
   onCreateNewBoard() {
-    const board: CreateBoardDto = {
-      title: 'New board',
-      description: 'Describe you new board',
+    const data: BoardTransferData = {
+      isNewBoard: true,
+      board: {
+        title: '',
+        description: '',
+      },
     };
-    this.store.dispatch(BoardActions.createBoard({ board }));
+
+    const dialogRef = this.dialog.open(BoardDialogComponent, { data });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        const board = res as CreateBoardDto;
+        this.store.dispatch(BoardActions.createBoard({ board }));
+      }
+    });
+  }
+
+  onEditBoard(board: Board): void {
+    const data: BoardTransferData = {
+      isNewBoard: false,
+      board: {
+        title: board.title,
+        description: board.description,
+      },
+    };
+
+    const dialogRef = this.dialog.open(BoardDialogComponent, { data });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        const updatedBoard = res as UpdateBoardDto;
+        this.store.dispatch(
+          BoardActions.updateBoard({ id: board.id, board: updatedBoard }),
+        );
+      }
+    });
   }
 
   onDeleteBoard(id: string) {
