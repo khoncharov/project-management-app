@@ -1,26 +1,20 @@
 {
+  "header": {
+    "home": "Home",
+    "projects": "Projects",
+    "board": "Board",
+    "loginAction": "Login",
+    "signUp": "Sign Up",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
   "editUser": {
-    "user": "Edit profile",
+    "title": "Edit profile",
     "name": "Name",
     "login": "Login",
     "newPassword": "New password",
-    "repeatPassword": "Repeat password",
     "deleteUser": "Delete User",
-    "submit": "Save",
-    "nameError": "Please enter a name",
-    "loginError": "Please enter a login",
-    "passwordError": "Please enter a password",
-    "passwordLengthError": "Should be at least 8 characters",
-    "passwordValidError": "Should contain at least 1 capital letter, 1 small letter and 1 number"
-  },
-  "header": {
-    "home": "Home",
-    "login": "Login",
-    "signup": "SignUp",
-    "logout": "Logout",
-    "profile": "Profile",
-    "projects": "Projects",
-    "board": "Board"
+    "submit": "Save"
   },
   "loginPage": {
     "title": "Login",
@@ -40,7 +34,8 @@
     "loginLink": "Login",
     "submit": "Sign Up"
   },
-  "validationMessage": {
+  "validation": {
+    "nameRequired": "Please enter a name",
     "loginRequired": "Please enter a login",
     "passwordRequired": "Please enter a password",
     "minLength": "Should be at least 8 characters",

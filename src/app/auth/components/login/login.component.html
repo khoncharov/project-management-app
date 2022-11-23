@@ -9,7 +9,7 @@
         <mat-label>{{ "loginPage.login" | translate }}</mat-label>
         <input matInput formControlName="login" />
         <mat-error *ngIf="loginForm.controls['login'].hasError('required')">
-          {{ "validationMessage.loginRequired" | translate }}
+          {{ "validation.loginRequired" | translate }}
         </mat-error>
       </mat-form-field>
 
@@ -33,20 +33,20 @@
         <mat-error
           *ngIf="loginForm.controls['password'].hasError('required');
           else minLengthValidation">
-          {{ "validationMessage.passwordRequired" | translate }}
+          {{ "validation.passwordRequired" | translate }}
         </mat-error>
 
         <ng-template #minLengthValidation>
           <mat-error
             *ngIf="loginForm.controls['password'].hasError('minlength');
             else passwordValidation">
-            {{ "validationMessage.minLength" | translate }}
+            {{ "validation.minLength" | translate }}
           </mat-error>
         </ng-template>
 
         <ng-template #passwordValidation>
           <mat-error *ngIf="loginForm.controls['password'].hasError('inValidPassword')">
-            {{ "validationMessage.invalidPassword" | translate }}
+            {{ "validation.invalidPassword" | translate }}
           </mat-error>
         </ng-template>
       </mat-form-field>
