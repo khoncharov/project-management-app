@@ -3,7 +3,12 @@
 
   <mat-form-field appearance="outline" floatLabel="never" class="input-field">
     <mat-label>Title</mat-label>
-    <input matInput autocomplete="off" [(ngModel)]="columnTitle" />
+    <input
+      matInput
+      cdkFocusInitial
+      autocomplete="off"
+      [(ngModel)]="columnTitle"
+    />
     <mat-hint align="start">Min 1 character</mat-hint>
   </mat-form-field>
 
@@ -12,7 +17,6 @@
     <button
       mat-button
       mat-dialog-close
-      cdkFocusInitial
       color="primary"
       [disabled]="columnTitle.length < 1"
       [mat-dialog-close]="columnTitle"
