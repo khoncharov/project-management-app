@@ -33,7 +33,7 @@
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "haveAccount": "Have an account?",
-    "loginLink": "Login",
+    "loginAction": "Login",
     "submit": "Sign Up"
   },
   "validation": {
