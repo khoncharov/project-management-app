@@ -18,6 +18,9 @@
   border-radius: 10px;
   display: grid;
   grid-template-rows: min-content 1fr;
+  @media screen and (max-width: 600px) {
+    padding: 10px 5px;
+  }
 }
 
 .board-header {
@@ -31,6 +34,17 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 80vw;
+
+    span {
+      font-size: smaller;
+      color: #b15f5f;
+      font-weight: 400;
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
   }
 }
 
@@ -42,6 +56,9 @@
   grid-template-columns: max-content min-content;
   overflow: auto;
   background-color: #fdfdfd;
+  @media screen and (max-width: 600px) {
+    padding: 5px;
+  }
 }
 
 .columns {

@@ -2,9 +2,14 @@
   <mat-card-content>
     <div class="column-header" *ngIf="isColumnTitleShown">
       <h3 class="column-header-text">{{ column.title }}</h3>
-      <button mat-icon-button color="primary" (click)="onColumnEdit()">
-        <mat-icon>edit</mat-icon>
-      </button>
+      <div class="column-header-controls">
+        <button mat-icon-button color="primary" (click)="onColumnEdit()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onColumnDelete()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </div>
 
     <div class="column-header" *ngIf="!isColumnTitleShown">

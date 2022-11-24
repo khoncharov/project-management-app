@@ -1,9 +1,9 @@
 /* eslint-disable operator-linebreak */
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 import {
@@ -24,14 +24,12 @@ import {
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
-export class TaskComponent implements OnDestroy {
+export class TaskComponent {
   @Input() boardId!: string;
 
   @Input() columnId!: string;
 
   @Input() task!: TaskShort;
-
-  private translate!: Subscription;
 
   private confirmTitle!: string;
 
@@ -45,10 +43,6 @@ export class TaskComponent implements OnDestroy {
     private translateService: TranslateService,
   ) {
     this.users$ = this.store.select(fromSelectedBoard.selectUsers);
-  }
-
-  ngOnDestroy(): void {
-    this.translate.unsubscribe();
   }
 
   onTaskEdit(boardId: string, columnId: string, currTask: TaskShort): void {
@@ -117,11 +111,9 @@ export class TaskComponent implements OnDestroy {
   }
 
   private getConfirmTranslate(): void {
-    this.translate = this.translateService
-      .get(['task'])
-      .subscribe((translations) => {
-        this.confirmTitle = translations.task.title;
-        this.confirmMessage = translations.task.message;
-      });
+    this.translateService.get(['task']).subscribe((translations) => {
+      this.confirmTitle = translations.task.title;
+      this.confirmMessage = translations.task.message;
+    });
   }
 }

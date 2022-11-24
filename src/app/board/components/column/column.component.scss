@@ -3,6 +3,10 @@
   height: 100%;
   background-color: #f5f0f0;
   box-shadow: 1px 1px 2px #9fa1a8;
+  @media screen and (max-width: 600px) {
+    width: 240px;
+    padding: 5px;
+  }
 }
 
 .column-header {
@@ -16,6 +20,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  &-controls {
+    display: flex;
   }
 }
 

@@ -4,9 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { TranslateService } from '@ngx-translate/core';
 
-import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 import {
   BoardWithColumns,
   ColumnWithTasks,
@@ -31,19 +29,12 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   private errorSub!: Subscription;
 
-  private translate!: Subscription;
-
   protected isLoading$!: Observable<boolean>;
-
-  private confirmTitle!: string;
-
-  private confirmMessage!: string;
 
   constructor(
     private store: Store,
     private errorBar: MatSnackBar,
     private dialog: MatDialog,
-    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +56,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.errorSub.unsubscribe();
-    this.translate.unsubscribe();
   }
 
   onColumnAdd(boardId: string): void {
@@ -79,35 +69,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         };
 
         this.store.dispatch(ColumnActions.createColumn({ boardId, column }));
-      }
-    });
-  }
-
-  onColumnDelete(board: BoardWithColumns): void {
-    this.getConfirmTranslate();
-    const dialogRef = this.dialog.open(ConfirmComponent, {
-      data: {
-        title: this.confirmTitle,
-        message: this.confirmMessage,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((confirm) => {
-      if (!confirm) return;
-      if (board.columns.length) {
-        const columns = board.columns.map((c) => ({
-          order: c.order,
-          id: c.id,
-        }));
-        columns.sort((a, b) => a.order - b.order);
-        const lastColumnId = columns.at(-1)!.id;
-
-        this.store.dispatch(
-          ColumnActions.deleteColumn({
-            boardId: board.id,
-            columnId: lastColumnId,
-          }),
-        );
       }
     });
   }
@@ -144,12 +105,5 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     id: string,
   ): ColumnWithTasks | undefined {
     return board.columns.find((c) => c.id === id);
-  }
-
-  private getConfirmTranslate(): void {
-    this.translate = this.translateService.get(['boardPage']).subscribe((translations) => {
-      this.confirmTitle = translations.boardPage.title;
-      this.confirmMessage = translations.boardPage.message;
-    });
   }
 }

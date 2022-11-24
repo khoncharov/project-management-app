@@ -32,8 +32,6 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
 
   private errorSub!: Subscription;
 
-  private translate!: Subscription;
-
   private confirmTitle!: string;
 
   private confirmMessage!: string;
@@ -67,7 +65,6 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.errorSub.unsubscribe();
-    this.translate.unsubscribe();
   }
 
   onOpenBoard(id: string) {
@@ -142,11 +139,9 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
   }
 
   private getConfirmTranslate(): void {
-    this.translate = this.translateService
-      .get(['projectPage'])
-      .subscribe((translations) => {
-        this.confirmTitle = translations.projectPage.confirmTitle;
-        this.confirmMessage = translations.projectPage.message;
-      });
+    this.translateService.get(['projectPage']).subscribe((translations) => {
+      this.confirmTitle = translations.projectPage.confirmTitle;
+      this.confirmMessage = translations.projectPage.message;
+    });
   }
 }
