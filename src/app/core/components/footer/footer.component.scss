@@ -51,3 +51,21 @@ a {
 .footer__list-item::before {
   content: url("../../../../assets/images/github-icon.svg");
 }
+
+@media (max-width: 768px) {
+  .footer {
+    height: 8rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-container {
+    width: 100%;
+  }
+
+  .footer__list {
+    width: 7rem;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

@@ -11,14 +11,14 @@
         >{{ "header.home" | translate }}</a
       >
       <a
-        class="header-container_btn"
+        class="header-container_btn header-container_btn-projects"
         routerLink="/projects"
         routerLinkActive="active"
         *ngIf="isAuthorized"
         >{{ "header.projects" | translate }}</a
       >
       <a
-        class="header-container_btn"
+        class="header-container_btn header-container_btn-board"
         routerLink="/board"
         routerLinkActive="active"
         *ngIf="isAuthorized"
@@ -45,7 +45,7 @@
         {{ "header.signup" | translate }}
       </button>
     </div>
-    <div class="header-login" *ngIf="isAuthorized">
+    <div class="header-login header-login__sign-up" *ngIf="isAuthorized">
       <button
         mat-button
         class="header-login__button"
@@ -56,6 +56,51 @@
       <button mat-button class="header-login__button" (click)="logout()">
         {{ "header.logout" | translate }}
       </button>
+    </div>
+    <div class="mobile-menu">
+      <button color="primary" mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          class="header-login__button"
+          mat-menu-item
+          *ngIf="isAuthorized"
+          [routerLink]="'/boards'"
+        >
+          {{ "header.board" | translate }}
+        </button>
+        <button
+          class="header-login__button"
+          mat-menu-item
+          *ngIf="isAuthorized"
+          [routerLink]="'/projects'"
+        >
+          {{ "header.projects" | translate }}
+        </button>
+        <button mat-menu-item *ngIf="!isAuthorized" [routerLink]="'auth/login'">
+          <mat-icon>login</mat-icon>
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!isAuthorized"
+          [routerLink]="'/auth/sign-up'"
+          class="header-login__button"
+        >
+          {{ "header.signup" | translate }}
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="isAuthorized"
+          class="header-login__button"
+          [routerLink]="'/edit-profile'"
+        >
+          {{ "header.profile" | translate }}
+        </button>
+        <button mat-menu-item *ngIf="isAuthorized" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </header>

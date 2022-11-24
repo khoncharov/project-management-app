@@ -5,7 +5,7 @@
     "login": "Логин",
     "newPassword": "Новый пароль",
     "repeatPassword": "Повторите пароль",
-    "deleteUser": "Удалить профиль",
+    "deleteUser": "Удалить",
     "submit": "Сохранить",
     "nameError": "Пожалуйста, введите имя",
     "loginError": "Пожалуйста, введите логин",
