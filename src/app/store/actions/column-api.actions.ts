@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
+import { BoardWithColumns } from '../../core/models';
 import { Column, ColumnWithTasks } from '../../core/models/column.model';
 
 export const getColumnsFailure = createAction(
   '[Column API] Get columns failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const getColumnsSuccess = createAction(
@@ -13,7 +15,7 @@ export const getColumnsSuccess = createAction(
 
 export const createColumnFailure = createAction(
   '[Column API] Column creation failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const createColumnSuccess = createAction(
@@ -23,7 +25,7 @@ export const createColumnSuccess = createAction(
 
 export const getColumnFailure = createAction(
   '[Column API] Get column failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const getColumnSuccess = createAction(
@@ -33,7 +35,7 @@ export const getColumnSuccess = createAction(
 
 export const deleteColumnFailure = createAction(
   '[Column API] Delete column failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const deleteColumnSuccess = createAction(
@@ -43,10 +45,10 @@ export const deleteColumnSuccess = createAction(
 
 export const updateColumnFailure = createAction(
   '[Column API] Update column failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const updateColumnSuccess = createAction(
   '[Column API] Column updated',
-  props<{ column: Column }>(),
+  props<{ board: BoardWithColumns }>(),
 );

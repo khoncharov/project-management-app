@@ -10,26 +10,26 @@
       <!-- List header -->
       <mat-list-item class="list-header">
         <div class="header-content">
-          <p class="header-text">Name / Description</p>
+          <p class="header-text">{{ "projectPage.title" | translate }}</p>
           <button mat-flat-button color="primary" (click)="onCreateNewBoard()">
-            New board
+            {{ "projectPage.newBoard" | translate }}
           </button>
         </div>
       </mat-list-item>
 
       <!-- List items -->
       <mat-list-item
-        *ngFor="let board of boards$ | async; last as last"
+        *ngFor="let board of boards$ | async | sortBoardsByTitle; last as last"
         class="list-line"
       >
         <mat-icon matListIcon [style]="getIconColor(board.id)">
           assignment
         </mat-icon>
         <h3 matLine>{{ board.title }}</h3>
-        <p matLine>
+        <p matLine class="list-text">
           {{ board.description }}
         </p>
-        <div>
+        <div class="btns-container">
           <button
             mat-icon-button
             color="primary"
@@ -37,7 +37,7 @@
           >
             <mat-icon>open_in_new</mat-icon>
           </button>
-          <button mat-icon-button color="primary">
+          <button mat-icon-button color="primary" (click)="onEditBoard(board)">
             <mat-icon>edit</mat-icon>
           </button>
           <button

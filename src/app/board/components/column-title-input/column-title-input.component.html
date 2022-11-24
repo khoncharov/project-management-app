@@ -1,0 +1,11 @@
+<mat-form-field appearance="outline" class="input-field">
+  <mat-label>{{ "columnTitle.title" | translate }}</mat-label>
+  <input matInput autocomplete="off" [(ngModel)]="columnTitle" />
+  <button matSuffix mat-icon-button color="primary" (click)="onSubmit()">
+    <mat-icon>check</mat-icon>
+  </button>
+  <button matSuffix mat-icon-button color="primary" (click)="onCancel()">
+    <mat-icon>cancel</mat-icon>
+  </button>
+  <mat-hint align="start">{{ "columnTitle.hint" | translate }}</mat-hint>
+</mat-form-field>

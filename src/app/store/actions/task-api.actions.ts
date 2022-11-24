@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { BoardWithColumns, Task } from '../../core/models';
 
 export const getTasksFailure = createAction(
   '[Task API] Get tasks failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const getTasksSuccess = createAction(
@@ -13,7 +14,7 @@ export const getTasksSuccess = createAction(
 
 export const getTaskFailure = createAction(
   '[Task API] Get task failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const getTaskSuccess = createAction(
@@ -23,7 +24,7 @@ export const getTaskSuccess = createAction(
 
 export const createTaskFailure = createAction(
   '[Task API] Task creation failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const createTaskSuccess = createAction(
@@ -33,7 +34,7 @@ export const createTaskSuccess = createAction(
 
 export const deleteTaskFailure = createAction(
   '[Task API] Delete task failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const deleteTaskSuccess = createAction(
@@ -43,7 +44,7 @@ export const deleteTaskSuccess = createAction(
 
 export const updateTaskFailure = createAction(
   '[Task API] Update task failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const updateTaskSuccess = createAction(

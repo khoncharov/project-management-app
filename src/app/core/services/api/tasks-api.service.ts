@@ -57,7 +57,7 @@ export class TasksApiService {
     return this.http.delete<null>(url);
   }
 
-  createTaskAndGetColumns(
+  createTaskAndGetBoard(
     boardId: string,
     columnId: string,
     task: CreateTaskDto,
@@ -67,7 +67,7 @@ export class TasksApiService {
     );
   }
 
-  updateTaskAndGetColumns(
+  updateTaskAndGetBoard(
     boardId: string,
     columnId: string,
     taskId: string,
@@ -78,7 +78,7 @@ export class TasksApiService {
     );
   }
 
-  deleteTaskAndGetColumns(
+  deleteTaskAndGetBoard(
     boardId: string,
     columnId: string,
     taskId: string,

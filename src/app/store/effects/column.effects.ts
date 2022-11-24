@@ -66,9 +66,13 @@ export class ColumnEffects {
       ofType(ColumnActions.updateColumn),
       mergeMap((payload) => {
         return this.columnApi
-          .updateColumn(payload.boardId, payload.columnId, payload.column)
+          .updateColumnAndGetBoard(
+            payload.boardId,
+            payload.columnId,
+            payload.column,
+          )
           .pipe(
-            map((column) => ColumnApiActions.updateColumnSuccess({ column })),
+            map((board) => ColumnApiActions.updateColumnSuccess({ board })),
             catchError((error) =>
               of(ColumnApiActions.updateColumnFailure({ error })),
             ),

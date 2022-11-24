@@ -1,25 +1,96 @@
 {
+  "header": {
+    "home": "Home",
+    "projects": "Projects",
+    "board": "Board",
+    "loginAction": "Login",
+    "signUp": "Sign Up",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
   "editUser": {
-    "user": "Edit profile",
+    "title": "Edit profile",
     "name": "Name",
     "login": "Login",
     "newPassword": "New password",
-    "repeatPassword": "Repeat password",
     "deleteUser": "Delete User",
-    "submit": "Save",
-    "nameError": "Please enter a name",
-    "loginError": "Please enter a login",
-    "passwordError": "Please enter a password",
-    "passwordLengthError": "Should be at least 8 characters",
-    "passwordValidError": "Should contain at least 1 capital letter, 1 small letter and 1 number"
+    "submit": "Save"
   },
-  "header": {
-    "home": "Home",
+  "loginPage": {
+    "title": "Login",
     "login": "Login",
-    "signup": "SignUp",
-    "logout": "Logout",
-    "profile": "Profile",
-    "projects": "Projects",
-    "board": "Board"
+    "password": "Password",
+    "signUp": "Sign Up",
+    "newUser": "New User?",
+    "submit": "Login"
+  },
+  "signUpPage": {
+    "signUp": "Sign Up",
+    "name": "Name",
+    "login": "Login",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "haveAccount": "Have an account?",
+    "loginLink": "Login",
+    "submit": "Sign Up"
+  },
+  "validation": {
+    "nameRequired": "Please enter a name",
+    "loginRequired": "Please enter a login",
+    "passwordRequired": "Please enter a password",
+    "minLength": "Should be at least 8 characters",
+    "invalidPassword": "Should contain at least 1 capital letter, 1 small letter and 1 number",
+    "mustMatch": "Passwords do not match"
+  },
+  "confirm": {
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "boardPage": {
+    "noBoard": "To load a board, please select it on the Projects page",
+    "title": "Do you really want to delete this column?",
+    "message": "This column will be permanently deleted."
+  },
+  "columnDialog": {
+    "newColumn": "New column",
+    "title": "Title",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "columnTitle": {
+    "title": "Column title",
+    "hint": "Min 1 character"
+  },
+  "task": {
+    "title": "Do you really want to delete this task?",
+    "message": "This task will be permanently deleted."
+  },
+  "taskDialog": {
+    "newTask": "New task",
+    "editTask": "Edit task",
+    "title": "Title",
+    "description": "Description",
+    "assignee": "Assignee",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update"
+  },
+  "boardDialog": {
+    "newBoard": "New board",
+    "editBoard": "Edit board",
+    "title": "Title",
+    "description": "Description",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update"
+  },
+  "projectPage": {
+    "title": "Name / Description",
+    "newBoard": "New board",
+    "confirmTitle":"Do you really want to delete this board?",
+    "message": "This board will be permanently deleted."
   }
 }

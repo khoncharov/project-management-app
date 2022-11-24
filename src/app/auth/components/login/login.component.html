@@ -1,42 +1,63 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>{{ "loginPage.title" | translate }}</mat-card-title>
   </mat-card-header>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
     <mat-card-content>
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Login</mat-label>
-        <input matInput formControlName="login">
-        <mat-error *ngIf="loginForm.controls.login.errors">
-          {{ getErrorMessage(loginForm.controls.login.errors) }}
+        <mat-label>{{ "loginPage.login" | translate }}</mat-label>
+        <input matInput formControlName="login" />
+        <mat-error *ngIf="loginForm.controls['login'].hasError('required')">
+          {{ "validation.loginRequired" | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline" floatLabel="always">
-        <mat-label>Password</mat-label>
+        <mat-label>{{ "loginPage.password" | translate }}</mat-label>
         <input
           matInput
           formControlName="password"
-          [type]="isHidden ? 'password' : 'text'">
+          [type]="isHidden ? 'password' : 'text'"
+        />
         <button
           mat-icon-button
           matSuffix
           (click)="isHidden = !isHidden"
           [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="isHidden">
+          [attr.aria-pressed]="isHidden"
+        >
           <mat-icon>{{ isHidden ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
-        <mat-error *ngIf="loginForm.controls.password.errors">
-          {{ getErrorMessage(loginForm.controls.password.errors) }}
+
+        <mat-error
+          *ngIf="loginForm.controls['password'].hasError('required');
+          else minLengthValidation">
+          {{ "validation.passwordRequired" | translate }}
         </mat-error>
+
+        <ng-template #minLengthValidation>
+          <mat-error
+            *ngIf="loginForm.controls['password'].hasError('minlength');
+            else passwordValidation">
+            {{ "validation.minLength" | translate }}
+          </mat-error>
+        </ng-template>
+
+        <ng-template #passwordValidation>
+          <mat-error *ngIf="loginForm.controls['password'].hasError('inValidPassword')">
+            {{ "validation.invalidPassword" | translate }}
+          </mat-error>
+        </ng-template>
       </mat-form-field>
     </mat-card-content>
 
     <mat-card-actions>
       <div>
-        <span>New user?</span>
-        <a routerLink="/auth/sign-up" mat-button color="primary">Sign Up</a>
+        <span>{{ "loginPage.newUser" | translate }}</span>
+        <a routerLink="/auth/sign-up" mat-button color="primary">
+          {{ "loginPage.signUp" | translate }}
+        </a>
       </div>
 
       <button
@@ -44,8 +65,13 @@
         color="primary"
         [disabled]="loginForm.invalid"
         type="submit">
-        Login
+        {{ "loginPage.submit" | translate }}
       </button>
     </mat-card-actions>
   </form>
+
+  <mat-progress-bar
+    *ngIf="isLoading$ | async"
+    mode="query">
+  </mat-progress-bar>
 </mat-card>

@@ -3,7 +3,7 @@
 }
 
 .spinner-container {
-  background-color: #00000020;
+  background-color: #ffffff50;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,10 @@
   padding: 20px 30px;
   border-radius: 10px;
   overflow: hidden;
+
+  @media screen and (max-width: 600px) {
+    padding: 10px 0px;
+  }
 }
 
 .custom-spinner {
@@ -38,6 +42,10 @@
 .list-header {
   background-color: #f4f7f9;
   border-radius: 4px;
+}
+
+.list-text {
+  color: #b15f5f;
 }
 
 .list-line:hover {
@@ -57,4 +65,8 @@
   padding: 0 16px;
   justify-content: center;
   align-items: center;
+}
+
+.btns-container {
+  display: flex;
 }

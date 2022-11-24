@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { Board, BoardWithColumns } from '../../core/models/board.model';
 
 export const getBoardsFailure = createAction(
   '[Board API] Get boards failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const getBoardsSuccess = createAction(
@@ -13,7 +14,7 @@ export const getBoardsSuccess = createAction(
 
 export const createBoardFailure = createAction(
   '[Board API] Board creation failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const createBoardSuccess = createAction(
@@ -23,7 +24,7 @@ export const createBoardSuccess = createAction(
 
 export const getBoardFailure = createAction(
   '[Board API] Get board failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const getBoardSuccess = createAction(
@@ -33,7 +34,7 @@ export const getBoardSuccess = createAction(
 
 export const deleteBoardFailure = createAction(
   '[Board API] Delete board failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const deleteBoardSuccess = createAction(
@@ -43,7 +44,7 @@ export const deleteBoardSuccess = createAction(
 
 export const updateBoardFailure = createAction(
   '[Board API] Update board failed',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const updateBoardSuccess = createAction(
