@@ -6,7 +6,9 @@
     "loginAction": "Login",
     "signUp": "Sign Up",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "en": "En",
+    "ru": "Ru"
   },
   "editUser": {
     "title": "Edit profile",
@@ -48,7 +50,7 @@
   },
   "boardPage": {
     "noBoard": "To load a board, please select it on the Projects page",
-    "title": "Do you really want to delete this column?",
+    "deleteColumn": "Delete Column",
     "message": "This column will be permanently deleted."
   },
   "columnDialog": {
@@ -63,7 +65,7 @@
     "hint": "Min 1 character"
   },
   "task": {
-    "title": "Do you really want to delete this task?",
+    "deleteTask": "Delete task",
     "message": "This task will be permanently deleted."
   },
   "taskDialog": {
@@ -90,7 +92,7 @@
   "projectPage": {
     "title": "Name / Description",
     "newBoard": "New board",
-    "confirmTitle":"Do you really want to delete this board?",
+    "deleteBoard":"Delete board",
     "message": "This board will be permanently deleted."
   }
 }
