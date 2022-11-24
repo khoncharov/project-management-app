@@ -1,7 +1,7 @@
 <div class="edit-user">
   <div class="edit-user-container">
     <form [formGroup]="editForm" (ngSubmit)="editProfile()">
-      <h1>{{ "editUser.user" | translate }}</h1>
+      <h1>{{ "editUser.title" | translate }}</h1>
       <mat-form-field appearance="outline">
         <mat-label autocomplete for="name">{{
           "editUser.name" | translate
@@ -14,7 +14,7 @@
           "
         >
           <span *ngIf="editForm.get('name')?.hasError('required')">
-            {{ "editUser.nameError" | translate }}
+            {{ "validation.nameRequired" | translate }}
           </span>
         </mat-error>
       </mat-form-field>
@@ -30,7 +30,7 @@
           "
         >
           <span *ngIf="editForm.get('login')?.hasError('required')">
-            {{ "editUser.loginError" | translate }}
+            {{ "validation.loginRequired" | translate }}
           </span>
         </mat-error>
       </mat-form-field>
@@ -52,13 +52,13 @@
           "
         >
           <span *ngIf="editForm.get('password')?.hasError('required')">
-            {{ "editUser.passwordError" | translate }}
+            {{ "validation.passwordRequired" | translate }}
           </span>
           <span *ngIf="editForm.get('password')?.hasError('minLength')">
-            {{ "editUser.passwordLengthError" | translate }}
+            {{ "validation.minLength" | translate }}
           </span>
           <span *ngIf="editForm.get('password')?.hasError('pattern')">
-            {{ "editUser.passwordValidError" | translate }}
+            {{ "validation.invalidPassword" | translate }}
           </span>
         </mat-error>
       </mat-form-field>

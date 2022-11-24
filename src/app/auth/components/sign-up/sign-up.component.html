@@ -9,7 +9,7 @@
         <mat-label>{{ "signUpPage.name" | translate }}</mat-label>
         <input matInput formControlName="name" />
         <mat-error *ngIf="signUpForm.controls['name'].hasError('required')">
-          {{ "validationMessage.nameRequired" }}
+          {{ "validation.nameRequired" }}
         </mat-error>
       </mat-form-field>
 
@@ -17,7 +17,7 @@
         <mat-label>{{ "signUpPage.login" | translate }}</mat-label>
         <input matInput formControlName="login" />
         <mat-error *ngIf="signUpForm.controls['login'].hasError('required')">
-          {{ "validationMessage.loginRequired" }}
+          {{ "validation.loginRequired" }}
         </mat-error>
       </mat-form-field>
 
@@ -40,20 +40,20 @@
         <mat-error
           *ngIf="signUpForm.controls['password'].hasError('required');
           else minLengthValidation">
-          {{ "validationMessage.passwordRequired" | translate }}
+          {{ "validation.passwordRequired" | translate }}
         </mat-error>
 
         <ng-template #minLengthValidation>
           <mat-error
             *ngIf="signUpForm.controls['password'].hasError('minlength');
             else passwordValidation">
-            {{ "validationMessage.minLength" | translate }}
+            {{ "validation.minLength" | translate }}
           </mat-error>
         </ng-template>
 
         <ng-template #passwordValidation>
           <mat-error *ngIf="signUpForm.controls['password'].hasError('inValidPassword')">
-            {{ "validationMessage.invalidPassword" | translate }}
+            {{ "validation.invalidPassword" | translate }}
           </mat-error>
         </ng-template>
       </mat-form-field>
@@ -76,7 +76,7 @@
         </button>
         <mat-error
         *ngIf="signUpForm.controls['confirmPassword'].hasError('mustMatch')">
-        {{ "validationMessage.mustMatch" | translate }}
+        {{ "validation.mustMatch" | translate }}
       </mat-error>
       </mat-form-field>
     </mat-card-content>
@@ -85,7 +85,7 @@
       <div>
         <span>{{ "signUpPage.haveAccount" | translate }}</span>
         <a routerLink="/auth/login" mat-button color="primary">{{
-          "signUpPage.loginLink" | translate
+          "signUpPage.loginAction" | translate
         }}</a>
       </div>
 

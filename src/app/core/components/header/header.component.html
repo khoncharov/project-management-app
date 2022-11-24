@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="header-container_link">
       <a routerLink="/">
-        <img class="header-logo" src="../assets/images/logo.svg" alt="logo" />
+        <img class="header-logo" src="assets/images/logo.svg" alt="logo" />
       </a>
       <a
         class="header-container_btn"
@@ -35,14 +35,14 @@
     </div>
     <div class="header-login header-login__sign-up" *ngIf="!isAuthorized">
       <button mat-button class="header-login__button" routerLink="/auth/login">
-        {{ "header.login" | translate }}
+        {{ "header.loginAction" | translate }}
       </button>
       <button
         mat-button
         class="header-login__button"
         routerLink="/auth/sign-up"
       >
-        {{ "header.signup" | translate }}
+        {{ "header.signUp" | translate }}
       </button>
     </div>
     <div class="header-login" *ngIf="isAuthorized">

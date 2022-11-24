@@ -1,29 +1,35 @@
 <form class="dialog-container" [formGroup]="taskForm">
-  <h2 mat-dialog-title>{{ isNewTask ? "New task" : "Edit task" }}</h2>
+  <h2 mat-dialog-title>
+    {{
+      isNewTask
+        ? ("taskDialog.newTask" | translate)
+        : ("taskDialog.newTask" | translate)
+    }}
+  </h2>
 
   <mat-form-field appearance="outline" class="input-field">
-    <mat-label>Title</mat-label>
+    <mat-label>{{ "taskDialog.title" | translate }}</mat-label>
     <input
       matInput
       cdkFocusInitial
       autocomplete="off"
       formControlName="title"
     />
-    <mat-hint align="start">Min 1 character</mat-hint>
+    <mat-hint align="start">{{ "taskDialog.hint" | translate }}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="textarea">
-    <mat-label>Description</mat-label>
+    <mat-label>{{ "taskDialog.description" | translate }}</mat-label>
     <textarea
       matInput
       formControlName="description"
       class="textarea-input"
     ></textarea>
-    <mat-hint align="start">Min 1 character</mat-hint>
+    <mat-hint align="start">{{ "taskDialog.hint" | translate }}</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="input-field">
-    <mat-label>Assignee</mat-label>
+    <mat-label>{{ "taskDialog.assignee" | translate }}</mat-label>
     <mat-select
       formControlName="userId"
       (selectionChange)="onUserSelect($event)"
@@ -51,14 +57,20 @@
   </mat-form-field>
 
   <div mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="null" color="primary">Cancel</button>
+    <button mat-button [mat-dialog-close]="null" color="primary">
+      {{ "taskDialog.cancel" | translate }}
+    </button>
     <button
       mat-button
       color="primary"
       [disabled]="taskForm.invalid"
       [mat-dialog-close]="taskForm.value"
     >
-      {{ isNewTask ? "Create" : "Update" }}
+      {{
+        isNewTask
+          ? ("taskDialog.create" | translate)
+          : ("taskDialog.update" | translate)
+      }}
     </button>
   </div>
 </form>

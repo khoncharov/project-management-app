@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ProjectsRoutingModule } from './projects-routing.module';
 import { ProjectsPageComponent } from './components/projects-page/projects-page.component';
@@ -19,6 +20,7 @@ import { SortBoardsByTitlePipe } from './pipes/sort-boards-by-title.pipe';
     ProjectsRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class ProjectsModule {}
