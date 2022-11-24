@@ -157,7 +157,7 @@ export class ColumnComponent {
 
   private getConfirmTranslate(): void {
     this.translateService.get(['boardPage']).subscribe((translations) => {
-      this.confirmTitle = translations.boardPage.title;
+      this.confirmTitle = translations.boardPage.deleteColumn;
       this.confirmMessage = translations.boardPage.message;
     });
   }
