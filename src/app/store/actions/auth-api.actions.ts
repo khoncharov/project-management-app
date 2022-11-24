@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { User } from '../../core/models/user.model';
 
 export const loginUserFailure = createAction(
   '[Auth API] User sign-in error',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const loginUserSuccess = createAction(
@@ -13,7 +14,7 @@ export const loginUserSuccess = createAction(
 
 export const registerUserFailure = createAction(
   '[Auth API] User sign-up error',
-  props<{ error: Error }>(),
+  props<{ error: HttpErrorResponse }>(),
 );
 
 export const registerUserSuccess = createAction(
