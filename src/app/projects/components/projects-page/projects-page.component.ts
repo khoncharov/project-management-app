@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 
@@ -31,6 +32,10 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
 
   private errorSub!: Subscription;
 
+  private confirmTitle!: string;
+
+  private confirmMessage!: string;
+
   protected isLoading$!: Observable<boolean>;
 
   constructor(
@@ -38,6 +43,7 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
     private errorBar: MatSnackBar,
     private router: Router,
     private dialog: MatDialog,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -114,10 +120,11 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
   }
 
   onDeleteBoard(id: string) {
+    this.getConfirmTranslate();
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        title: 'Do you want to delete this board?',
-        message: 'This board will be permanently deleted.',
+        title: this.confirmTitle,
+        message: this.confirmMessage,
       },
     });
 
@@ -129,5 +136,12 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
 
   getIconColor(id: string): string {
     return `color: #${id.slice(0, 6)}`;
+  }
+
+  private getConfirmTranslate(): void {
+    this.translateService.get(['projectPage']).subscribe((translations) => {
+      this.confirmTitle = translations.projectPage.confirmTitle;
+      this.confirmMessage = translations.projectPage.message;
+    });
   }
 }
