@@ -13,7 +13,7 @@
     "name": "Имя",
     "login": "Логин",
     "newPassword": "Новый пароль",
-    "deleteUser": "Удалить профиль",
+    "deleteUser": "Удалить",
     "submit": "Сохранить"
   },
   "loginPage": {
