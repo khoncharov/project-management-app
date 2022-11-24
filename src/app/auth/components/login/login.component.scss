@@ -2,13 +2,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 70vh;
+  min-height: calc(100vh - 10rem - 40px);
 }
 
 mat-card {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 36px;
+
+  @media screen and (max-width: 768px) {
+    padding: 24px;
+  }
 
   mat-card-header {
     margin-bottom: 12px;
@@ -40,6 +45,14 @@ mat-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 0;
+    padding: 0;
+
+    @media screen and (max-width: 425px) {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
   }
 }
 

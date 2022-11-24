@@ -26,12 +26,13 @@
       >
     </div>
     <div class="header-switcher">
-      <span>en</span>
+      <span>{{ "header.ru" | translate }}</span>
       <mat-slide-toggle
-        [checked]="isLangChecked"
-        (change)="checkLang()"
+        color="primary"
+        [checked]="isDefaultLang"
+        (change)="toggleLang()"
       ></mat-slide-toggle>
-      <span>ru</span>
+      <span>{{ "header.en" | translate }}</span>
     </div>
     <div class="header-login header-login__sign-up" *ngIf="!isAuthorized">
       <button mat-button class="header-login__button" routerLink="/auth/login">
@@ -66,7 +67,7 @@
           class="header-login__button"
           mat-menu-item
           *ngIf="isAuthorized"
-          [routerLink]="'/boards'"
+          [routerLink]="'/board'"
         >
           {{ "header.board" | translate }}
         </button>
@@ -87,7 +88,7 @@
           [routerLink]="'/auth/sign-up'"
           class="header-login__button"
         >
-          {{ "header.signup" | translate }}
+          {{ "header.signUp" | translate }}
         </button>
         <button
           mat-menu-item
