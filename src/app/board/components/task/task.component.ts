@@ -2,8 +2,10 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
+import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 import {
   CreateTaskDto,
   TaskShort,
@@ -29,9 +31,17 @@ export class TaskComponent {
 
   @Input() task!: TaskShort;
 
+  private confirmTitle!: string;
+
+  private confirmMessage!: string;
+
   protected users$!: Observable<User[]>;
 
-  constructor(private store: Store, protected dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    protected dialog: MatDialog,
+    private translateService: TranslateService,
+  ) {
     this.users$ = this.store.select(fromSelectedBoard.selectUsers);
   }
 
@@ -80,10 +90,30 @@ export class TaskComponent {
   }
 
   onTaskDelete(boardId: string, columnId: string, taskId: string): void {
-    this.store.dispatch(TaskActions.deleteTask({ boardId, columnId, taskId }));
+    this.getConfirmTranslate();
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {
+        title: this.confirmTitle,
+        message: this.confirmMessage,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm) => {
+      if (!confirm) return;
+      this.store.dispatch(
+        TaskActions.deleteTask({ boardId, columnId, taskId }),
+      );
+    });
   }
 
   getIconColor(id: string): string {
     return `color: #${id.slice(0, 6)}`;
+  }
+
+  private getConfirmTranslate(): void {
+    this.translateService.get(['task']).subscribe((translations) => {
+      this.confirmTitle = translations.task.title;
+      this.confirmMessage = translations.task.message;
+    });
   }
 }

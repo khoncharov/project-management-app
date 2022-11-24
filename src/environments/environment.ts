@@ -2,9 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// API_ORIGIN: 'https://sleepy-waters-31777.herokuapp.com',
+
 export const environment = {
   production: false,
-  API_ORIGIN: 'https://sleepy-waters-31777.herokuapp.com',
+  API_ORIGIN: 'https://viable-memory-production.up.railway.app',
 };
 
 /*

@@ -84,3 +84,23 @@
 .header-login__sign-up {
   width: 11rem;
 }
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    gap: 0.5rem;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .header-login,
+  .header-container_btn-board,
+  .header-container_btn-projects {
+    display: none;
+  }
+}
