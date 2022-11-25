@@ -53,6 +53,17 @@ const localData = new LocalDataService();
 export const authReducer = createReducer(
   initState,
 
+  on(
+    AuthActions.removeCurrUserError,
+    (state): CurrentUserState => ({
+      ...state,
+      page: {
+        ...state.page,
+        error: null,
+      },
+    }),
+  ),
+
   // Login user
 
   on(AuthActions.loginUser, onDataRequest),

@@ -19,9 +19,9 @@ import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-  private subscription1$ = new Subscription();
+  private subscription1$!: Subscription;
 
-  private subscription2$ = new Subscription();
+  private subscription2$!: Subscription;
 
   signUpForm!: FormGroup;
 
@@ -45,6 +45,22 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.error$ = this.store.select(fromCurrentUser.selectLoginError);
     this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
     this.user$ = this.store.select(fromCurrentUser.selectUser);
+
+    this.subscription1$ = this.error$.subscribe((error) => {
+      if (error) {
+        this.snackBar.open(error, 'Ok', {
+          verticalPosition: 'top',
+          panelClass: 'snack-bar-light',
+        });
+        this.store.dispatch(AuthActions.removeCurrUserError());
+      }
+    });
+
+    this.subscription2$ = this.user$.subscribe((user) => {
+      if (user.id) {
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 
   signUp() {
@@ -58,21 +74,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
       this.store.dispatch(AuthActions.registerUser({ user }));
     }
-
-    this.subscription1$ = this.error$.subscribe((error) => {
-      if (error) {
-        this.snackBar.open(error, 'close', {
-          verticalPosition: 'top',
-          panelClass: 'snack-bar-light',
-        });
-      }
-    });
-
-    this.subscription2$ = this.user$.subscribe((user) => {
-      if (user.id) {
-        this.router.navigate(['/auth/login']);
-      }
-    });
   }
 
   ngOnDestroy(): void {

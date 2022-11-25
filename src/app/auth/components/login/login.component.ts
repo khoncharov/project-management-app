@@ -16,9 +16,9 @@ import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private subscription1$ = new Subscription();
+  private subscription1$!: Subscription;
 
-  private subscription2$ = new Subscription();
+  private subscription2$!: Subscription;
 
   loginForm!: FormGroup;
 
@@ -42,6 +42,22 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.error$ = this.store.select(fromCurrentUser.selectLoginError);
     this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
     this.token$ = this.store.select(fromCurrentUser.selectToken);
+
+    this.subscription1$ = this.error$.subscribe((error) => {
+      if (error) {
+        this.snackBar.open(error, 'Ok', {
+          verticalPosition: 'top',
+          panelClass: 'snack-bar-light',
+        });
+      }
+      this.store.dispatch(AuthActions.removeCurrUserError());
+    });
+
+    this.subscription2$ = this.token$.subscribe((token) => {
+      if (token) {
+        this.router.navigate(['/projects']);
+      }
+    });
   }
 
   login() {
@@ -52,21 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         password,
       };
       this.store.dispatch(AuthActions.loginUser({ user }));
-
-      this.subscription1$ = this.error$.subscribe((error) => {
-        if (error) {
-          this.snackBar.open(error, 'close', {
-            verticalPosition: 'top',
-            panelClass: 'snack-bar-light',
-          });
-        }
-      });
-
-      this.subscription2$ = this.token$.subscribe((token) => {
-        if (token) {
-          this.router.navigate(['/projects']);
-        }
-      });
     }
   }
 
