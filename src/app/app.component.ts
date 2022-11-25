@@ -66,11 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const subErrCurrUser = this.errorCurrUser$.subscribe((err) => {
       if (err) {
-        const message = `Code: ${err.code} || Message: ${err.msg} || Action: ${err.action.type}}`;
-        this.errorBar.open(message, 'Ok', {
-          verticalPosition: 'top',
-          panelClass: 'snack-bar-light',
-        });
+        this.errorHandler(err);
         this.store.dispatch(AuthActions.removeCurrUserError());
       }
     });
@@ -78,11 +74,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const subErrProjects = this.errorProjects$.subscribe((err) => {
       if (err) {
-        const message = `Code: ${err.code} || Message: ${err.msg} || Action: ${err.action.type}}`;
-        this.errorBar.open(message, 'Ok', {
-          verticalPosition: 'top',
-          panelClass: 'snack-bar-light',
-        });
+        this.errorHandler(err);
         this.store.dispatch(BoardActions.removeProjectsError());
       }
     });
@@ -90,11 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const subErrBoard = this.errorBoard$.subscribe((err) => {
       if (err) {
-        const message = `Code: ${err.code} || Message: ${err.msg} || Action: ${err.action.type}}`;
-        this.errorBar.open(message, 'Ok', {
-          verticalPosition: 'top',
-          panelClass: 'snack-bar-light',
-        });
+        this.errorHandler(err);
         this.store.dispatch(BoardActions.removeSelectedBoardError());
       }
     });
@@ -104,6 +92,14 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subs.forEach((sub) => {
       sub.unsubscribe();
+    });
+  }
+
+  errorHandler(err: ErrType): void {
+    const message = `Error: ${err.msg} [Code: ${err.code}] || Action: ${err.action.type}}`;
+    this.errorBar.open(message, 'Ok', {
+      verticalPosition: 'top',
+      panelClass: 'snack-bar-light',
     });
   }
 }
