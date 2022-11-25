@@ -94,5 +94,8 @@
     "newBoard": "New board",
     "deleteBoard":"Delete board",
     "message": "This board will be permanently deleted."
+  },
+  "pageNotFound": {
+    "notFound": "Page not found"
   }
 }
