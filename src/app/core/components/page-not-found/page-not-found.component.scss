@@ -1,0 +1,39 @@
+mat-card {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: calc(100vh - 10rem - 40px);
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @media screen and (max-width: 600px) {
+    padding: 10px 0px;
+  }
+}
+
+.error-container {
+  width: 31rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 3rem;
+  gap: 3rem;
+  color: #b15f5f;
+}
+
+.error-text {
+  width: 31rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .error-text {
+    font-size: 1.8rem;
+  }
+}

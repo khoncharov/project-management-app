@@ -90,7 +90,10 @@
   "projectPage": {
     "title": "Name / Description",
     "newBoard": "New board",
-    "confirmTitle":"Do you really want to delete this board?",
+    "confirmTitle": "Do you really want to delete this board?",
     "message": "This board will be permanently deleted."
+  },
+  "pageNotFound": {
+    "notFound": "Page not found"
   }
 }
