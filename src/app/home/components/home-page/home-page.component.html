@@ -1,33 +1,30 @@
 <mat-card class="home">
   <mat-card-header>
     <mat-card-title class="home__title">
-      Team 3 Final Project for Angular 2022Q3
+      {{ "homePage.title" | translate }}
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content class="home__content">
-    <p>
-      Project management system is an application that helps an individual in a
-      team or group of developers achieve their goals.
-    </p>
+    <p>{{ "homePage.description" | translate }}</p>
 
     <section class="team">
-      <h2 class="team__title">Our Team</h2>
+      <h2 class="team__title">{{ "homePage.sectionTitle" | translate }}</h2>
       <ul class="team__list">
         <li class="team__member">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>Konstantin</mat-card-title>
-              <mat-card-subtitle>Team Lead</mat-card-subtitle>
+              <mat-card-title>{{ "homePage.konstantin" | translate }}</mat-card-title>
+              <mat-card-subtitle>{{ "homePage.teamLead" | translate }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <ul class="contribution__list">
-                <li class="contribution__item">Project Setup</li>
-                <li class="contribution__item">Backend Deploy</li>
-                <li class="contribution__item">Services/NGRX</li>
-                <li class="contribution__item">Error Handling</li>
-                <li class="contribution__item">Projects Page</li>
-                <li class="contribution__item">Board Page</li>
+                <li class="contribution__item">{{ "homePage.setup" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.deploy" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.ngrx" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.errors" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.projects" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.board" | translate }}</li>
               </ul>
             </mat-card-content>
           </mat-card>
@@ -36,15 +33,15 @@
         <li class="team__member">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>Alena</mat-card-title>
+              <mat-card-title>{{ "homePage.alena" | translate }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <ul class="contribution__list">
-                <li class="contribution__item">Login Page</li>
-                <li class="contribution__item">Sign Up Page</li>
-                <li class="contribution__item">Welcome Page</li>
-                <li class="contribution__item">Confirmation Dialog</li>
-                <li class="contribution__item">Localization</li>
+                <li class="contribution__item">{{ "homePage.login" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.signUp" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.welcome" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.confirm" | translate }}</li>
+                <li class="contribution__item">{{ "homePage.i18n" | translate }}</li>
               </ul>
             </mat-card-content>
           </mat-card>
@@ -53,16 +50,16 @@
         <li class="team__member">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>Alesya</mat-card-title>
+              <mat-card-title>{{ "homePage.alesya" | translate }}</mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <ul class="contribution__list">
-                  <li class="contribution__item">Header</li>
-                  <li class="contribution__item">Footer</li>
-                  <li class="contribution__item">Edit Profile</li>
-                  <li class="contribution__item">Not Found Page</li>
-                  <li class="contribution__item">Adaptive Layout</li>
-                  <li class="contribution__item">Localization</li>
+                  <li class="contribution__item">{{ "homePage.header" | translate }}</li>
+                  <li class="contribution__item">{{ "homePage.footer" | translate }}</li>
+                  <li class="contribution__item">{{ "homePage.edit" | translate }}</li>
+                  <li class="contribution__item">{{ "homePage.notFound" | translate }}</li>
+                  <li class="contribution__item">{{ "homePage.adaptive" | translate }}</li>
+                  <li class="contribution__item">{{ "homePage.i18n" | translate }}</li>
                 </ul>
               </mat-card-content>
           </mat-card>

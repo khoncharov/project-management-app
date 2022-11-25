@@ -8,7 +8,7 @@
     "profile": "Profile",
     "logout": "Logout",
     "en": "En",
-    "ru": "Ru"
+    "ru": "Рус"
   },
   "editUser": {
     "title": "Edit profile",
@@ -97,5 +97,30 @@
   },
   "pageNotFound": {
     "notFound": "Page not found"
+  },
+  "homePage": {
+    "title": "Team 3 Final Project for Angular 2022Q3",
+    "description": "Project management system is an application that helps an individual in a team or group of developers achieve their goals.",
+    "sectionTitle": "Our Team",
+    "konstantin": "Konstantin",
+    "alena": "Alena",
+    "alesya": "Alesya",
+    "teamLead": "Team Lead",
+    "setup": "Project Setup",
+    "deploy": "Backend Deploy",
+    "ngrx": "Services/NGRX",
+    "errors": "Error Handling",
+    "projects": "Projects Page",
+    "board": "Board Page",
+    "login": "Login Page",
+    "signUp": "Sign Up Page",
+    "welcome": "Welcome Page",
+    "confirm": "Confirmation Dialog",
+    "i18n": "Localization",
+    "header": "Header",
+    "footer": "Footer",
+    "edit": "Edit Profile",
+    "notFound": "Not Found Page",
+    "adaptive": "Adaptive Layout"
   }
 }
