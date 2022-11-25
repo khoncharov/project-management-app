@@ -1,18 +1,73 @@
-<h2>Login</h2>
+<mat-card class="home">
+  <mat-card-header>
+    <mat-card-title class="home__title">
+      Team 3 Final Project for Angular 2022Q3
+    </mat-card-title>
+  </mat-card-header>
 
-<input type="text" placeholder="Name (reg)" [formControl]="userName" /><br />
-<input type="text" placeholder="Login" [formControl]="userLogin" /><br />
-<input type="text" placeholder="Password" [formControl]="userPassword" /><br />
+  <mat-card-content class="home__content">
+    <p>
+      Project management system is an application that helps an individual in a
+      team or group of developers achieve their goals.
+    </p>
 
-<button type="button" (click)="onSignUp()">REG</button><br />
-<button type="button" (click)="onSignIn()">LOGIN</button><br />
-<button type="button" (click)="onSignOut()">LOGOUT</button><br />
+    <section class="team">
+      <h2 class="team__title">Our Team</h2>
+      <ul class="team__list">
+        <li class="team__member">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Konstantin</mat-card-title>
+              <mat-card-subtitle>Team Lead</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <ul class="contribution__list">
+                <li class="contribution__item">Project Setup</li>
+                <li class="contribution__item">Backend Deploy</li>
+                <li class="contribution__item">Services/NGRX</li>
+                <li class="contribution__item">Error Handling</li>
+                <li class="contribution__item">Projects Page</li>
+                <li class="contribution__item">Board Page</li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+        </li>
 
-<hr />
+        <li class="team__member">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Alena</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <ul class="contribution__list">
+                <li class="contribution__item">Login Page</li>
+                <li class="contribution__item">Sign Up Page</li>
+                <li class="contribution__item">Welcome Page</li>
+                <li class="contribution__item">Confirmation Dialog</li>
+                <li class="contribution__item">Localization</li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+        </li>
 
-<mat-progress-bar *ngIf="isLoading$ | async" mode="query"></mat-progress-bar>
-
-<div>
-  Err:
-  {{ error$ | async }}
-</div>
+        <li class="team__member">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Alesya</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <ul class="contribution__list">
+                  <li class="contribution__item">Header</li>
+                  <li class="contribution__item">Footer</li>
+                  <li class="contribution__item">Edit Profile</li>
+                  <li class="contribution__item">Not Found Page</li>
+                  <li class="contribution__item">Adaptive Layout</li>
+                  <li class="contribution__item">Localization</li>
+                </ul>
+              </mat-card-content>
+          </mat-card>
+        </li>
+      </ul>
+    </section>
+  </mat-card-content>
+</mat-card>
