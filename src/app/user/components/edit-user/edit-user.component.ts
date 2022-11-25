@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -26,11 +25,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   private currentUserSubscription!: Subscription;
 
-  private errorSubscription!: Subscription;
-
   protected user$!: Observable<User>;
-
-  protected error$!: Observable<string | null>;
 
   protected isLoading$!: Observable<boolean>;
 
@@ -40,14 +35,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private store: Store,
-    private snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
     this.user$ = this.store.select(fromCurrentUser.selectUser);
-
-    this.error$ = this.store.select(fromCurrentUser.selectLoginError);
 
     this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
 
@@ -60,15 +52,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
           name: user.name,
           login: user.login,
           password: '',
-        });
-      }
-    });
-
-    this.errorSubscription = this.error$.subscribe((error) => {
-      if (error) {
-        this.snackBar.open(error, 'close', {
-          verticalPosition: 'top',
-          panelClass: 'snack-bar-light',
         });
       }
     });
@@ -124,6 +107,5 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.currentUserSubscription.unsubscribe();
-    this.errorSubscription.unsubscribe();
   }
 }

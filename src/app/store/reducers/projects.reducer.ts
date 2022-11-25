@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
+import { ErrType } from './auth.reducer';
 import { Board } from '../../core/models/board.model';
 import * as BoardActions from '../actions/board.actions';
 import * as BoardApiActions from '../actions/board-api.actions';
@@ -7,7 +8,7 @@ import * as BoardApiActions from '../actions/board-api.actions';
 export interface ProjectsState {
   boards: Board[];
   isLoading: boolean;
-  error: string | null;
+  error: ErrType | null;
 }
 
 const initState: ProjectsState = {
@@ -42,7 +43,11 @@ export const projectsReducer = createReducer(
     BoardApiActions.getBoardsFailure,
     (state, action): ProjectsState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: BoardActions.getBoards,
+      },
       isLoading: false,
     }),
   ),
@@ -50,7 +55,11 @@ export const projectsReducer = createReducer(
     BoardApiActions.createBoardFailure,
     (state, action): ProjectsState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: BoardActions.createBoard,
+      },
       isLoading: false,
     }),
   ),
@@ -58,7 +67,11 @@ export const projectsReducer = createReducer(
     BoardApiActions.deleteBoardFailure,
     (state, action): ProjectsState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: BoardActions.deleteBoard,
+      },
       isLoading: false,
     }),
   ),
@@ -66,7 +79,11 @@ export const projectsReducer = createReducer(
     BoardApiActions.updateBoardFailure,
     (state, action): ProjectsState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: BoardActions.updateBoard,
+      },
       isLoading: false,
     }),
   ),

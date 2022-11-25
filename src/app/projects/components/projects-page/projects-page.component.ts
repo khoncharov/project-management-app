@@ -1,11 +1,10 @@
 /* eslint-disable operator-linebreak */
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ConfirmComponent } from 'src/app/shared/components/confirm/confirm.component';
 
 import {
@@ -25,12 +24,8 @@ import {
   templateUrl: './projects-page.component.html',
   styleUrls: ['./projects-page.component.scss'],
 })
-export class ProjectsPageComponent implements OnInit, OnDestroy {
+export class ProjectsPageComponent implements OnInit {
   protected boards$!: Observable<Board[]>;
-
-  protected error$!: Observable<string | null>;
-
-  private errorSub!: Subscription;
 
   private confirmTitle!: string;
 
@@ -40,7 +35,6 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private errorBar: MatSnackBar,
     private router: Router,
     private dialog: MatDialog,
     private translateService: TranslateService,
@@ -48,24 +42,9 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.boards$ = this.store.select(fromProjects.selectBoards);
-    this.error$ = this.store.select(fromProjects.selectError);
     this.isLoading$ = this.store.select(fromProjects.selectProgress);
 
     this.store.dispatch(BoardActions.getBoards());
-
-    this.errorSub = this.error$.subscribe((err) => {
-      if (err) {
-        this.errorBar.open(err, 'Ok', {
-          verticalPosition: 'top',
-          panelClass: 'snack-bar-light',
-        });
-        this.store.dispatch(BoardActions.removeProjectsError());
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.errorSub.unsubscribe();
   }
 
   onOpenBoard(id: string) {
