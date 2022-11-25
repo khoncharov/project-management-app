@@ -63,14 +63,14 @@
         </mat-error>
       </mat-form-field>
       <div class="edit-user-container_btn">
-        <button mat-button (click)="deleteProfile()" class="form-button">
+        <button mat-button (click)="deleteProfile()" color="warn">
           {{ "editUser.deleteUser" | translate }}
         </button>
         <button
-          mat-button
+          mat-flat-button
           type="submit"
           [disabled]="editForm.invalid"
-          class="form-button"
+          color="primary"
         >
           {{ "editUser.submit" | translate }}
         </button>
