@@ -11,14 +11,14 @@
         >{{ "header.home" | translate }}</a
       >
       <a
-        class="header-container_btn header-container_btn-projects"
+        class="header-container_btn"
         routerLink="/projects"
         routerLinkActive="active"
         *ngIf="isAuthorized"
         >{{ "header.projects" | translate }}</a
       >
       <a
-        class="header-container_btn header-container_btn-board"
+        class="header-container_btn"
         routerLink="/board"
         routerLinkActive="active"
         *ngIf="isAuthorized"
@@ -66,6 +66,13 @@
         <button
           class="header-login__button"
           mat-menu-item
+          [routerLink]="'/home'"
+        >
+          {{ "header.home" | translate }}
+        </button>
+        <button
+          class="header-login__button"
+          mat-menu-item
           *ngIf="isAuthorized"
           [routerLink]="'/board'"
         >
@@ -79,9 +86,6 @@
         >
           {{ "header.projects" | translate }}
         </button>
-        <button mat-menu-item *ngIf="!isAuthorized" [routerLink]="'auth/login'">
-          <mat-icon>login</mat-icon>
-        </button>
         <button
           mat-menu-item
           *ngIf="!isAuthorized"
@@ -89,6 +93,9 @@
           class="header-login__button"
         >
           {{ "header.signUp" | translate }}
+        </button>
+        <button mat-menu-item *ngIf="!isAuthorized" [routerLink]="'auth/login'">
+          <mat-icon>login</mat-icon>
         </button>
         <button
           mat-menu-item
