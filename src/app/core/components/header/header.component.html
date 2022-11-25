@@ -11,14 +11,14 @@
         >{{ "header.home" | translate }}</a
       >
       <a
-        class="header-container_btn header-container_btn-projects"
+        class="header-container_btn"
         routerLink="/projects"
         routerLinkActive="active"
         *ngIf="isAuthorized"
         >{{ "header.projects" | translate }}</a
       >
       <a
-        class="header-container_btn header-container_btn-board"
+        class="header-container_btn"
         routerLink="/board"
         routerLinkActive="active"
         *ngIf="isAuthorized"
@@ -26,12 +26,13 @@
       >
     </div>
     <div class="header-switcher">
-      <span>en</span>
+      <span>{{ "header.ru" | translate }}</span>
       <mat-slide-toggle
-        [checked]="isLangChecked"
-        (change)="checkLang()"
+        color="primary"
+        [checked]="isDefaultLang"
+        (change)="toggleLang()"
       ></mat-slide-toggle>
-      <span>ru</span>
+      <span>{{ "header.en" | translate }}</span>
     </div>
     <div class="header-login header-login__sign-up" *ngIf="!isAuthorized">
       <button mat-button class="header-login__button" routerLink="/auth/login">
@@ -65,8 +66,15 @@
         <button
           class="header-login__button"
           mat-menu-item
+          [routerLink]="'/home'"
+        >
+          {{ "header.home" | translate }}
+        </button>
+        <button
+          class="header-login__button"
+          mat-menu-item
           *ngIf="isAuthorized"
-          [routerLink]="'/boards'"
+          [routerLink]="'/board'"
         >
           {{ "header.board" | translate }}
         </button>
@@ -78,16 +86,16 @@
         >
           {{ "header.projects" | translate }}
         </button>
-        <button mat-menu-item *ngIf="!isAuthorized" [routerLink]="'auth/login'">
-          <mat-icon>login</mat-icon>
-        </button>
         <button
           mat-menu-item
           *ngIf="!isAuthorized"
           [routerLink]="'/auth/sign-up'"
           class="header-login__button"
         >
-          {{ "header.signup" | translate }}
+          {{ "header.signUp" | translate }}
+        </button>
+        <button mat-menu-item *ngIf="!isAuthorized" [routerLink]="'auth/login'">
+          <mat-icon>login</mat-icon>
         </button>
         <button
           mat-menu-item

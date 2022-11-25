@@ -21,6 +21,10 @@
   justify-content: flex-start;
   align-items: center;
   background-color: #ffffff;
+
+  @media (max-width: 400px) {
+    justify-content: space-between;
+  }
 }
 
 .header-container_link {
@@ -68,7 +72,11 @@
 
   span {
     padding: 0 0.5rem;
-    font-size: 16px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 400px) {
+    margin: auto;
   }
 }
 
@@ -99,8 +107,7 @@
   }
 
   .header-login,
-  .header-container_btn-board,
-  .header-container_btn-projects {
+  .header-container_btn {
     display: none;
   }
 }

@@ -112,7 +112,7 @@ export class TaskComponent {
 
   private getConfirmTranslate(): void {
     this.translateService.get(['task']).subscribe((translations) => {
-      this.confirmTitle = translations.task.title;
+      this.confirmTitle = translations.task.deleteTask;
       this.confirmMessage = translations.task.message;
     });
   }

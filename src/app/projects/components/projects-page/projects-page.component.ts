@@ -140,7 +140,7 @@ export class ProjectsPageComponent implements OnInit, OnDestroy {
 
   private getConfirmTranslate(): void {
     this.translateService.get(['projectPage']).subscribe((translations) => {
-      this.confirmTitle = translations.projectPage.confirmTitle;
+      this.confirmTitle = translations.projectPage.deleteBoard;
       this.confirmMessage = translations.projectPage.message;
     });
   }
