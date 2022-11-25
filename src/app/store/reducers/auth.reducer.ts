@@ -265,10 +265,10 @@ export const authReducer = createReducer(
     }),
   ),
 
-  on(
-    UserApiActions.deleteUserSuccess,
-    (): CurrentUserState => ({
+  on(UserApiActions.deleteUserSuccess, (): CurrentUserState => {
+    localData.userToken = '';
+    return {
       ...initState,
-    }),
-  ),
+    };
+  }),
 );
