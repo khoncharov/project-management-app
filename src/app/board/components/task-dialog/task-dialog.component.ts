@@ -70,7 +70,7 @@ export class TaskDialogComponent implements OnInit, OnDestroy {
         title: this.data.task.title,
         description: this.data.task.description,
       });
-      // In case user is deleted and task is returned with userId === ''
+      // In case user is deleted and task is returned with userId === null
       if (this.data.task.userId) {
         this.taskForm.patchValue({ userId: this.data.task.userId });
         this.changeSelectedUser(this.data.task.userId);

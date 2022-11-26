@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -16,9 +15,7 @@ import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private subscription1$ = new Subscription();
-
-  private subscription2$ = new Subscription();
+  private subscription2$!: Subscription;
 
   loginForm!: FormGroup;
 
@@ -26,22 +23,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   token$!: Observable<string>;
 
-  error$!: Observable<string | null>;
-
   isLoading$!: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private store: Store,
-    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
     this.createForm();
-    this.error$ = this.store.select(fromCurrentUser.selectLoginError);
     this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
     this.token$ = this.store.select(fromCurrentUser.selectToken);
+
+    this.subscription2$ = this.token$.subscribe((token) => {
+      if (token) {
+        this.router.navigate(['/projects']);
+      }
+    });
   }
 
   login() {
@@ -52,26 +51,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         password,
       };
       this.store.dispatch(AuthActions.loginUser({ user }));
-
-      this.subscription1$ = this.error$.subscribe((error) => {
-        if (error) {
-          this.snackBar.open(error, 'close', {
-            verticalPosition: 'top',
-            panelClass: 'snack-bar-light',
-          });
-        }
-      });
-
-      this.subscription2$ = this.token$.subscribe((token) => {
-        if (token) {
-          this.router.navigate(['/projects']);
-        }
-      });
     }
   }
 
   ngOnDestroy(): void {
-    this.subscription1$.unsubscribe();
     this.subscription2$.unsubscribe();
   }
 

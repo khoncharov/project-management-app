@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
@@ -19,9 +18,7 @@ import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-  private subscription1$ = new Subscription();
-
-  private subscription2$ = new Subscription();
+  private subscription2$!: Subscription;
 
   signUpForm!: FormGroup;
 
@@ -29,22 +26,24 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   user$!: Observable<User>;
 
-  error$!: Observable<string | null>;
-
   isLoading$!: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private store: Store,
-    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
     this.createForm();
-    this.error$ = this.store.select(fromCurrentUser.selectLoginError);
     this.isLoading$ = this.store.select(fromCurrentUser.selectLoginProgress);
     this.user$ = this.store.select(fromCurrentUser.selectUser);
+
+    this.subscription2$ = this.user$.subscribe((user) => {
+      if (user.id) {
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 
   signUp() {
@@ -58,25 +57,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
       this.store.dispatch(AuthActions.registerUser({ user }));
     }
-
-    this.subscription1$ = this.error$.subscribe((error) => {
-      if (error) {
-        this.snackBar.open(error, 'close', {
-          verticalPosition: 'top',
-          panelClass: 'snack-bar-light',
-        });
-      }
-    });
-
-    this.subscription2$ = this.user$.subscribe((user) => {
-      if (user.id) {
-        this.router.navigate(['/auth/login']);
-      }
-    });
   }
 
   ngOnDestroy(): void {
-    this.subscription1$.unsubscribe();
     this.subscription2$.unsubscribe();
   }
 

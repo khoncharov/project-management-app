@@ -7,14 +7,13 @@
 
 .edit-user-container {
   width: 310px;
-  height: 24rem;
   padding: 1.5rem;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 3px rgb(168, 166, 177);
 
   mat-form-field {
-    width: 16rem;
+    width: 100%;
     line-height: 1.2;
   }
 
@@ -29,15 +28,7 @@ h1 {
 }
 
 .edit-user-container_btn {
+  margin-top: 24px;
   display: flex;
   justify-content: space-between;
-}
-
-.form-button {
-  width: 8rem;
-  height: 2rem;
-  margin-top: 25px;
-  background-color: #d7d7d7;
-  color: #ffffff;
-  cursor: pointer;
 }

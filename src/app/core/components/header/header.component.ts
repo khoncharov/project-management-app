@@ -1,14 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { logoutUser } from 'src/app/store/actions/auth.actions';
-import { getUser } from 'src/app/store/actions/user.actions';
-import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors';
-import { User } from 'src/app/core/models';
 import { LocalDataService } from 'src/app/core/services/localStorage/local-data.service';
+import * as fromCurrentUser from 'src/app/store/selectors/current-user.selectors';
 
 const enum Langs {
   EN = 'en',
@@ -23,11 +21,7 @@ const enum Langs {
 export class HeaderComponent implements OnInit, OnDestroy {
   protected token$!: Observable<string>;
 
-  protected user$!: Observable<User>;
-
-  private currentUserSubscription!: Subscription;
-
-  private currentTokenSubscription!: Subscription;
+  private tokenSub!: Subscription;
 
   private defaultLang = Langs.EN;
 
@@ -46,25 +40,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.initLang();
 
     this.token$ = this.store.select(fromCurrentUser.selectToken);
-    this.user$ = this.store.select(fromCurrentUser.selectUser);
   }
 
   ngOnInit(): void {
-    this.currentTokenSubscription = this.token$.subscribe((token) => {
-      const isTokenExist = Boolean(token);
-      if (isTokenExist) {
-        this.router.navigate(['/projects']);
-        this.isAuthorized = true;
-      } else {
-        this.router.navigate(['/home']);
-        this.isAuthorized = false;
-      }
-    });
-
-    this.currentUserSubscription = this.user$.subscribe((user) => {
-      if (user && !user.name) {
-        this.store.dispatch(getUser({ id: user.id }));
-      }
+    this.tokenSub = this.token$.subscribe((token) => {
+      this.isAuthorized = Boolean(token);
     });
   }
 
@@ -81,11 +61,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public logout(): void {
     this.store.dispatch(logoutUser());
+    this.router.navigate(['/home']);
   }
 
   ngOnDestroy(): void {
-    this.currentTokenSubscription.unsubscribe();
-    this.currentUserSubscription.unsubscribe();
+    this.tokenSub.unsubscribe();
   }
 
   private initLang(): void {

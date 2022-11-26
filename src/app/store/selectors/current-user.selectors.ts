@@ -11,7 +11,7 @@ export const selectLoginProgress = createSelector(
   (state) => state.page.isLoading,
 );
 
-export const selectLoginError = createSelector(
+export const selectError = createSelector(
   selectCurrUserState,
   (state) => state.page.error,
 );
