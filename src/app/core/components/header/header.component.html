@@ -89,13 +89,18 @@
         <button
           mat-menu-item
           *ngIf="!isAuthorized"
+          class="header-login__button"
+          [routerLink]="'auth/login'"
+        >
+          {{ "header.loginAction" | translate }}
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!isAuthorized"
           [routerLink]="'/auth/sign-up'"
           class="header-login__button"
         >
           {{ "header.signUp" | translate }}
-        </button>
-        <button mat-menu-item *ngIf="!isAuthorized" [routerLink]="'auth/login'">
-          <mat-icon>login</mat-icon>
         </button>
         <button
           mat-menu-item
@@ -105,8 +110,13 @@
         >
           {{ "header.profile" | translate }}
         </button>
-        <button mat-menu-item *ngIf="isAuthorized" (click)="logout()">
-          <mat-icon>logout</mat-icon>
+        <button
+          mat-menu-item
+          *ngIf="isAuthorized"
+          class="header-login__button"
+          (click)="logout()"
+        >
+          {{ "header.logout" | translate }}
         </button>
       </mat-menu>
     </div>
