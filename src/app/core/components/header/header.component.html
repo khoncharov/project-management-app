@@ -74,17 +74,17 @@
           class="header-login__button"
           mat-menu-item
           *ngIf="isAuthorized"
-          [routerLink]="'/board'"
+          [routerLink]="'/projects'"
         >
-          {{ "header.board" | translate }}
+          {{ "header.projects" | translate }}
         </button>
         <button
           class="header-login__button"
           mat-menu-item
           *ngIf="isAuthorized"
-          [routerLink]="'/projects'"
+          [routerLink]="'/board'"
         >
-          {{ "header.projects" | translate }}
+          {{ "header.board" | translate }}
         </button>
         <button
           mat-menu-item
