@@ -117,10 +117,9 @@ export const authReducer = createReducer(
 
   // Logout user
 
-  on(AuthActions.logoutUser, (state): CurrentUserState => {
+  on(AuthActions.logoutUser, (): CurrentUserState => {
     localData.userToken = '';
     return {
-      ...state,
       ...initState,
     };
   }),
@@ -156,7 +155,7 @@ export const authReducer = createReducer(
     };
   }),
 
-  // Check token
+  // Check token if exists
 
   on(AuthActions.checkToken, (state) => {
     const token = localData.userToken;
