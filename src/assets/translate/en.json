@@ -92,7 +92,7 @@
   "projectPage": {
     "title": "Name / Description",
     "newBoard": "New board",
-    "deleteBoard":"Delete board",
+    "deleteBoard": "Delete board",
     "message": "This board will be permanently deleted."
   },
   "pageNotFound": {
@@ -122,5 +122,15 @@
     "edit": "Edit Profile",
     "notFound": "Not Found Page",
     "adaptive": "Adaptive Layout"
+  },
+  "error": {
+    "code": "Code",
+    "unknown": "Unknown error",
+    "code400": "Bad request. The server cannot or will not process the request",
+    "code401": "Unauthorized access. Please, login or register first",
+    "code403": "Incorrect login or password",
+    "code404": "Data not found. Try to reload the page",
+    "code408": "Request timeout",
+    "code409": "User with the same login already exists"
   }
 }

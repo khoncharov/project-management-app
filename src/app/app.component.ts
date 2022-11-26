@@ -100,7 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
   errorHandler(err: ErrType): void {
     if (err.code === 401) {
       this.store.dispatch(AuthActions.logoutUser());
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/home']);
     }
 
     const message = this.errorDescription.get(err);
