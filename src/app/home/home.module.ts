@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -11,8 +11,8 @@ import MaterialModule from '../shared/material/material.module';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    ReactiveFormsModule,
     MaterialModule,
+    TranslateModule,
   ],
 })
 export class HomeModule {}

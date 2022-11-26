@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+import { TypedAction } from '@ngrx/store/src/models';
 
 import { User } from '../../core/models/user.model';
 import { LocalDataService } from '../../core/services/localStorage/local-data.service';
@@ -13,9 +14,15 @@ export interface TokenData {
   issuedAt: number;
 }
 
+export interface ErrType {
+  code: number;
+  msg: string;
+  action: TypedAction<string>;
+}
+
 export interface PageInfo {
   isLoading: boolean;
-  error: string | null;
+  error: ErrType | null;
 }
 
 export interface CurrentUserState {
@@ -53,6 +60,17 @@ const localData = new LocalDataService();
 export const authReducer = createReducer(
   initState,
 
+  on(
+    AuthActions.removeCurrUserError,
+    (state): CurrentUserState => ({
+      ...state,
+      page: {
+        ...state.page,
+        error: null,
+      },
+    }),
+  ),
+
   // Login user
 
   on(AuthActions.loginUser, onDataRequest),
@@ -62,7 +80,11 @@ export const authReducer = createReducer(
     (state, action): CurrentUserState => ({
       ...state,
       page: {
-        error: action.error.message,
+        error: {
+          code: action.error.status,
+          msg: action.error.error.message,
+          action: AuthActions.loginUser,
+        },
         isLoading: false,
       },
     }),
@@ -95,10 +117,9 @@ export const authReducer = createReducer(
 
   // Logout user
 
-  on(AuthActions.logoutUser, (state): CurrentUserState => {
+  on(AuthActions.logoutUser, (): CurrentUserState => {
     localData.userToken = '';
     return {
-      ...state,
       ...initState,
     };
   }),
@@ -112,7 +133,11 @@ export const authReducer = createReducer(
     (state, action): CurrentUserState => ({
       ...state,
       page: {
-        error: action.error.message,
+        error: {
+          code: action.error.status,
+          msg: action.error.error.message,
+          action: AuthActions.registerUser,
+        },
         isLoading: false,
       },
     }),
@@ -130,7 +155,7 @@ export const authReducer = createReducer(
     };
   }),
 
-  // Check token
+  // Check token if exists
 
   on(AuthActions.checkToken, (state) => {
     const token = localData.userToken;
@@ -167,7 +192,11 @@ export const authReducer = createReducer(
     (state, action): CurrentUserState => ({
       ...state,
       page: {
-        error: action.error.message,
+        error: {
+          code: action.error.status,
+          msg: action.error.error.message,
+          action: UserActions.getUser,
+        },
         isLoading: false,
       },
     }),
@@ -194,7 +223,11 @@ export const authReducer = createReducer(
     (state, action): CurrentUserState => ({
       ...state,
       page: {
-        error: action.error.message,
+        error: {
+          code: action.error.status,
+          msg: action.error.error.message,
+          action: UserActions.updateUser,
+        },
         isLoading: false,
       },
     }),
@@ -221,9 +254,20 @@ export const authReducer = createReducer(
     (state, action): CurrentUserState => ({
       ...state,
       page: {
-        error: action.error.message,
+        error: {
+          code: action.error.status,
+          msg: action.error.error.message,
+          action: UserActions.deleteUser,
+        },
         isLoading: false,
       },
     }),
   ),
+
+  on(UserApiActions.deleteUserSuccess, (): CurrentUserState => {
+    localData.userToken = '';
+    return {
+      ...initState,
+    };
+  }),
 );

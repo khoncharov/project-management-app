@@ -1,5 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
+import { ErrType } from './auth.reducer';
 import { BoardWithColumns, ColumnWithTasks, User } from '../../core/models';
 import * as UserActions from '../actions/user.actions';
 import * as UserApiActions from '../actions/user-api.actions';
@@ -14,7 +15,7 @@ export interface SelectedBoardState {
   board: BoardWithColumns | null;
   users: User[];
   isLoading: boolean;
-  error: string | null;
+  error: ErrType | null;
 }
 
 const initState: SelectedBoardState = {
@@ -50,7 +51,11 @@ export const selectedBoardReducer = createReducer(
     BoardApiActions.getBoardFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: BoardActions.getBoard,
+      },
       isLoading: false,
     }),
   ),
@@ -71,7 +76,11 @@ export const selectedBoardReducer = createReducer(
     UserApiActions.getUsersFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: UserActions.getUsers,
+      },
       isLoading: false,
     }),
   ),
@@ -92,7 +101,11 @@ export const selectedBoardReducer = createReducer(
     ColumnApiActions.createColumnFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: ColumnActions.createColumn,
+      },
       isLoading: false,
     }),
   ),
@@ -125,7 +138,11 @@ export const selectedBoardReducer = createReducer(
     ColumnApiActions.updateColumnFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: ColumnActions.updateColumn,
+      },
       isLoading: false,
     }),
   ),
@@ -154,7 +171,11 @@ export const selectedBoardReducer = createReducer(
     ColumnApiActions.deleteColumnFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: ColumnActions.deleteColumn,
+      },
       isLoading: false,
     }),
   ),
@@ -184,7 +205,11 @@ export const selectedBoardReducer = createReducer(
     TaskApiActions.createTaskFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: TaskActions.createTask,
+      },
       isLoading: false,
     }),
   ),
@@ -207,7 +232,11 @@ export const selectedBoardReducer = createReducer(
     TaskApiActions.updateTaskFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: TaskActions.updateTask,
+      },
       isLoading: false,
     }),
   ),
@@ -230,7 +259,11 @@ export const selectedBoardReducer = createReducer(
     TaskApiActions.deleteTaskFailure,
     (state, action): SelectedBoardState => ({
       ...state,
-      error: action.error.message,
+      error: {
+        code: action.error.status,
+        msg: action.error.error.message,
+        action: TaskActions.deleteTask,
+      },
       isLoading: false,
     }),
   ),

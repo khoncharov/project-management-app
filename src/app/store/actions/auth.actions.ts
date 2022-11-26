@@ -14,3 +14,7 @@ export const registerUser = createAction(
 export const logoutUser = createAction('[Header] Sign-out user');
 
 export const checkToken = createAction('[Token] Check token');
+
+export const removeCurrUserError = createAction(
+  '[User] Remove request error in current user',
+);

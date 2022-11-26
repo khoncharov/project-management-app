@@ -6,7 +6,9 @@
     "loginAction": "Login",
     "signUp": "Sign Up",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "en": "En",
+    "ru": "Рус"
   },
   "editUser": {
     "title": "Edit profile",
@@ -31,7 +33,7 @@
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "haveAccount": "Have an account?",
-    "loginLink": "Login",
+    "loginAction": "Login",
     "submit": "Sign Up"
   },
   "validation": {
@@ -48,7 +50,7 @@
   },
   "boardPage": {
     "noBoard": "To load a board, please select it on the Projects page",
-    "title": "Do you really want to delete this column?",
+    "deleteColumn": "Delete Column",
     "message": "This column will be permanently deleted."
   },
   "columnDialog": {
@@ -63,7 +65,7 @@
     "hint": "Min 1 character"
   },
   "task": {
-    "title": "Do you really want to delete this task?",
+    "deleteTask": "Delete task",
     "message": "This task will be permanently deleted."
   },
   "taskDialog": {
@@ -90,7 +92,35 @@
   "projectPage": {
     "title": "Name / Description",
     "newBoard": "New board",
-    "confirmTitle":"Do you really want to delete this board?",
+    "deleteBoard":"Delete board",
     "message": "This board will be permanently deleted."
+  },
+  "pageNotFound": {
+    "notFound": "Page not found"
+  },
+  "homePage": {
+    "title": "Team 3 Final Project for Angular 2022Q3",
+    "description": "Project management system is an application that helps an individual in a team or group of developers achieve their goals.",
+    "sectionTitle": "Our Team",
+    "konstantin": "Konstantin",
+    "alena": "Alena",
+    "alesya": "Alesya",
+    "teamLead": "Team Lead",
+    "setup": "Project Setup",
+    "deploy": "Backend Deploy",
+    "ngrx": "Services/NGRX",
+    "errors": "Error Handling",
+    "projects": "Projects Page",
+    "board": "Board Page",
+    "login": "Login Page",
+    "signUp": "Sign Up Page",
+    "welcome": "Welcome Page",
+    "confirm": "Confirmation Dialog",
+    "i18n": "Localization",
+    "header": "Header",
+    "footer": "Footer",
+    "edit": "Edit Profile",
+    "notFound": "Not Found Page",
+    "adaptive": "Adaptive Layout"
   }
 }

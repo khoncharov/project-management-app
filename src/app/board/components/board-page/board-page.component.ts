@@ -1,8 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 import {
@@ -12,7 +11,6 @@ import {
   UpdateColumnDto,
 } from 'src/app/core/models';
 import * as fromSelectedBoard from '../../../store/selectors/selectedBoard.selectors';
-import * as BoardActions from '../../../store/actions/board.actions';
 import * as ColumnActions from '../../../store/actions/column.actions';
 import * as UserActions from '../../../store/actions/user.actions';
 import { ColumnDialogComponent } from '../column-dialog/column-dialog.component';
@@ -22,40 +20,19 @@ import { ColumnDialogComponent } from '../column-dialog/column-dialog.component'
   templateUrl: './board-page.component.html',
   styleUrls: ['./board-page.component.scss'],
 })
-export class BoardPageComponent implements OnInit, OnDestroy {
+export class BoardPageComponent implements OnInit {
   protected board$!: Observable<BoardWithColumns | null>;
-
-  protected error$!: Observable<string | null>;
-
-  private errorSub!: Subscription;
 
   protected isLoading$!: Observable<boolean>;
 
-  constructor(
-    private store: Store,
-    private errorBar: MatSnackBar,
-    private dialog: MatDialog,
-  ) {}
+  constructor(private store: Store, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.store.dispatch(UserActions.getUsers());
 
     this.board$ = this.store.select(fromSelectedBoard.selectBoard);
-    this.error$ = this.store.select(fromSelectedBoard.selectError);
+
     this.isLoading$ = this.store.select(fromSelectedBoard.selectProgress);
-
-    this.errorSub = this.error$.subscribe((err) => {
-      if (err) {
-        this.errorBar.open(err, 'Ok', {
-          verticalPosition: 'top',
-        });
-        this.store.dispatch(BoardActions.removeSelectedBoardError());
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.errorSub.unsubscribe();
   }
 
   onColumnAdd(boardId: string): void {

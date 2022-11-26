@@ -39,7 +39,7 @@
 }
 
 .footer-year {
-  margin: 0;
+  margin: 0 10px 0 0;
   color: #000000;
   filter: opacity(0.5);
 }
@@ -54,7 +54,6 @@ a {
 
 @media (max-width: 768px) {
   .footer {
-    height: 8rem;
     display: flex;
     align-items: center;
   }
@@ -67,5 +66,10 @@ a {
     width: 7rem;
     display: flex;
     flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .footer__list-item {
+    font-size: smaller;
   }
 }
