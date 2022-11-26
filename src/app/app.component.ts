@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ErrType } from './store/reducers/auth.reducer';
+import { ErrorDescriptionService } from './core/services/errors/error-handler.service';
 import * as AuthActions from './store/actions/auth.actions';
 import * as BoardActions from './store/actions/board.actions';
 import * as UserActions from './store/actions/user.actions';
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private store: Store,
     private router: Router,
     private errorBar: MatSnackBar,
+    private errorDescription: ErrorDescriptionService,
   ) {}
 
   ngOnInit(): void {
@@ -96,7 +98,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   errorHandler(err: ErrType): void {
-    const message = `Error: ${err.msg} [Code: ${err.code}] || Action: ${err.action.type}}`;
+    if (err.code === 401) {
+      this.store.dispatch(AuthActions.logoutUser());
+      this.router.navigate(['/auth/login']);
+    }
+
+    const message = this.errorDescription.get(err);
     this.errorBar.open(message, 'Ok', {
       verticalPosition: 'top',
       panelClass: 'snack-bar-light',
