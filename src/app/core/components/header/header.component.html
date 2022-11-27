@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header-container">
     <div class="header-container_link">
-      <a routerLink="/">
+      <a routerLink="/" class="header-logo-link">
         <img class="header-logo" src="assets/images/logo.svg" alt="logo" />
       </a>
       <a
@@ -24,6 +24,9 @@
         *ngIf="isAuthorized"
         >{{ "header.board" | translate }}</a
       >
+    </div>
+    <div class="header-search" *ngIf="isAuthorized">
+      <app-search></app-search>
     </div>
     <div class="header-switcher">
       <span>{{ "header.ru" | translate }}</span>
@@ -89,13 +92,18 @@
         <button
           mat-menu-item
           *ngIf="!isAuthorized"
+          class="header-login__button"
+          [routerLink]="'auth/login'"
+        >
+          {{ "header.loginAction" | translate }}
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!isAuthorized"
           [routerLink]="'/auth/sign-up'"
           class="header-login__button"
         >
           {{ "header.signUp" | translate }}
-        </button>
-        <button mat-menu-item *ngIf="!isAuthorized" [routerLink]="'auth/login'">
-          <mat-icon>login</mat-icon>
         </button>
         <button
           mat-menu-item
@@ -105,8 +113,13 @@
         >
           {{ "header.profile" | translate }}
         </button>
-        <button mat-menu-item *ngIf="isAuthorized" (click)="logout()">
-          <mat-icon>logout</mat-icon>
+        <button
+          mat-menu-item
+          *ngIf="isAuthorized"
+          class="header-login__button"
+          (click)="logout()"
+        >
+          {{ "header.logout" | translate }}
         </button>
       </mat-menu>
     </div>

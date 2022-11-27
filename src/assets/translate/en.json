@@ -16,7 +16,9 @@
     "login": "Login",
     "newPassword": "New password",
     "deleteUser": "Delete User",
-    "submit": "Save"
+    "submit": "Save",
+    "confirmTitle": "Delete account",
+    "confirmMessage": "Your account will be permanently deleted."
   },
   "loginPage": {
     "title": "Login",
@@ -92,15 +94,15 @@
   "projectPage": {
     "title": "Name / Description",
     "newBoard": "New board",
-    "deleteBoard":"Delete board",
+    "deleteBoard": "Delete board",
     "message": "This board will be permanently deleted."
   },
   "pageNotFound": {
     "notFound": "Page not found"
   },
   "homePage": {
-    "title": "Team 3 Final Project for Angular 2022Q3",
-    "description": "Project management system is an application that helps an individual in a team or group of developers achieve their goals.",
+    "title": "Project Management app",
+    "description": "Kanban is a popular approach for applying agile and DevOps principles to software development. Work tasks are visually presented on the Kanban board, allowing team members to see the status of each task at any given time. The Project Management app is an implementation of the Kanban approach as a web application developed with Angular. The project is the final task of the RS School Angular course (2022Q3)",
     "sectionTitle": "Our Team",
     "konstantin": "Konstantin",
     "alena": "Alena",
@@ -122,5 +124,15 @@
     "edit": "Edit Profile",
     "notFound": "Not Found Page",
     "adaptive": "Adaptive Layout"
+  },
+  "error": {
+    "code": "Code",
+    "unknown": "Unknown error",
+    "code400": "Bad request. The server cannot or will not process the request",
+    "code401": "Unauthorized access. Please, login or register first",
+    "code403": "Incorrect login or password",
+    "code404": "Data not found. Try to reload the page",
+    "code408": "Request timeout",
+    "code409": "User with the same login already exists"
   }
 }
