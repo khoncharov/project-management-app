@@ -99,7 +99,7 @@
     "notFound": "Страница не найдена"
   },
   "homePage": {
-    "title": "Project management app",
+    "title": "Project Management app",
     "description": "Kanban — это популярный подход, позволяющий применять принципы agile и DevOps при разработке ПО. Рабочие задачи визуально представлены на доске Kanban, что позволяет участникам команды видеть состояние каждой задачи в любой момент времени. Project management app - это реализация Kanban подхода в виде веб приложения, разработанного с помощью Angular. Проект является финальным заданием курса RS School Angular (2022Q3)",
     "sectionTitle": "Наша команда",
     "konstantin": "Константин",
