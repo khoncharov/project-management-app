@@ -16,7 +16,9 @@
     "login": "Логин",
     "newPassword": "Новый пароль",
     "deleteUser": "Удалить",
-    "submit": "Сохранить"
+    "submit": "Сохранить",
+    "confirmTitle": "Удалить аккаунт",
+    "confirmMessage": "Ваш аккаунт будет безвозвратно удален."
   },
   "loginPage": {
     "title": "Вход",

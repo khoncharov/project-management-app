@@ -16,7 +16,9 @@
     "login": "Login",
     "newPassword": "New password",
     "deleteUser": "Delete User",
-    "submit": "Save"
+    "submit": "Save",
+    "confirmTitle": "Delete account",
+    "confirmMessage": "Your account will be permanently deleted."
   },
   "loginPage": {
     "title": "Login",

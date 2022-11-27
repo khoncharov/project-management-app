@@ -8,6 +8,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/core/models';
@@ -31,11 +32,16 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   private currentUser!: User;
 
+  private confirmTitle!: string;
+
+  private confirmMessage!: string;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private store: Store,
     private dialog: MatDialog,
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -87,10 +93,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   deleteProfile() {
+    this.getConfirmTranslate();
     const dialogRef = this.dialog.open(ConfirmComponent, {
       data: {
-        title: 'Do you want to delete your account?',
-        message: 'Your account will be permanently deleted.',
+        title: this.confirmTitle,
+        message: this.confirmMessage,
       },
     });
 
@@ -107,5 +114,12 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.currentUserSubscription.unsubscribe();
+  }
+
+  private getConfirmTranslate(): void {
+    this.translateService.get(['editUser']).subscribe((translations) => {
+      this.confirmTitle = translations.editUser.confirmTitle;
+      this.confirmMessage = translations.editUser.confirmMessage;
+    });
   }
 }
