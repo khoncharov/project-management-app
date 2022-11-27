@@ -9,12 +9,12 @@ ul {
   margin: 0 auto;
   max-width: 1200px;
   min-height: calc(100vh - 10rem - 40px);
-  padding: 20px 30px;
+  padding: 40px 30px;
   border-radius: 10px;
   overflow: hidden;
 
   @media screen and (max-width: 600px) {
-    padding: 15px 10px;
+    padding: 20px 10px;
   }
 
   .mat-card-header {
@@ -24,6 +24,8 @@ ul {
       margin-bottom: 20px;
       text-align: center;
       color: #2b3b92;
+      line-height: 150%;
+      letter-spacing: 1px;
     }
 
     & .mat-card-subtitle {
@@ -37,15 +39,18 @@ ul {
     margin-bottom: 20px;
 
     p {
-
+      font-size: 16px;
+      line-height: 150%;
     }
   }
 }
 
 .team {
   &__title {
+    margin-top: 30px;
     color: #2b3b92;
     text-align: center;
+    letter-spacing: 1px;
   }
 
   &__list {
