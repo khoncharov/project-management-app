@@ -13,11 +13,12 @@ import { BoardsApiService } from './boards-api.service';
   providedIn: 'root',
 })
 export class TaskSearchService {
-  private tasks: Task[] = [];
+  public tasks: Task[] = [];
 
   constructor(private boardApi: BoardsApiService) {}
 
   getTasks() {
+    this.tasks = [];
     this.boardApi
       .getBoards()
       .pipe(

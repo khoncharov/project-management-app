@@ -51,6 +51,12 @@
   }
 }
 
+.header-logo-link {
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+
 .header-container_btn {
   color: #b15f5f;
 }
@@ -68,10 +74,6 @@
   min-width: 30px;
   width: 100%;
   height: 40px;
-
-  @media (max-width: 400px) {
-    display: none;
-  }
 }
 
 .header-switcher {

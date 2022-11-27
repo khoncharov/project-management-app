@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddTokenInterceptor } from './interceptors/add-token';
 import { SearchComponent } from './components/search/search.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SearchComponent } from './components/search/search.component';
     PageNotFoundComponent,
     FooterComponent,
     SearchComponent,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
