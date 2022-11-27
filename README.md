@@ -15,6 +15,10 @@ This project is the final task for the [RS School Angular course](https://rs.sch
 - [Konstantin](https://github.com/khoncharov)
 - [Alexander](https://github.com/Se3ver) (mentor)
 
+## Final PR
+
+[Link](https://github.com/khoncharov/project-management-app/pull/69)
+
 ## Deploy
 
 https://pm-app-team3.netlify.app
