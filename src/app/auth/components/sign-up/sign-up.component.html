@@ -9,7 +9,7 @@
         <mat-label>{{ "signUpPage.name" | translate }}</mat-label>
         <input matInput formControlName="name" />
         <mat-error *ngIf="signUpForm.controls['name'].hasError('required')">
-          {{ "validation.nameRequired" }}
+          {{ "validation.nameRequired" | translate }}
         </mat-error>
       </mat-form-field>
 
@@ -17,7 +17,7 @@
         <mat-label>{{ "signUpPage.login" | translate }}</mat-label>
         <input matInput formControlName="login" />
         <mat-error *ngIf="signUpForm.controls['login'].hasError('required')">
-          {{ "validation.loginRequired" }}
+          {{ "validation.loginRequired" | translate }}
         </mat-error>
       </mat-form-field>
 
@@ -77,9 +77,9 @@
           <mat-icon>{{ isHidden ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
         <mat-error
-        *ngIf="signUpForm.controls['confirmPassword'].hasError('mustMatch')">
-        {{ "validation.mustMatch" | translate }}
-      </mat-error>
+          *ngIf="signUpForm.controls['confirmPassword'].hasError('mustMatch')">
+          {{ "validation.mustMatch" | translate }}
+        </mat-error>
       </mat-form-field>
     </mat-card-content>
 
