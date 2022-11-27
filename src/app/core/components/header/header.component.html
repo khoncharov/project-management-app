@@ -25,6 +25,9 @@
         >{{ "header.board" | translate }}</a
       >
     </div>
+    <div class="header-search">
+      <app-search></app-search>
+    </div>
     <div class="header-switcher">
       <span>{{ "header.ru" | translate }}</span>
       <mat-slide-toggle
@@ -63,6 +66,7 @@
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
+        <app-search></app-search>
         <button
           class="header-login__button"
           mat-menu-item

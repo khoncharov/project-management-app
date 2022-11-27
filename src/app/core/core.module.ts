@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { HeaderComponent } from './components/header/header.component';
@@ -9,13 +10,20 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddTokenInterceptor } from './interceptors/add-token';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
-  declarations: [HeaderComponent, PageNotFoundComponent, FooterComponent],
+  declarations: [
+    HeaderComponent,
+    PageNotFoundComponent,
+    FooterComponent,
+    SearchComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
+    ReactiveFormsModule,
     SharedModule,
     TranslateModule,
   ],
