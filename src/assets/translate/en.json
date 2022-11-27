@@ -99,8 +99,8 @@
     "notFound": "Page not found"
   },
   "homePage": {
-    "title": "Team 3 Final Project for Angular 2022Q3",
-    "description": "Project management system is an application that helps an individual in a team or group of developers achieve their goals.",
+    "title": "Project management app",
+    "description": "Kanban is a popular approach for applying agile and DevOps principles to software development. Work tasks are visually presented on the Kanban board, allowing team members to see the status of each task at any given time. The Project Management app is an implementation of the Kanban approach as a web application developed with Angular. The project is the final task of the RS School Angular course (2022Q3)",
     "sectionTitle": "Our Team",
     "konstantin": "Konstantin",
     "alena": "Alena",
