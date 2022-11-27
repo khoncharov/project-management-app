@@ -1,0 +1,51 @@
+.task {
+  width: 100%;
+  border-radius: 5px;
+
+  &-header {
+    margin: 0 0 5px 0;
+    max-width: 217px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media screen and (max-width: 600px) {
+      max-width: 180px;
+    }
+  }
+
+  &-text {
+    color: #b15f5f;
+    max-width: 217px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media screen and (max-width: 600px) {
+      max-width: 180px;
+    }
+  }
+
+  &-assignee {
+    width: 100%;
+    margin-right: 8px;
+    margin-left: 8px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    &-icon {
+      margin: 0 5px 2px 0;
+      width: 25px;
+    }
+
+    &-text {
+      max-width: 120px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @media screen and (max-width: 600px) {
+        max-width: 70px;
+      }
+    }
+  }
+}

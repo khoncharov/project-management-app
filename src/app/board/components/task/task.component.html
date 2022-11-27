@@ -1,0 +1,33 @@
+<mat-card class="task">
+  <mat-card-content>
+    <h3 class="task-header">{{ task.title }}</h3>
+    <p class="task-text">{{ task.description }}</p>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <div class="task-assignee" *ngIf="users$ | async as users">
+      <ng-container *ngIf="task.userId">
+        <mat-icon class="task-assignee-icon" [style]="getIconColor(task.userId)"
+          >account_circle</mat-icon
+        >
+        <span class="task-assignee-text">
+          {{ task.userId | userNameById: users }}
+        </span>
+      </ng-container>
+    </div>
+    <button
+      mat-icon-button
+      color="primary"
+      (click)="onTaskEdit(boardId, columnId, task)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="onTaskDelete(boardId, columnId, task.id)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

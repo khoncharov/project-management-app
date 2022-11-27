@@ -1,0 +1,75 @@
+.footer {
+  margin-top: 20px;
+  height: 5rem;
+  background-color: #fff;
+  box-shadow: 1px 1px 4px #b7bfcf;
+}
+
+.footer-container {
+  margin: 0 auto;
+  height: 5rem;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.footer__link {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: #000000;
+  line-height: 150%;
+  font-weight: 400;
+  padding: 0 10px;
+  filter: opacity(0.5);
+  transition: filter 200ms ease-out;
+}
+
+.footer__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer__link:hover {
+  filter: opacity(1);
+}
+
+.footer-year {
+  margin: 0 10px 0 0;
+  color: #000000;
+  filter: opacity(0.5);
+}
+
+a {
+  text-decoration: none;
+}
+
+.footer__list-item::before {
+  content: url("../../../../assets/images/github-icon.svg");
+}
+
+@media (max-width: 768px) {
+  .footer {
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-container {
+    width: 100%;
+  }
+
+  .footer__list {
+    width: 7rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .footer__list-item {
+    font-size: smaller;
+  }
+}

@@ -1,0 +1,127 @@
+<header class="header">
+  <div class="header-container">
+    <div class="header-container_link">
+      <a routerLink="/" class="header-logo-link">
+        <img class="header-logo" src="assets/images/logo.svg" alt="logo" />
+      </a>
+      <a
+        class="header-container_btn"
+        routerLink="/home"
+        routerLinkActive="active"
+        >{{ "header.home" | translate }}</a
+      >
+      <a
+        class="header-container_btn"
+        routerLink="/projects"
+        routerLinkActive="active"
+        *ngIf="isAuthorized"
+        >{{ "header.projects" | translate }}</a
+      >
+      <a
+        class="header-container_btn"
+        routerLink="/board"
+        routerLinkActive="active"
+        *ngIf="isAuthorized"
+        >{{ "header.board" | translate }}</a
+      >
+    </div>
+    <div class="header-search" *ngIf="isAuthorized">
+      <app-search></app-search>
+    </div>
+    <div class="header-switcher">
+      <span>{{ "header.ru" | translate }}</span>
+      <mat-slide-toggle
+        color="primary"
+        [checked]="isDefaultLang"
+        (change)="toggleLang()"
+      ></mat-slide-toggle>
+      <span>{{ "header.en" | translate }}</span>
+    </div>
+    <div class="header-login header-login__sign-up" *ngIf="!isAuthorized">
+      <button mat-button class="header-login__button" routerLink="/auth/login">
+        {{ "header.loginAction" | translate }}
+      </button>
+      <button
+        mat-button
+        class="header-login__button"
+        routerLink="/auth/sign-up"
+      >
+        {{ "header.signUp" | translate }}
+      </button>
+    </div>
+    <div class="header-login header-login__sign-up" *ngIf="isAuthorized">
+      <button
+        mat-button
+        class="header-login__button"
+        routerLink="/edit-profile"
+      >
+        {{ "header.profile" | translate }}
+      </button>
+      <button mat-button class="header-login__button" (click)="logout()">
+        {{ "header.logout" | translate }}
+      </button>
+    </div>
+    <div class="mobile-menu">
+      <button color="primary" mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          class="header-login__button"
+          mat-menu-item
+          [routerLink]="'/home'"
+        >
+          {{ "header.home" | translate }}
+        </button>
+        <button
+          class="header-login__button"
+          mat-menu-item
+          *ngIf="isAuthorized"
+          [routerLink]="'/projects'"
+        >
+          {{ "header.projects" | translate }}
+        </button>
+        <button
+          class="header-login__button"
+          mat-menu-item
+          *ngIf="isAuthorized"
+          [routerLink]="'/board'"
+        >
+          {{ "header.board" | translate }}
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!isAuthorized"
+          class="header-login__button"
+          [routerLink]="'auth/login'"
+        >
+          {{ "header.loginAction" | translate }}
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="!isAuthorized"
+          [routerLink]="'/auth/sign-up'"
+          class="header-login__button"
+        >
+          {{ "header.signUp" | translate }}
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="isAuthorized"
+          class="header-login__button"
+          [routerLink]="'/edit-profile'"
+        >
+          {{ "header.profile" | translate }}
+        </button>
+        <button
+          mat-menu-item
+          *ngIf="isAuthorized"
+          class="header-login__button"
+          (click)="logout()"
+        >
+          {{ "header.logout" | translate }}
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</header>

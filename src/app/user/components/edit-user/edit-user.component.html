@@ -1,0 +1,84 @@
+<div class="edit-user">
+  <div class="edit-user-container">
+    <form [formGroup]="editForm" (ngSubmit)="editProfile()">
+      <h1>{{ "editUser.title" | translate }}</h1>
+      <mat-form-field appearance="outline">
+        <mat-label autocomplete for="name">{{
+          "editUser.name" | translate
+        }}</mat-label>
+        <input matInput type="text" formControlName="name" value="name" />
+        <mat-error
+          *ngIf="
+            editForm.get('name')?.invalid &&
+            (editForm.get('name')?.touched || editForm.get('name')?.dirty)
+          "
+        >
+          <span *ngIf="editForm.get('name')?.hasError('required')">
+            {{ "validation.nameRequired" | translate }}
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label autocomplete for="login">{{
+          "editUser.login" | translate
+        }}</mat-label>
+        <input matInput type="text" formControlName="login" value="login" />
+        <mat-error
+          *ngIf="
+            editForm.get('login')?.invalid &&
+            (editForm.get('login')?.touched || editForm.get('login')?.dirty)
+          "
+        >
+          <span *ngIf="editForm.get('login')?.hasError('required')">
+            {{ "validation.loginRequired" | translate }}
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label autocomplete for="password">{{
+          "editUser.newPassword" | translate
+        }}</mat-label>
+        <input
+          type="password"
+          matInput
+          formControlName="password"
+          value="password"
+        />
+        <mat-error
+          *ngIf="
+            editForm.get('password')?.invalid &&
+            (editForm.get('password')?.touched ||
+              editForm.get('password')?.dirty)
+          "
+        >
+          <span *ngIf="editForm.get('password')?.hasError('required')">
+            {{ "validation.passwordRequired" | translate }}
+          </span>
+          <span *ngIf="editForm.get('password')?.hasError('minLength')">
+            {{ "validation.minLength" | translate }}
+          </span>
+          <span *ngIf="editForm.get('password')?.hasError('pattern')">
+            {{ "validation.invalidPassword" | translate }}
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <div class="edit-user-container_btn">
+        <button mat-button (click)="deleteProfile()" color="warn">
+          {{ "editUser.deleteUser" | translate }}
+        </button>
+        <button
+          mat-flat-button
+          type="submit"
+          [disabled]="editForm.invalid"
+          color="primary"
+        >
+          {{ "editUser.submit" | translate }}
+        </button>
+      </div>
+    </form>
+    <mat-progress-bar
+      *ngIf="isLoading$ | async"
+      mode="query"
+    ></mat-progress-bar>
+  </div>
+</div>

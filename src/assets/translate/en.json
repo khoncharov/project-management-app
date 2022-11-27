@@ -1,0 +1,138 @@
+{
+  "header": {
+    "home": "Home",
+    "projects": "Projects",
+    "board": "Board",
+    "loginAction": "Login",
+    "signUp": "Sign Up",
+    "profile": "Profile",
+    "logout": "Logout",
+    "en": "En",
+    "ru": "Рус"
+  },
+  "editUser": {
+    "title": "Edit profile",
+    "name": "Name",
+    "login": "Login",
+    "newPassword": "New password",
+    "deleteUser": "Delete User",
+    "submit": "Save",
+    "confirmTitle": "Delete account",
+    "confirmMessage": "Your account will be permanently deleted."
+  },
+  "loginPage": {
+    "title": "Login",
+    "login": "Login",
+    "password": "Password",
+    "signUp": "Sign Up",
+    "newUser": "New User?",
+    "submit": "Login"
+  },
+  "signUpPage": {
+    "signUp": "Sign Up",
+    "name": "Name",
+    "login": "Login",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "haveAccount": "Have an account?",
+    "loginAction": "Login",
+    "submit": "Sign Up"
+  },
+  "validation": {
+    "nameRequired": "Please enter a name",
+    "loginRequired": "Please enter a login",
+    "passwordRequired": "Please enter a password",
+    "minLength": "Should be at least 8 characters",
+    "invalidPassword": "Should contain at least 1 capital letter, 1 small letter and 1 number",
+    "mustMatch": "Passwords do not match"
+  },
+  "confirm": {
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "boardPage": {
+    "noBoard": "To load a board, please select it on the Projects page",
+    "deleteColumn": "Delete Column",
+    "message": "This column will be permanently deleted."
+  },
+  "columnDialog": {
+    "newColumn": "New column",
+    "title": "Title",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create"
+  },
+  "columnTitle": {
+    "title": "Column title",
+    "hint": "Min 1 character"
+  },
+  "task": {
+    "deleteTask": "Delete task",
+    "message": "This task will be permanently deleted."
+  },
+  "taskDialog": {
+    "newTask": "New task",
+    "editTask": "Edit task",
+    "title": "Title",
+    "description": "Description",
+    "assignee": "Assignee",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update"
+  },
+  "boardDialog": {
+    "newBoard": "New board",
+    "editBoard": "Edit board",
+    "title": "Title",
+    "description": "Description",
+    "hint": "Min 1 character",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update"
+  },
+  "projectPage": {
+    "title": "Name / Description",
+    "newBoard": "New board",
+    "deleteBoard": "Delete board",
+    "message": "This board will be permanently deleted."
+  },
+  "pageNotFound": {
+    "notFound": "Page not found"
+  },
+  "homePage": {
+    "title": "Project Management app",
+    "description": "Kanban is a popular approach for applying agile and DevOps principles to software development. Work tasks are visually presented on the Kanban board, allowing team members to see the status of each task at any given time. The Project Management app is an implementation of the Kanban approach as a web application developed with Angular. The project is the final task of the RS School Angular course (2022Q3)",
+    "sectionTitle": "Our Team",
+    "konstantin": "Konstantin",
+    "alena": "Alena",
+    "alesya": "Alesya",
+    "teamLead": "Team Lead",
+    "setup": "Project Setup",
+    "deploy": "Backend Deploy",
+    "ngrx": "Services/NGRX",
+    "errors": "Error Handling",
+    "projects": "Projects Page",
+    "board": "Board Page",
+    "login": "Login Page",
+    "signUp": "Sign Up Page",
+    "welcome": "Welcome Page",
+    "confirm": "Confirmation Dialog",
+    "i18n": "Localization",
+    "header": "Header",
+    "footer": "Footer",
+    "edit": "Edit Profile",
+    "notFound": "Not Found Page",
+    "adaptive": "Adaptive Layout"
+  },
+  "error": {
+    "code": "Code",
+    "unknown": "Unknown error",
+    "code400": "Bad request. The server cannot or will not process the request",
+    "code401": "Unauthorized access. Please, login or register first",
+    "code403": "Incorrect login or password",
+    "code404": "Data not found. Try to reload the page",
+    "code408": "Request timeout",
+    "code409": "User with the same login already exists"
+  }
+}

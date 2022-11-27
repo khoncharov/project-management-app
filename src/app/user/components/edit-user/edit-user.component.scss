@@ -1,0 +1,34 @@
+.edit-user {
+  min-height: calc(100vh - 10rem - 40px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-user-container {
+  width: 310px;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px rgb(168, 166, 177);
+
+  mat-form-field {
+    width: 100%;
+    line-height: 1.2;
+  }
+
+  mat-progress-bar {
+    margin: 0.5rem;
+  }
+}
+
+h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.edit-user-container_btn {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+}

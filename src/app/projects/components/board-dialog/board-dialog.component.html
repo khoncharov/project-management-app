@@ -1,0 +1,48 @@
+<form class="dialog-container" [formGroup]="boardForm">
+  <h2 mat-dialog-title>
+    {{
+      isNewBoard
+        ? ("boardDialog.newBoard" | translate)
+        : ("boardDialog.editBoard" | translate)
+    }}
+  </h2>
+
+  <mat-form-field appearance="outline" class="input-field">
+    <mat-label>{{ "boardDialog.title" | translate }}</mat-label>
+    <input
+      matInput
+      cdkFocusInitial
+      autocomplete="off"
+      formControlName="title"
+    />
+    <mat-hint align="start">{{ "boardDialog.hint" | translate }}</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="textarea">
+    <mat-label>{{ "boardDialog.description" | translate }}</mat-label>
+    <textarea
+      matInput
+      formControlName="description"
+      class="textarea-input"
+    ></textarea>
+    <mat-hint align="start">{{ "boardDialog.hint" | translate }}</mat-hint>
+  </mat-form-field>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="null" color="primary">
+      {{ "boardDialog.cancel" | translate }}
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="boardForm.invalid"
+      [mat-dialog-close]="boardForm.value"
+    >
+      {{
+        isNewBoard
+          ? ("boardDialog.create" | translate)
+          : ("boardDialog.update" | translate)
+      }}
+    </button>
+  </div>
+</form>

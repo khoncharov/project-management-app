@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 10rem - 40px);
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px;
+
+  @media screen and (max-width: 768px) {
+    padding: 24px;
+  }
+
+  mat-card-header {
+    margin-bottom: 12px;
+  }
+
+  mat-card-title {
+    font-weight: 500;
+  }
+
+  mat-form-field {
+    display: block;
+
+    mat-label {
+      font-size: 16px;
+    }
+
+    input {
+      width: 100%;
+      background-color: transparent;
+    }
+
+    mat-icon {
+      color: #6c6f80;
+      cursor: pointer;
+    }
+  }
+
+  mat-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+
+    @media screen and (max-width: 425px) {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<!-- Load spinner -->
+<div class="spinner-container" *ngIf="isLoading$ | async">
+  <mat-spinner></mat-spinner>
+</div>
+
+<mat-card class="projects-container">
+  <mat-card-content>
+    <!-- Projects list -->
+    <mat-list class="list">
+      <!-- List header -->
+      <mat-list-item class="list-header">
+        <div class="header-content">
+          <p class="header-text">{{ "projectPage.title" | translate }}</p>
+          <button mat-flat-button color="primary" (click)="onCreateNewBoard()">
+            {{ "projectPage.newBoard" | translate }}
+          </button>
+        </div>
+      </mat-list-item>
+
+      <!-- List items -->
+      <mat-list-item
+        *ngFor="let board of boards$ | async | sortBoardsByTitle; last as last"
+        class="list-line"
+      >
+        <mat-icon matListIcon [style]="getIconColor(board.id)">
+          assignment
+        </mat-icon>
+        <h3 matLine>{{ board.title }}</h3>
+        <p matLine class="list-text">
+          {{ board.description }}
+        </p>
+        <div class="btns-container">
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="onOpenBoard(board.id)"
+          >
+            <mat-icon>open_in_new</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="onEditBoard(board)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="onDeleteBoard(board.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
