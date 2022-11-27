@@ -1,0 +1,24 @@
+<form class="form">
+  <mat-form-field appearance="outline">
+    <input
+      class="input"
+      type="text"
+      matInput
+      [formControl]="search"
+      [matAutocomplete]="auto"
+      (focus)="getAllTasks()"
+    />
+    <mat-icon matPrefix class="icon">search</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete">
+      <ng-container *ngIf="tasksList$ | async as tasks">
+        <mat-option
+          *ngFor="let task of tasks | filter: search.value"
+          [value]="task"
+          (onSelectionChange)="onOpenBoardWithTask(task.boardId)"
+        >
+          {{ displayTask(task) }}
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

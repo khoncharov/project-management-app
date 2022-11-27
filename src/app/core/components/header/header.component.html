@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header-container">
     <div class="header-container_link">
-      <a routerLink="/">
+      <a routerLink="/" class="header-logo-link">
         <img class="header-logo" src="assets/images/logo.svg" alt="logo" />
       </a>
       <a
@@ -24,6 +24,9 @@
         *ngIf="isAuthorized"
         >{{ "header.board" | translate }}</a
       >
+    </div>
+    <div class="header-search" *ngIf="isAuthorized">
+      <app-search></app-search>
     </div>
     <div class="header-switcher">
       <span>{{ "header.ru" | translate }}</span>
