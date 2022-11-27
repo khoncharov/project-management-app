@@ -31,6 +31,15 @@ const onDataRequest = (state: SelectedBoardState): SelectedBoardState => ({
   isLoading: true,
 });
 
+const moveItem = <T>(arr: Array<T>, from: number, to: number): Array<T> => {
+  const a = [...arr];
+
+  const item = a.splice(from, 1)[0];
+  a.splice(to, 0, item);
+
+  return a;
+};
+
 export const selectedBoardReducer = createReducer(
   initState,
 
@@ -133,7 +142,39 @@ export const selectedBoardReducer = createReducer(
 
   // Update column
 
-  on(ColumnActions.updateColumn, onDataRequest),
+  on(ColumnActions.updateColumn, (state, action): SelectedBoardState => {
+    if (state.board) {
+      const columns = [...state.board.columns];
+      columns.sort((a, b) => a.order - b.order);
+
+      const from = columns.findIndex((c) => c.id === action.columnId);
+      const to = action.column.order - 1;
+
+      if (from > -1) {
+        const newCols = moveItem<ColumnWithTasks>(columns, from, to).map(
+          (c, i) => ({
+            ...c,
+            order: i + 1,
+          }),
+        );
+
+        return {
+          ...state,
+          board: {
+            ...state.board,
+            columns: [...newCols],
+          },
+          error: null,
+          isLoading: true,
+        };
+      }
+    }
+    return {
+      ...state,
+      error: null,
+      isLoading: true,
+    };
+  }),
   on(
     ColumnApiActions.updateColumnFailure,
     (state, action): SelectedBoardState => ({
@@ -227,7 +268,16 @@ export const selectedBoardReducer = createReducer(
 
   // Update task
 
-  on(TaskActions.updateTask, onDataRequest),
+  on(TaskActions.updateTask, (state): SelectedBoardState => {
+    if (state.board) {
+      // pass
+    }
+    return {
+      ...state,
+      error: null,
+      isLoading: true,
+    };
+  }),
   on(
     TaskApiActions.updateTaskFailure,
     (state, action): SelectedBoardState => ({

@@ -1,27 +1,28 @@
 # ProjectManagementApp
 
+## About
+
+This project is the final task for the [RS School Angular course](https://rs.school/angular/)
+
+## Requirements
+
+[Task link](https://github.com/rolling-scopes-school/js-fe-course-en/blob/main/tasks/angular/project-management-system.md)
+
+## Our team
+
+- [Alena](https://github.com/aldrachova)
+- [Alesya](https://github.com/alesyaz)
+- [Konstantin](https://github.com/khoncharov)
+- [Alexander](https://github.com/Se3ver) (mentor)
+
+## Final PR
+
+[Link](https://github.com/khoncharov/project-management-app/pull/69)
+
+## Deploy
+
+https://pm-app-team3.netlify.app
+
+## Angular version
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
